@@ -5,254 +5,217 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zubex Calidad</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --zx-blue:#1a1aff;--zx-blue-dark:#0d0d99;--zx-blue-light:#e8e8ff;
-  --zx-purple:#4a0080;--bg:#f5f6fa;--white:#fff;
-  --text:#1a1a2e;--text2:#555;--border:#e0e0ee;
-  --success:#1a9e3f;--warning:#e6820a;--danger:#cc2222;
-}
-body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-
-/* WATERMARK ZX */
-.zx-watermark{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;overflow:hidden}
-.zx-watermark svg{width:380px;height:380px;opacity:0.06}
-.zx-letters{animation:zxGrow 3s ease-in-out infinite alternate}
-@keyframes zxGrow{0%{transform:scale(0.85)}100%{transform:scale(1.0)}}
-.zx-circuit-path{stroke-dasharray:600;animation:circuitRun 4s linear infinite}
-@keyframes circuitRun{0%{stroke-dashoffset:600}100%{stroke-dashoffset:0}}
-
-/* HEADER */
-header{background:var(--white);border-bottom:2px solid var(--zx-blue-light);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(26,26,255,.07)}
-.logo-area{display:flex;align-items:center;gap:14px}
-.logo-zx{width:40px;height:40px;background:#000;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.logo-zx svg{width:28px;height:28px}
-.brand-text h1{font-size:1.1rem;font-weight:700;color:var(--zx-blue);letter-spacing:1px}
-.brand-text p{font-size:.7rem;color:var(--text2);letter-spacing:2px;text-transform:uppercase}
-.dept-badge{background:var(--zx-blue);color:#fff;padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:1px}
-
-/* NAV */
-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;gap:0;position:sticky;top:64px;z-index:99}
-.nav-tab{padding:14px 28px;font-size:.88rem;font-weight:600;border:none;background:none;cursor:pointer;color:var(--text2);border-bottom:3px solid transparent;transition:.2s;letter-spacing:.5px}
-.nav-tab.active{color:var(--zx-blue);border-bottom-color:var(--zx-blue)}
-.nav-tab:hover:not(.active){color:var(--zx-blue);background:var(--zx-blue-light)}
-.nav-tab.ztela{display:flex;align-items:center;gap:6px}
-.nav-tab.ztela .ext-icon{font-size:.7rem;background:var(--zx-blue-light);color:var(--zx-blue);padding:2px 6px;border-radius:4px}
-
-/* MAIN */
+:root{--zb:#1a1aff;--zbd:#0d0d99;--zbl:#e8e8ff;--bg:#f5f6fa;--wh:#fff;--tx:#1a1a2e;--tx2:#666;--bd:#e0e0ee;--ok:#1a9e3f;--wn:#e6820a;--dg:#cc2222;--dmg:#8b00b5}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+.zx-wm{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;overflow:hidden}
+.zx-wm svg{width:400px;height:400px;opacity:.055}
+.zxL{animation:zxG 3s ease-in-out infinite alternate}
+@keyframes zxG{0%{transform:scale(.85)}100%{transform:scale(1)}}
+.zxC{stroke-dasharray:700;animation:zxR 4s linear infinite}
+@keyframes zxR{0%{stroke-dashoffset:700}100%{stroke-dashoffset:0}}
+header{background:var(--wh);border-bottom:2px solid var(--zbl);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(26,26,255,.07)}
+.la{display:flex;align-items:center;gap:14px}
+.lzx{width:40px;height:40px;background:#000;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.bt h1{font-size:1.1rem;font-weight:700;color:var(--zb);letter-spacing:1px}
+.bt p{font-size:.7rem;color:var(--tx2);letter-spacing:2px;text-transform:uppercase}
+.dbadge{background:var(--zb);color:#fff;padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:1px}
+nav{background:var(--wh);border-bottom:1px solid var(--bd);padding:0 2rem;display:flex;gap:0;position:sticky;top:64px;z-index:99}
+.nt{padding:14px 28px;font-size:.88rem;font-weight:600;border:none;background:none;cursor:pointer;color:var(--tx2);border-bottom:3px solid transparent;transition:.2s;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.nt.active{color:var(--zb);border-bottom-color:var(--zb)}
+.nt:hover:not(.active){color:var(--zb);background:var(--zbl)}
+.ext-ic{font-size:.7rem;background:var(--zbl);color:var(--zb);padding:2px 6px;border-radius:4px}
 main{position:relative;z-index:1;padding:2rem;max-width:1200px;margin:0 auto}
 .section{display:none}.section.active{display:block}
-
-/* DASHBOARD CARDS */
-.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
-.dash-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:12px}
-.dash-card .icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
-.dash-card .info p{font-size:.75rem;color:var(--text2);margin-bottom:2px}
-.dash-card .info h3{font-size:1.4rem;font-weight:700}
-.dash-card.total .icon{background:#e8e8ff;} .dash-card.total h3{color:var(--zx-blue)}
-.dash-card.ok .icon{background:#e6f9ed;} .dash-card.ok h3{color:var(--success)}
-.dash-card.warn .icon{background:#fff4e0;} .dash-card.warn h3{color:var(--warning)}
-.dash-card.alert .icon{background:#ffeaea;} .dash-card.alert h3{color:var(--danger)}
-
-/* TOOLBAR */
-.toolbar{display:flex;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
-.toolbar input,.toolbar select{padding:8px 14px;border:1px solid var(--border);border-radius:8px;font-size:.85rem;background:var(--white);color:var(--text);outline:none}
-.toolbar input:focus,.toolbar select:focus{border-color:var(--zx-blue)}
-.toolbar input{flex:1;min-width:200px}
-.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;display:flex;align-items:center;gap:6px}
-.btn-primary{background:var(--zx-blue);color:#fff}.btn-primary:hover{background:var(--zx-blue-dark)}
-.btn-secondary{background:var(--white);color:var(--zx-blue);border:1px solid var(--zx-blue)}.btn-secondary:hover{background:var(--zx-blue-light)}
-.btn-sm{padding:5px 12px;font-size:.78rem}
-
-/* TABLE */
-.table-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-table{width:100%;border-collapse:collapse;font-size:.84rem}
-thead{background:var(--zx-blue);color:#fff}
-thead th{padding:11px 14px;text-align:left;font-weight:600;font-size:.8rem;letter-spacing:.5px}
-tbody tr{border-bottom:1px solid var(--border);transition:.15s}
+.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
+.dc{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:1.1rem;display:flex;align-items:center;gap:12px}
+.dc .ic{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.dc .inf p{font-size:.73rem;color:var(--tx2);margin-bottom:2px}
+.dc .inf h3{font-size:1.35rem;font-weight:700}
+.dc.total .ic{background:#e8e8ff}.dc.total h3{color:var(--zb)}
+.dc.ok .ic{background:#e6f9ed}.dc.ok h3{color:var(--ok)}
+.dc.warn .ic{background:#fff4e0}.dc.warn h3{color:var(--wn)}
+.dc.alert .ic{background:#ffeaea}.dc.alert h3{color:var(--dg)}
+.dc.dmg .ic{background:#f5e0ff}.dc.dmg h3{color:var(--dmg)}
+.tb{display:flex;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
+.tb input,.tb select{padding:8px 14px;border:1px solid var(--bd);border-radius:8px;font-size:.85rem;background:var(--wh);color:var(--tx);outline:none}
+.tb input:focus,.tb select:focus{border-color:var(--zb)}
+.tb input{flex:1;min-width:200px}
+.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-p{background:var(--zb);color:#fff}.btn-p:hover{background:var(--zbd)}
+.btn-s{background:var(--wh);color:var(--zb);border:1px solid var(--zb)}.btn-s:hover{background:var(--zbl)}
+.btn-g{background:#1a7a38;color:#fff}.btn-g:hover{background:#155e2c}
+.btn-sm{padding:5px 10px;font-size:.77rem}
+.tw{background:var(--wh);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+thead{background:var(--zb);color:#fff}
+thead th{padding:11px 14px;text-align:left;font-weight:600;font-size:.79rem;letter-spacing:.4px}
+tbody tr{border-bottom:1px solid var(--bd);transition:.15s}
 tbody tr:hover{background:#f0f0ff}
-tbody td{padding:10px 14px;color:var(--text)}
-.status-badge{padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;white-space:nowrap}
-.s-ok{background:#e6f9ed;color:#1a7a38}.s-warn{background:#fff4e0;color:#b36200}.s-venc{background:#ffeaea;color:#aa1111}.s-na{background:#f0f0f0;color:#888}
-
-/* SEMAFORO */
-.semaforo{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
-.sem-green{background:var(--success)}.sem-yellow{background:var(--warning)}.sem-red{background:var(--danger)}
-
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:var(--white);border-radius:16px;width:90%;max-width:720px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.modal-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.modal-header h2{font-size:1rem;font-weight:700;color:var(--zx-blue)}
-.modal-body{padding:1.5rem}
-.modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.75rem}
-.close-btn{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text2);line-height:1}
-
-/* FORM */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.form-group{display:flex;flex-direction:column;gap:5px}
-.form-group.full{grid-column:1/-1}
-label{font-size:.78rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
-input[type=text],input[type=date],select,textarea{padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:.88rem;color:var(--text);background:var(--white);outline:none;font-family:inherit}
-input:focus,select:focus,textarea:focus{border-color:var(--zx-blue);box-shadow:0 0 0 3px rgba(26,26,255,.1)}
+tbody td{padding:10px 14px}
+.sb{padding:3px 10px;border-radius:20px;font-size:.71rem;font-weight:600;white-space:nowrap}
+.s-ok{background:#e6f9ed;color:#1a7a38}.s-warn{background:#fff4e0;color:#b36200}.s-venc{background:#ffeaea;color:#aa1111}.s-na{background:#f0f0f0;color:#888}.s-dmg{background:#f5e0ff;color:#6a0099}
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.mo.open{display:flex}
+.md{background:var(--wh);border-radius:16px;width:92%;max-width:740px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.mh{padding:1.2rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.mh h2{font-size:1rem;font-weight:700;color:var(--zb)}
+.mb{padding:1.5rem}
+.mf{padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.75rem}
+.cb{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--tx2);line-height:1}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fgr{display:flex;flex-direction:column;gap:5px}
+.fgr.full{grid-column:1/-1}
+label{font-size:.77rem;font-weight:600;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px}
+input[type=text],input[type=date],input[type=password],select,textarea{padding:9px 12px;border:1px solid var(--bd);border-radius:8px;font-size:.88rem;color:var(--tx);background:var(--wh);outline:none;font-family:inherit;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--zb);box-shadow:0 0 0 3px rgba(26,26,255,.1)}
 textarea{resize:vertical;min-height:70px}
-
-/* DETALLE INSTRUMENTO */
-.detail-header{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.detail-qr{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.5rem}
-.qr-card{background:var(--white);border:2px solid var(--zx-blue);border-radius:12px;padding:1rem;text-align:center}
-.qr-card h4{font-size:.7rem;letter-spacing:2px;color:var(--zx-blue);font-weight:700;margin-bottom:.5rem}
-.qr-id{font-size:.65rem;color:var(--text2);margin-top:.5rem}
-.qr-badge{font-size:.7rem;background:var(--zx-blue);color:#fff;padding:2px 10px;border-radius:20px;margin-top:4px}
-.detail-info{flex:1;min-width:260px}
-.info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:.86rem}
-.info-row:last-child{border:none}
-.info-label{color:var(--text2);font-weight:600;font-size:.78rem}
-
-/* DETALLE PUBLIC (vista QR) */
-.pub-card{background:var(--white);border-radius:16px;max-width:400px;margin:2rem auto;border:2px solid var(--zx-blue);overflow:hidden}
-.pub-card-header{background:var(--zx-blue);color:#fff;padding:1rem 1.2rem;text-align:center}
-.pub-card-header .pub-logo{font-size:1.6rem;font-weight:900;letter-spacing:2px;font-style:italic}
-.pub-card-header .pub-type{background:rgba(255,255,255,.25);padding:2px 14px;border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:2px;display:inline-block;margin-top:6px}
-.pub-body{padding:1.2rem}
-.pub-id{font-size:.8rem;color:var(--text2);margin-bottom:.3rem}
-.pub-name{font-size:1.1rem;font-weight:700;margin-bottom:1rem}
-.pub-sem{display:flex;align-items:center;gap:.75rem;padding:10px 14px;border-radius:10px;margin-bottom:1rem}
-.pub-sem.green{background:#e6f9ed;color:#1a7a38}
-.pub-sem.yellow{background:#fff4e0;color:#b36200}
-.pub-sem.red{background:#ffeaea;color:#aa1111}
-.pub-sem .sem-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0}
-.pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
-.pub-field{background:var(--bg);border-radius:8px;padding:.75rem}
-.pub-field .pf-label{font-size:.7rem;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
-.pub-field .pf-value{font-size:.92rem;font-weight:600}
-.dias-badge{text-align:center;font-size:.8rem;padding:8px;border-radius:8px;font-weight:600}
-.dias-badge.ok{background:#e6f9ed;color:#1a7a38}
-.dias-badge.warn{background:#fff4e0;color:#b36200}
-.dias-badge.venc{background:#ffeaea;color:#aa1111}
-
-/* ZTELA SECTION */
-.ztela-container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:2rem;text-align:center}
-.ztela-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:3rem 4rem;max-width:500px}
-.ztela-logo{font-size:1.4rem;font-weight:900;color:var(--zx-blue);letter-spacing:3px;margin-bottom:.5rem}
-.ztela-sub{font-size:.85rem;color:var(--text2);margin-bottom:2rem}
-.ztela-btn{background:var(--zx-blue);color:#fff;padding:14px 48px;border-radius:40px;border:none;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:1px;transition:.2s;display:inline-flex;align-items:center;gap:10px}
-.ztela-btn:hover{background:var(--zx-blue-dark);transform:translateY(-2px)}
-.ztela-btn .arrow{font-size:1.2rem}
-.under-construction{background:var(--zx-blue-light);color:var(--zx-blue);padding:8px 20px;border-radius:20px;font-size:.78rem;font-weight:600;letter-spacing:1px;display:inline-block}
-
-/* EMPTY */
-.empty{text-align:center;padding:3rem;color:var(--text2);font-size:.9rem}
-
-/* TOAST */
+.dh{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.dq{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.qcard{background:var(--wh);border:2px solid var(--zb);border-radius:12px;padding:1rem;text-align:center}
+.qcard h4{font-size:.68rem;letter-spacing:2px;color:var(--zb);font-weight:700;margin-bottom:.5rem}
+.qid{font-size:.65rem;color:var(--tx2);margin-top:.5rem}
+.qbadge{font-size:.68rem;background:var(--zb);color:#fff;padding:2px 10px;border-radius:20px;margin-top:4px}
+.di{flex:1;min-width:260px}
+.ir{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:.85rem}
+.ir:last-child{border:none}
+.il{color:var(--tx2);font-weight:600;font-size:.77rem}
+.pc{background:var(--wh);border-radius:16px;max-width:400px;margin:2rem auto;border:2px solid var(--zb);overflow:hidden}
+.pch{background:var(--zb);color:#fff;padding:1rem 1.2rem;text-align:center}
+.pch .plogo{font-size:1.6rem;font-weight:900;letter-spacing:2px;font-style:italic}
+.pch .ptyp{background:rgba(255,255,255,.25);padding:2px 14px;border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:2px;display:inline-block;margin-top:6px}
+.pb{padding:1.2rem}
+.pid{font-size:.8rem;color:var(--tx2);margin-bottom:.3rem}
+.pname{font-size:1.1rem;font-weight:700;margin-bottom:1rem}
+.psem{display:flex;align-items:center;gap:.75rem;padding:10px 14px;border-radius:10px;margin-bottom:1rem}
+.psem.green{background:#e6f9ed;color:#1a7a38}.psem.yellow{background:#fff4e0;color:#b36200}.psem.red{background:#ffeaea;color:#aa1111}.psem.purple{background:#f5e0ff;color:#6a0099}
+.sdot{width:18px;height:18px;border-radius:50%;flex-shrink:0}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
+.pf{background:var(--bg);border-radius:8px;padding:.75rem}
+.pfl{font-size:.7rem;color:var(--tx2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.pfv{font-size:.9rem;font-weight:600}
+.db2{text-align:center;font-size:.8rem;padding:8px;border-radius:8px;font-weight:600}
+.db2.ok{background:#e6f9ed;color:#1a7a38}.db2.warn{background:#fff4e0;color:#b36200}.db2.venc{background:#ffeaea;color:#aa1111}
+.ztc{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:2rem;text-align:center}
+.ztcard{background:var(--wh);border:1px solid var(--bd);border-radius:20px;padding:3rem 4rem;max-width:500px}
+.ztlog{font-size:1.4rem;font-weight:900;color:var(--zb);letter-spacing:3px;margin-bottom:.5rem}
+.ztsub{font-size:.85rem;color:var(--tx2);margin-bottom:2rem}
+.ztbtn{background:var(--zb);color:#fff;padding:14px 48px;border-radius:40px;border:none;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:1px;transition:.2s;display:inline-flex;align-items:center;gap:10px}
+.ztbtn:hover{background:var(--zbd);transform:translateY(-2px)}
+.uc{background:var(--zbl);color:var(--zb);padding:8px 20px;border-radius:20px;font-size:.78rem;font-weight:600;letter-spacing:1px;display:inline-block}
+.empty{text-align:center;padding:3rem;color:var(--tx2);font-size:.9rem}
 .toast{position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:12px 22px;border-radius:10px;font-size:.85rem;z-index:9999;transform:translateY(100px);opacity:0;transition:.3s}
 .toast.show{transform:translateY(0);opacity:1}
+.pw-box{background:var(--bg);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.pw-box h3{font-size:.9rem;font-weight:700;color:var(--zb);margin-bottom:1rem}
+.divider{border:none;border-top:1px solid var(--bd);margin:1.5rem 0}
 </style>
 </head>
 <body>
-
-<!-- WATERMARK -->
-<div class="zx-watermark" aria-hidden="true">
+<div class="zx-wm" aria-hidden="true">
 <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-  <g class="zx-letters" fill="none" stroke="#1a1aff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="30,60 120,60 30,180 120,180"/>
-    <line x1="150,60" y1="150,60" x2="270,180" y2="270,180"/>
-    <line x1="270,60" y1="270,60" x2="150,180" y2="150,180"/>
-    <polyline class="zx-circuit-path" stroke="#1a1aff" stroke-width="4" points="30,60 120,60 30,180 120,180 150,60 270,180 270,60 150,180"/>
+  <g class="zxL" fill="none" stroke="#1a1aff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20,55 115,55 20,175 115,175"/>
+    <line x1="145" y1="55" x2="265" y2="175"/>
+    <line x1="265" y1="55" x2="145" y2="175"/>
   </g>
+  <polyline class="zxC" points="20,55 115,55 20,175 115,175 145,55 265,175 265,55 145,175" fill="none" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 </div>
 
-<!-- HEADER -->
 <header>
-  <div class="logo-area">
-    <div class="logo-zx">
+  <div class="la">
+    <div class="lzx">
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polyline points="4,8 20,8 4,26 20,26" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="4,8 20,8 4,26 20,26" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
         <line x1="24" y1="8" x2="36" y2="26" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round"/>
         <line x1="36" y1="8" x2="24" y2="26" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round"/>
       </svg>
     </div>
-    <div class="brand-text">
-      <h1>zubex</h1>
-      <p>Departamento de Calidad</p>
-    </div>
+    <div class="bt"><h1>zubex</h1><p>Departamento de Calidad</p></div>
   </div>
-  <span class="dept-badge">CALIDAD ZX</span>
+  <span class="dbadge">CALIDAD ZX</span>
 </header>
 
-<!-- NAV -->
 <nav>
-  <button class="nav-tab active" onclick="showSection('equipos',this)">📐 Equipos de Medición</button>
-  <button class="nav-tab ztela" onclick="showSection('ztela',this)">
-    ZX - Ztela <span class="ext-icon">↗</span>
-  </button>
+  <button class="nt active" onclick="showSec('equipos',this)">📐 Equipos de Medición</button>
+  <button class="nt" onclick="showSec('ztela',this)">ZX - Ztela <span class="ext-ic">↗</span></button>
+  <button class="nt" onclick="showSec('config',this)">⚙️ Configuración</button>
 </nav>
 
-<!-- MAIN -->
 <main>
-
-  <!-- EQUIPOS SECTION -->
+  <!-- EQUIPOS -->
   <div id="section-equipos" class="section active">
-
-    <!-- DASHBOARD CARDS -->
-    <div class="dash-grid" id="dashCards">
-      <div class="dash-card total"><div class="icon">📐</div><div class="info"><p>Total equipos</p><h3 id="dTotal">0</h3></div></div>
-      <div class="dash-card ok"><div class="icon">✅</div><div class="info"><p>Vigentes</p><h3 id="dOk">0</h3></div></div>
-      <div class="dash-card warn"><div class="icon">⚠️</div><div class="info"><p>Por vencer (30 días)</p><h3 id="dWarn">0</h3></div></div>
-      <div class="dash-card alert"><div class="icon">🚨</div><div class="info"><p>Vencidos</p><h3 id="dAlert">0</h3></div></div>
+    <div class="dg" id="dashCards">
+      <div class="dc total"><div class="ic">📐</div><div class="inf"><p>Total equipos</p><h3 id="dTotal">0</h3></div></div>
+      <div class="dc ok"><div class="ic">✅</div><div class="inf"><p>Vigentes</p><h3 id="dOk">0</h3></div></div>
+      <div class="dc warn"><div class="ic">⚠️</div><div class="inf"><p>Por vencer (30 días)</p><h3 id="dWarn">0</h3></div></div>
+      <div class="dc alert"><div class="ic">🚨</div><div class="inf"><p>Vencidos</p><h3 id="dAlert">0</h3></div></div>
+      <div class="dc dmg"><div class="ic">🔧</div><div class="inf"><p>Dañados</p><h3 id="dDmg">0</h3></div></div>
     </div>
-
-    <!-- TOOLBAR -->
-    <div class="toolbar">
-      <input type="text" id="searchInput" placeholder="🔍  Buscar por ID, instrumento, depto..." oninput="renderTable()">
+    <div class="tb">
+      <input type="text" id="searchInput" placeholder="🔍  Buscar ID, instrumento, depto..." oninput="renderTable()">
       <select id="filterDept" onchange="renderTable()"><option value="">Todos los departamentos</option></select>
       <select id="filterStatus" onchange="renderTable()">
         <option value="">Todos los estados</option>
         <option value="ok">Vigente</option>
         <option value="warn">Por vencer</option>
         <option value="venc">Vencido</option>
+        <option value="dmg">Dañado</option>
         <option value="baja">Dado de baja</option>
       </select>
-      <button class="btn btn-primary" onclick="openNewModal()">＋ Registrar equipo</button>
+      <button class="btn btn-g" onclick="exportExcel()">📊 Exportar Excel</button>
+      <button class="btn btn-p" onclick="reqPass('new')">＋ Registrar equipo</button>
     </div>
-
-    <!-- TABLE -->
-    <div class="table-wrap">
+    <div class="tw">
       <table>
         <thead>
           <tr>
-            <th>Estado</th>
-            <th>ID</th>
-            <th>Instrumento</th>
-            <th>Departamento</th>
-            <th>Ult. Calibración</th>
-            <th>Próx. Verificación</th>
-            <th>Responsable</th>
-            <th>Acciones</th>
+            <th>Estado</th><th>ID</th><th>Instrumento</th><th>Departamento</th>
+            <th>Ult. Calibración</th><th>Próx. Verificación</th><th>Responsable</th><th>Acciones</th>
           </tr>
         </thead>
-        <tbody id="equiposBody">
-          <tr><td colspan="8" class="empty">No hay equipos registrados. Haz clic en "Registrar equipo" para comenzar.</td></tr>
-        </tbody>
+        <tbody id="equiposBody"><tr><td colspan="8" class="empty">Sin equipos registrados.</td></tr></tbody>
       </table>
     </div>
   </div>
 
-  <!-- ZTELA SECTION -->
+  <!-- ZTELA -->
   <div id="section-ztela" class="section">
-    <div class="ztela-container">
-      <div class="ztela-card">
-        <div class="ztela-logo">ZX - Ztela</div>
-        <div class="ztela-sub">Plataforma de producción y extrusión de película plástica</div>
-        <button class="ztela-btn" onclick="goZtela()">
-          Ir a Ztela <span class="arrow">→</span>
-        </button>
-        <div style="margin-top:1.5rem">
-          <span class="under-construction">🚧 &nbsp;En construcción</span>
+    <div class="ztc">
+      <div class="ztcard">
+        <div class="ztlog">ZX - Ztela</div>
+        <div class="ztsub">Plataforma de producción y extrusión de película plástica</div>
+        <button class="ztbtn" onclick="goZtela()">Ir a Ztela <span>→</span></button>
+        <div style="margin-top:1.5rem"><span class="uc">🚧 &nbsp;En construcción</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIG -->
+  <div id="section-config" class="section">
+    <div style="max-width:480px;margin:0 auto;padding-top:1rem">
+      <div class="pw-box">
+        <h3>🔐 Cambiar contraseña de Admin</h3>
+        <div class="fgr" style="margin-bottom:1rem">
+          <label>Contraseña actual</label>
+          <input type="password" id="cpActual" placeholder="••••••••">
         </div>
+        <div class="fgr" style="margin-bottom:1rem">
+          <label>Nueva contraseña</label>
+          <input type="password" id="cpNueva" placeholder="••••••••">
+        </div>
+        <div class="fgr" style="margin-bottom:1.2rem">
+          <label>Confirmar nueva contraseña</label>
+          <input type="password" id="cpConfirm" placeholder="••••••••">
+        </div>
+        <button class="btn btn-p" onclick="cambiarPass()">Actualizar contraseña</button>
+      </div>
+      <div class="pw-box" style="margin-top:1rem">
+        <h3>ℹ️ Información</h3>
+        <p style="font-size:.84rem;color:var(--tx2);line-height:1.6">Usuario administrador: <strong>admin</strong><br>La contraseña protege el registro, edición y eliminación de equipos.</p>
       </div>
     </div>
   </div>
@@ -261,64 +224,78 @@ textarea{resize:vertical;min-height:70px}
   <div id="section-public" class="section">
     <div id="pubCardContent"></div>
   </div>
-
 </main>
 
-<!-- MODAL REGISTRO / EDITAR -->
-<div class="modal-overlay" id="modalRegistro">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 id="modalTitle">Registrar Equipo de Medición</h2>
-      <button class="close-btn" onclick="closeModal()">×</button>
+<!-- MODAL PASSWORD -->
+<div class="mo" id="modalPass">
+  <div class="md" style="max-width:380px">
+    <div class="mh"><h2 id="passModalTitle">🔐 Acceso Admin</h2><button class="cb" onclick="closePass()">×</button></div>
+    <div class="mb">
+      <div class="fgr">
+        <label>Contraseña</label>
+        <input type="password" id="passInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')verifyPass()">
+      </div>
+      <p id="passError" style="color:var(--dg);font-size:.8rem;margin-top:.5rem;display:none">Contraseña incorrecta</p>
     </div>
-    <div class="modal-body">
-      <div class="form-grid">
-        <div class="form-group"><label>ID del Equipo *</label><input type="text" id="fId" placeholder="EQM-XXX-000"></div>
-        <div class="form-group"><label>Instrumento *</label><input type="text" id="fInstrumento" placeholder="Vernier, Termómetro..."></div>
-        <div class="form-group"><label>Departamento *</label><input type="text" id="fDept" placeholder="Calidad, Producción..."></div>
-        <div class="form-group"><label>Responsable (Custodio)</label><input type="text" id="fResponsable" placeholder="Nombre del custodio"></div>
-        <div class="form-group"><label>Descripción</label><input type="text" id="fDesc" placeholder="Descripción breve"></div>
-        <div class="form-group"><label>Unidad de medida</label><input type="text" id="fUnidad" placeholder="mm, °C, kg..."></div>
-        <div class="form-group"><label>Marca / Modelo</label><input type="text" id="fMarca" placeholder="Mitutoyo 530-104..."></div>
-        <div class="form-group"><label>Número de serie</label><input type="text" id="fSerie" placeholder="Núm. de serie"></div>
-        <div class="form-group"><label>Rango de medición</label><input type="text" id="fRango" placeholder="0 - 150 mm"></div>
-        <div class="form-group"><label>Resolución / Exactitud</label><input type="text" id="fResolucion" placeholder="0.02 mm"></div>
-        <div class="form-group"><label>Última calibración</label><input type="date" id="fUltCal"></div>
-        <div class="form-group"><label>Próxima calibración</label><input type="date" id="fProxCal"></div>
-        <div class="form-group"><label>Última verificación interna</label><input type="date" id="fUltVer"></div>
-        <div class="form-group"><label>Próxima verificación interna</label><input type="date" id="fProxVer"></div>
-        <div class="form-group"><label>Periodo verif. interna</label><input type="text" id="fPeriodoVer" placeholder="Mensual, Bimestral..."></div>
-        <div class="form-group"><label>Periodo calib. externa</label><input type="text" id="fPeriodoCal" placeholder="Anual, Semestral..."></div>
-        <div class="form-group"><label>Estado</label>
+    <div class="mf">
+      <button class="btn btn-s" onclick="closePass()">Cancelar</button>
+      <button class="btn btn-p" onclick="verifyPass()">Ingresar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL REGISTRO -->
+<div class="mo" id="modalRegistro">
+  <div class="md">
+    <div class="mh"><h2 id="modalTitle">Registrar Equipo</h2><button class="cb" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div class="fg">
+        <div class="fgr"><label>ID del Equipo *</label><input type="text" id="fId" placeholder="EQM-XXX-000"></div>
+        <div class="fgr"><label>Instrumento *</label>
+          <select id="fInstrumento"><option value="">— Seleccionar —</option></select>
+        </div>
+        <div class="fgr"><label>Departamento *</label><input type="text" id="fDept" placeholder="Calidad, Producción..."></div>
+        <div class="fgr"><label>Responsable (Custodio)</label><input type="text" id="fResponsable" placeholder="Nombre"></div>
+        <div class="fgr"><label>Descripción</label><input type="text" id="fDesc" placeholder="Descripción breve"></div>
+        <div class="fgr"><label>Unidad de medida</label><input type="text" id="fUnidad" placeholder="mm, °C, kg..."></div>
+        <div class="fgr"><label>Marca / Modelo</label><input type="text" id="fMarca" placeholder="Mitutoyo..."></div>
+        <div class="fgr"><label>Número de serie</label><input type="text" id="fSerie"></div>
+        <div class="fgr"><label>Rango de medición</label><input type="text" id="fRango" placeholder="0 - 150 mm"></div>
+        <div class="fgr"><label>Resolución / Exactitud</label><input type="text" id="fResolucion" placeholder="0.02 mm"></div>
+        <div class="fgr"><label>Última calibración</label><input type="date" id="fUltCal"></div>
+        <div class="fgr"><label>Próxima calibración</label><input type="date" id="fProxCal"></div>
+        <div class="fgr"><label>Última verificación interna</label><input type="date" id="fUltVer"></div>
+        <div class="fgr"><label>Próxima verificación interna</label><input type="date" id="fProxVer"></div>
+        <div class="fgr"><label>Periodo verif. interna</label><input type="text" id="fPeriodoVer" placeholder="Mensual, Bimestral..."></div>
+        <div class="fgr"><label>Periodo calib. externa</label><input type="text" id="fPeriodoCal" placeholder="Anual, Semestral..."></div>
+        <div class="fgr"><label>Estado</label>
           <select id="fEstado">
-            <option value="ok">Operativo</option>
-            <option value="warn">En revisión</option>
-            <option value="venc">Fuera de servicio</option>
+            <option value="op">Operativo</option>
+            <option value="rev">En revisión</option>
+            <option value="dmg">Dañado</option>
+            <option value="fs">Fuera de servicio</option>
             <option value="baja">Dado de baja</option>
           </select>
         </div>
-        <div class="form-group"><label>Ubicación física</label><input type="text" id="fUbicacion" placeholder="Área / Línea / Planta"></div>
-        <div class="form-group full"><label>Notas / Observaciones</label><textarea id="fNotas" placeholder="Condiciones de uso, observaciones..."></textarea></div>
+        <div class="fgr"><label>Ubicación física</label><input type="text" id="fUbicacion" placeholder="Área / Línea / Planta"></div>
+        <div class="fgr full"><label>Notas / Observaciones</label><textarea id="fNotas"></textarea></div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveEquipo()">💾 Guardar</button>
+    <div class="mf">
+      <button class="btn btn-s" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-p" onclick="saveEquipo()">💾 Guardar</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL DETALLE -->
-<div class="modal-overlay" id="modalDetalle">
-  <div class="modal">
-    <div class="modal-header">
-      <h2>Detalle del Equipo</h2>
-      <button class="close-btn" onclick="document.getElementById('modalDetalle').classList.remove('open')">×</button>
-    </div>
-    <div class="modal-body" id="detalleBody"></div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="document.getElementById('modalDetalle').classList.remove('open')">Cerrar</button>
-      <button class="btn btn-primary" id="btnEditFromDetail">✏️ Editar</button>
+<div class="mo" id="modalDetalle">
+  <div class="md">
+    <div class="mh"><h2>Detalle del Equipo</h2><button class="cb" onclick="closeDet()">×</button></div>
+    <div class="mb" id="detalleBody"></div>
+    <div class="mf">
+      <button class="btn btn-s" onclick="closeDet()">Cerrar</button>
+      <button class="btn btn-p" id="btnEditDet">✏️ Editar</button>
     </div>
   </div>
 </div>
@@ -326,63 +303,81 @@ textarea{resize:vertical;min-height:70px}
 <div class="toast" id="toast"></div>
 
 <script>
-let equipos = JSON.parse(localStorage.getItem('zxEquipos')||'[]');
+const INSTRUMENTS = [...new Set([
+  'Termómetro Infrarrojo','Medidor de espesor','Pesa Patrón','Regla patrón','Termómetro',
+  'Vernier','Balanza analítica','Báscula','ADMET','Dinamómetro','Lainas',
+  'Medidor de estática','Termómetro Copa Zahn','Cronómetro Digital','Termómetro Digital',
+  'Contador Digital','Copa Zahn','Cuentametros','Cuenta Metros','Infrarrojo',
+  'Medidor de ancho plano','Torquímetro','Cámara termográfica','Medidor de Estática',
+  'Probador de dureza','Micrómetro','Transportador de Ángulos','Placa patrón',
+  'Medidor de alturas','Rugosímetro','Medidor de espesor de ultrasonido',
+  'Calibrador Digital','Calibrador de Termopares','Medidor de espesores','Pesa patrón'
+])].sort();
+
+let equipos = JSON.parse(localStorage.getItem('zxEq2')||'[]');
 let editingId = null;
-const ZTELA_URL = 'https://zubex-ztela.com'; // URL a configurar
+let pendingAction = null;
+const ZTELA_URL = 'https://zubex-ztela.com';
+const DEFAULT_PASS = 'admin123';
 
-function save(){localStorage.setItem('zxEquipos',JSON.stringify(equipos))}
+function getPass(){return localStorage.getItem('zxPass')||DEFAULT_PASS}
+function save(){localStorage.setItem('zxEq2',JSON.stringify(equipos))}
 
-function showSection(sec, btn){
+// Fill instrument dropdown
+function fillInstruments(){
+  const sel = document.getElementById('fInstrumento');
+  sel.innerHTML = '<option value="">— Seleccionar —</option>' + INSTRUMENTS.map(i=>`<option value="${i}">${i}</option>`).join('');
+}
+
+function showSec(sec,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.nt').forEach(b=>b.classList.remove('active'));
   document.getElementById('section-'+sec).classList.add('active');
   if(btn) btn.classList.add('active');
 }
 
-function goZtela(){
-  showToast('Redirigiendo a ZX-Ztela...');
-  setTimeout(()=>window.open(ZTELA_URL,'_blank'),800);
+function goZtela(){showToast('Redirigiendo a ZX-Ztela...');setTimeout(()=>window.open(ZTELA_URL,'_blank'),800)}
+
+function diasHasta(d){
+  if(!d) return null;
+  const dt=new Date(d),hoy=new Date();
+  dt.setHours(0,0,0,0);hoy.setHours(0,0,0,0);
+  return Math.ceil((dt-hoy)/(864e5));
 }
 
-function diasHasta(dateStr){
-  if(!dateStr) return null;
-  const d=new Date(dateStr); const hoy=new Date();
-  d.setHours(0,0,0,0); hoy.setHours(0,0,0,0);
-  return Math.ceil((d-hoy)/(1000*60*60*24));
-}
-
-function statusClass(eq){
-  if(eq.estado==='baja') return 'na';
-  const dias = diasHasta(eq.fProxVer || eq.fProxCal);
+function statusOf(e){
+  if(e.fEstado==='baja') return 'baja';
+  if(e.fEstado==='dmg') return 'dmg';
+  if(e.fEstado==='fs') return 'venc';
+  const dias=diasHasta(e.fProxVer||e.fProxCal);
   if(dias===null) return 'na';
   if(dias<0) return 'venc';
   if(dias<=30) return 'warn';
   return 'ok';
 }
 
-function statusLabel(cls){
-  return {ok:'Vigente',warn:'Por vencer',venc:'Vencido',na:'Dado de baja'}[cls]||'N/A';
-}
+function statusLbl(s){return{ok:'Vigente',warn:'Por vencer',venc:'Vencido',baja:'Dado de baja',dmg:'Dañado',na:'Sin fecha'}[s]||'—'}
 
 function updateDash(){
-  let tot=equipos.length,ok=0,warn=0,alert=0;
+  let tot=equipos.length,ok=0,warn=0,al=0,dmg=0;
   equipos.forEach(e=>{
-    const s=statusClass(e);
+    const s=statusOf(e);
     if(s==='ok') ok++;
     else if(s==='warn') warn++;
-    else if(s==='venc') alert++;
+    else if(s==='venc') al++;
+    else if(s==='dmg') dmg++;
   });
   document.getElementById('dTotal').textContent=tot;
   document.getElementById('dOk').textContent=ok;
   document.getElementById('dWarn').textContent=warn;
-  document.getElementById('dAlert').textContent=alert;
+  document.getElementById('dAlert').textContent=al;
+  document.getElementById('dDmg').textContent=dmg;
 }
 
 function updateDeptFilter(){
-  const sel=document.getElementById('filterDept');
-  const cur=sel.value;
-  const deptos=[...new Set(equipos.map(e=>e.fDept).filter(Boolean))].sort();
-  sel.innerHTML='<option value="">Todos los departamentos</option>'+deptos.map(d=>`<option value="${d}" ${d===cur?'selected':''}>${d}</option>`).join('');
+  const sel=document.getElementById('filterDept'),cur=sel.value;
+  const deps=[...new Set(equipos.map(e=>e.fDept).filter(Boolean))].sort();
+  sel.innerHTML='<option value="">Todos los departamentos</option>'+deps.map(d=>`<option value="${d}"${d===cur?' selected':''}>${d}</option>`).join('');
 }
 
 function renderTable(){
@@ -390,52 +385,79 @@ function renderTable(){
   const dept=document.getElementById('filterDept').value;
   const status=document.getElementById('filterStatus').value;
   const filtered=equipos.filter(e=>{
-    const matchQ=!q||(e.fId+e.fInstrumento+e.fDept+e.fResponsable).toLowerCase().includes(q);
-    const matchD=!dept||e.fDept===dept;
-    const sc=statusClass(e);
-    const matchS=!status||(status==='ok'&&sc==='ok')||(status==='warn'&&sc==='warn')||(status==='venc'&&sc==='venc')||(status==='baja'&&e.estado==='baja');
-    return matchQ&&matchD&&matchS;
+    const mq=!q||(e.fId+e.fInstrumento+e.fDept+e.fResponsable).toLowerCase().includes(q);
+    const md=!dept||e.fDept===dept;
+    const sc=statusOf(e);
+    const ms=!status||sc===status||(status==='baja'&&e.fEstado==='baja')||(status==='dmg'&&sc==='dmg');
+    return mq&&md&&ms;
   });
   const tb=document.getElementById('equiposBody');
   if(!filtered.length){tb.innerHTML='<tr><td colspan="8" class="empty">Sin resultados</td></tr>';return;}
   tb.innerHTML=filtered.map(e=>{
-    const sc=statusClass(e);
+    const sc=statusOf(e);
     const dias=diasHasta(e.fProxVer||e.fProxCal);
-    const diasStr=dias!==null?(dias<0?`<span style="color:var(--danger)">${Math.abs(dias)}d vencido</span>`:`${dias}d`):'—';
+    const dStr=dias!==null?(dias<0?`<span style="color:var(--dg);font-size:.75rem">${Math.abs(dias)}d vencido</span>`:`<span style="font-size:.75rem;color:var(--tx2)">${dias}d</span>`):'';
     return `<tr>
-      <td><span class="status-badge s-${sc}">${statusLabel(sc)}</span></td>
+      <td><span class="sb s-${sc}">${statusLbl(sc)}</span></td>
       <td><strong>${e.fId}</strong></td>
-      <td>${e.fInstrumento}</td>
+      <td>${e.fInstrumento||'—'}</td>
       <td>${e.fDept||'—'}</td>
-      <td>${e.fUltCal||'—'}</td>
-      <td>${e.fProxVer||e.fProxCal||'—'} <small style="color:var(--text2)">${diasStr}</small></td>
-      <td>${e.fResponsable||'—'}</td>
-      <td style="white-space:nowrap">
-        <button class="btn btn-sm btn-secondary" onclick="openDetalle('${e.fId}')">👁 Ver</button>
-        <button class="btn btn-sm btn-secondary" onclick="openEdit('${e.fId}')" style="margin-left:4px">✏️</button>
-        <button class="btn btn-sm" style="background:#ffeaea;color:#aa1111;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:.78rem" onclick="eliminar('${e.fId}')" style="margin-left:4px">🗑</button>
+      <td style="font-size:.8rem">${e.fUltCal||'—'}</td>
+      <td style="font-size:.8rem">${e.fProxVer||e.fProxCal||'—'} ${dStr}</td>
+      <td style="font-size:.82rem">${e.fResponsable||'—'}</td>
+      <td style="white-space:nowrap;display:flex;gap:4px;padding:8px 14px">
+        <button class="btn btn-sm btn-s" onclick="openDet('${e.fId}')">👁</button>
+        <button class="btn btn-sm btn-s" onclick="reqPass('edit','${e.fId}')">✏️</button>
+        <button class="btn btn-sm" style="background:#ffeaea;color:#aa1111;border:1px solid #ffcaca;border-radius:6px;cursor:pointer;font-size:.77rem;padding:5px 9px" onclick="reqPass('del','${e.fId}')">🗑</button>
       </td>
     </tr>`;
   }).join('');
 }
 
+// PASSWORD FLOW
+function reqPass(action, id=''){
+  pendingAction={action,id};
+  document.getElementById('passInput').value='';
+  document.getElementById('passError').style.display='none';
+  document.getElementById('passModalTitle').textContent = action==='del'?'🔐 Confirmar eliminación':'🔐 Acceso Admin';
+  document.getElementById('modalPass').classList.add('open');
+  setTimeout(()=>document.getElementById('passInput').focus(),100);
+}
+
+function verifyPass(){
+  const v=document.getElementById('passInput').value;
+  if(v!==getPass()){
+    document.getElementById('passError').style.display='block';
+    document.getElementById('passInput').value='';
+    return;
+  }
+  closePass();
+  if(!pendingAction) return;
+  const {action,id}=pendingAction;
+  pendingAction=null;
+  if(action==='new') openNewModal();
+  else if(action==='edit') openEdit(id);
+  else if(action==='del') eliminar(id);
+}
+
+function closePass(){document.getElementById('modalPass').classList.remove('open')}
+
 function openNewModal(){
   editingId=null;
   document.getElementById('modalTitle').textContent='Registrar Equipo de Medición';
-  ['fId','fInstrumento','fDept','fResponsable','fDesc','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.value='';
-  });
-  document.getElementById('fEstado').value='ok';
+  const fields=['fId','fDesc','fDept','fResponsable','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas'];
+  fields.forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  document.getElementById('fInstrumento').value='';
+  document.getElementById('fEstado').value='op';
   document.getElementById('modalRegistro').classList.add('open');
 }
 
 function openEdit(id){
-  const e=equipos.find(x=>x.fId===id); if(!e) return;
+  const e=equipos.find(x=>x.fId===id);if(!e) return;
   editingId=id;
-  document.getElementById('modalTitle').textContent='Editar Equipo: '+id;
-  ['fId','fInstrumento','fDept','fResponsable','fDesc','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas','fEstado'].forEach(k=>{
-    const el=document.getElementById(k); if(el&&e[k]!==undefined) el.value=e[k];
-  });
+  document.getElementById('modalTitle').textContent='Editar: '+id;
+  const fields=['fId','fInstrumento','fDept','fResponsable','fDesc','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas','fEstado'];
+  fields.forEach(k=>{const el=document.getElementById(k);if(el&&e[k]!==undefined)el.value=e[k]});
   document.getElementById('modalRegistro').classList.add('open');
 }
 
@@ -443,152 +465,156 @@ function closeModal(){document.getElementById('modalRegistro').classList.remove(
 
 function saveEquipo(){
   const id=document.getElementById('fId').value.trim();
-  const inst=document.getElementById('fInstrumento').value.trim();
+  const inst=document.getElementById('fInstrumento').value;
   const dept=document.getElementById('fDept').value.trim();
   if(!id||!inst||!dept){showToast('⚠️ ID, Instrumento y Departamento son requeridos');return;}
-  const existing=equipos.find(e=>e.fId===id);
-  if(!editingId && existing){showToast('⚠️ Ya existe un equipo con ese ID');return;}
+  if(!editingId&&equipos.find(e=>e.fId===id)){showToast('⚠️ Ya existe un equipo con ese ID');return;}
   const campos=['fId','fInstrumento','fDept','fResponsable','fDesc','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas','fEstado'];
   const obj={};
-  campos.forEach(k=>{const el=document.getElementById(k);if(el)obj[k]=el.value.trim();});
-  if(editingId){
-    const idx=equipos.findIndex(e=>e.fId===editingId);
-    if(idx>-1) equipos[idx]=obj;
-  } else {
-    equipos.push(obj);
-  }
-  save(); updateDash(); updateDeptFilter(); renderTable();
-  closeModal(); showToast('✅ Equipo guardado correctamente');
+  campos.forEach(k=>{const el=document.getElementById(k);if(el)obj[k]=el.value.trim()});
+  if(editingId){const i=equipos.findIndex(e=>e.fId===editingId);if(i>-1)equipos[i]=obj;}
+  else equipos.push(obj);
+  save();updateDash();updateDeptFilter();renderTable();
+  closeModal();showToast('✅ Equipo guardado');
 }
 
 function eliminar(id){
-  if(!confirm(`¿Eliminar el equipo ${id}? Esta acción no se puede deshacer.`)) return;
+  if(!confirm(`¿Eliminar el equipo ${id}?`)) return;
   equipos=equipos.filter(e=>e.fId!==id);
-  save(); updateDash(); updateDeptFilter(); renderTable();
+  save();updateDash();updateDeptFilter();renderTable();
   showToast('🗑 Equipo eliminado');
 }
 
-function openDetalle(id){
-  const e=equipos.find(x=>x.fId===id); if(!e) return;
-  const sc=statusClass(e);
+function closeDet(){document.getElementById('modalDetalle').classList.remove('open')}
+
+function openDet(id){
+  const e=equipos.find(x=>x.fId===id);if(!e) return;
+  const sc=statusOf(e);
   const dias=diasHasta(e.fProxVer||e.fProxCal);
   const diasTxt=dias!==null?(dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días restantes`):'Sin fecha';
-  const body=document.getElementById('detalleBody');
-  body.innerHTML=`
-    <div class="detail-header">
-      <div class="detail-qr">
-        <div class="qr-card">
+  const cid='qr_'+e.fId.replace(/[^a-z0-9]/gi,'_');
+  document.getElementById('detalleBody').innerHTML=`
+    <div class="dh">
+      <div class="dq">
+        <div class="qcard">
           <h4>VERIFICACIÓN</h4>
-          <div id="qrCanvas_${e.fId.replace(/[^a-z0-9]/gi,'_')}"></div>
-          <div class="qr-id">${e.fId}</div>
-          <div class="qr-badge">${statusLabel(sc)}</div>
+          <div id="${cid}"></div>
+          <div class="qid">${e.fId}</div>
+          <div class="qbadge">${statusLbl(sc)}</div>
         </div>
-        <button class="btn btn-sm btn-secondary" style="margin-top:8px" onclick="downloadQR('${e.fId.replace(/[^a-z0-9]/gi,'_')}','${e.fId}')">⬇ Descargar QR</button>
-        <button class="btn btn-sm btn-secondary" style="margin-top:4px" onclick="verPublic('${e.fId}')">📱 Vista QR</button>
+        <button class="btn btn-sm btn-s" style="margin-top:8px" onclick="dlQR('${cid}','${e.fId}')">⬇ Descargar QR</button>
+        <button class="btn btn-sm btn-s" style="margin-top:4px" onclick="verPub('${e.fId}')">📱 Vista QR</button>
       </div>
-      <div class="detail-info">
-        <div class="info-row"><span class="info-label">ID</span><span><strong>${e.fId}</strong></span></div>
-        <div class="info-row"><span class="info-label">Instrumento</span><span>${e.fInstrumento}</span></div>
-        <div class="info-row"><span class="info-label">Descripción</span><span>${e.fDesc||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Departamento</span><span>${e.fDept}</span></div>
-        <div class="info-row"><span class="info-label">Responsable</span><span>${e.fResponsable||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Ubicación</span><span>${e.fUbicacion||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Marca / Modelo</span><span>${e.fMarca||'—'}</span></div>
-        <div class="info-row"><span class="info-label">No. Serie</span><span>${e.fSerie||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Rango</span><span>${e.fRango||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Resolución</span><span>${e.fResolucion||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Ult. Calibración</span><span>${e.fUltCal||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Próx. Calibración</span><span>${e.fProxCal||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Ult. Verificación</span><span>${e.fUltVer||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Próx. Verificación</span><span>${e.fProxVer||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Periodo Verif.</span><span>${e.fPeriodoVer||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Periodo Calib.</span><span>${e.fPeriodoCal||'—'}</span></div>
-        <div class="info-row"><span class="info-label">Estado</span><span><span class="status-badge s-${sc}">${statusLabel(sc)}</span> — ${diasTxt}</span></div>
-        ${e.fNotas?`<div class="info-row"><span class="info-label">Notas</span><span style="font-size:.82rem;color:var(--text2)">${e.fNotas}</span></div>`:''}
+      <div class="di">
+        ${[
+          ['ID',`<strong>${e.fId}</strong>`],['Instrumento',e.fInstrumento||'—'],['Descripción',e.fDesc||'—'],
+          ['Departamento',e.fDept||'—'],['Responsable',e.fResponsable||'—'],['Ubicación',e.fUbicacion||'—'],
+          ['Marca / Modelo',e.fMarca||'—'],['No. Serie',e.fSerie||'—'],['Rango',e.fRango||'—'],
+          ['Resolución',e.fResolucion||'—'],['Ult. Calibración',e.fUltCal||'—'],['Próx. Calibración',e.fProxCal||'—'],
+          ['Ult. Verificación',e.fUltVer||'—'],['Próx. Verificación',e.fProxVer||'—'],
+          ['Periodo Verif.',e.fPeriodoVer||'—'],['Periodo Calib.',e.fPeriodoCal||'—'],
+          ['Estado',`<span class="sb s-${sc}">${statusLbl(sc)}</span> — ${diasTxt}`],
+          ...(e.fNotas?[['Notas',`<span style="font-size:.8rem;color:var(--tx2)">${e.fNotas}</span>`]]:[])
+        ].map(([l,v])=>`<div class="ir"><span class="il">${l}</span><span>${v}</span></div>`).join('')}
       </div>
     </div>`;
   document.getElementById('modalDetalle').classList.add('open');
-  document.getElementById('btnEditFromDetail').onclick=()=>{
-    document.getElementById('modalDetalle').classList.remove('open');
-    openEdit(e.fId);
-  };
-  setTimeout(()=>generateQR(e.fId.replace(/[^a-z0-9]/gi,'_'), e.fId), 100);
+  document.getElementById('btnEditDet').onclick=()=>{closeDet();reqPass('edit',e.fId)};
+  setTimeout(()=>genQR(cid,e.fId),150);
 }
 
-function generateQR(canvasId, eqId){
-  const el=document.getElementById('qrCanvas_'+canvasId);
+function genQR(cid,eqId){
+  const el=document.getElementById(cid);
   if(!el||el.querySelector('canvas')) return;
-  const url=window.location.href.split('?')[0]+'?qr='+encodeURIComponent(eqId);
+  const url=location.href.split('?')[0]+'?qr='+encodeURIComponent(eqId);
   new QRCode(el,{text:url,width:140,height:140,colorDark:'#1a1aff',colorLight:'#fff'});
 }
 
-function downloadQR(canvasId, eqId){
-  const el=document.getElementById('qrCanvas_'+canvasId);
-  if(!el) return;
-  const canvas=el.querySelector('canvas');
-  if(!canvas){showToast('Generando QR...');return;}
-  const a=document.createElement('a');
-  a.download='QR_'+eqId+'.png';
-  a.href=canvas.toDataURL();
-  a.click();
+function dlQR(cid,eqId){
+  const el=document.getElementById(cid);if(!el) return;
+  const c=el.querySelector('canvas');if(!c){showToast('Generando QR...');return;}
+  const a=document.createElement('a');a.download='QR_'+eqId+'.png';a.href=c.toDataURL();a.click();
   showToast('⬇ QR descargado');
 }
 
-function verPublic(id){
-  document.getElementById('modalDetalle').classList.remove('open');
-  const e=equipos.find(x=>x.fId===id); if(!e) return;
-  const sc=statusClass(e);
+function verPub(id){
+  closeDet();
+  const e=equipos.find(x=>x.fId===id);if(!e) return;
+  const sc=statusOf(e);
   const dias=diasHasta(e.fProxVer||e.fProxCal);
-  const semColor=sc==='ok'?'green':sc==='warn'?'yellow':'red';
-  const semTxt=sc==='ok'?'Equipo vigente':sc==='warn'?'Por vencer pronto':'VENCIDO / Fuera de servicio';
-  const semDotColor=sc==='ok'?'#1a9e3f':sc==='warn'?'#e6820a':'#cc2222';
-  const diasBadge=dias!==null?`<div class="dias-badge ${sc==='venc'?'venc':sc==='warn'?'warn':'ok'}">${dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días para próxima verificación`}</div>`:'';
+  const semC=sc==='ok'?'green':sc==='warn'?'yellow':(sc==='dmg'?'purple':'red');
+  const semTxt=sc==='ok'?'Equipo vigente':sc==='warn'?'Por vencer pronto':sc==='dmg'?'DAÑADO — En reparación':'VENCIDO / Fuera de servicio';
+  const dotC=sc==='ok'?'#1a9e3f':sc==='warn'?'#e6820a':(sc==='dmg'?'#8b00b5':'#cc2222');
+  const diasBadge=dias!==null?`<div class="db2 ${dias<0?'venc':sc==='warn'?'warn':'ok'}">${dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días para próxima verificación`}</div>`:'';
   document.getElementById('pubCardContent').innerHTML=`
-    <button class="btn btn-secondary" style="margin-bottom:1rem" onclick="showSection('equipos')">← Volver</button>
-    <div class="pub-card">
-      <div class="pub-card-header">
-        <div class="pub-logo">zubex</div>
-        <div class="pub-type">VERIFICACIÓN</div>
-      </div>
-      <div class="pub-body">
-        <div class="pub-id">ID: ${e.fId}</div>
-        <div class="pub-name">${e.fInstrumento}</div>
-        <div class="pub-sem ${semColor}">
-          <div class="sem-dot" style="background:${semDotColor}"></div>
-          <span style="font-weight:600;font-size:.9rem">${semTxt}</span>
-        </div>
-        <div class="pub-grid">
-          <div class="pub-field"><div class="pf-label">Departamento</div><div class="pf-value">${e.fDept||'—'}</div></div>
-          <div class="pub-field"><div class="pf-label">Responsable</div><div class="pf-value">${e.fResponsable||'—'}</div></div>
-          <div class="pub-field"><div class="pf-label">Ult. Verificación</div><div class="pf-value">${e.fUltVer||e.fUltCal||'—'}</div></div>
-          <div class="pub-field"><div class="pf-label">Próx. Verificación</div><div class="pf-value">${e.fProxVer||e.fProxCal||'—'}</div></div>
-          <div class="pub-field"><div class="pf-label">Periodo Verif.</div><div class="pf-value">${e.fPeriodoVer||'—'}</div></div>
-          <div class="pub-field"><div class="pf-label">Ubicación</div><div class="pf-value">${e.fUbicacion||'—'}</div></div>
+    <button class="btn btn-s" style="margin-bottom:1rem" onclick="showSec('equipos')">← Volver</button>
+    <div class="pc">
+      <div class="pch"><div class="plogo">zubex</div><div class="ptyp">VERIFICACIÓN</div></div>
+      <div class="pb">
+        <div class="pid">ID: ${e.fId}</div>
+        <div class="pname">${e.fInstrumento||'—'}</div>
+        <div class="psem ${semC}"><div class="sdot" style="background:${dotC}"></div><span style="font-weight:600;font-size:.9rem">${semTxt}</span></div>
+        <div class="pgrid">
+          <div class="pf"><div class="pfl">Departamento</div><div class="pfv">${e.fDept||'—'}</div></div>
+          <div class="pf"><div class="pfl">Responsable</div><div class="pfv">${e.fResponsable||'—'}</div></div>
+          <div class="pf"><div class="pfl">Ult. Verificación</div><div class="pfv">${e.fUltVer||e.fUltCal||'—'}</div></div>
+          <div class="pf"><div class="pfl">Próx. Verificación</div><div class="pfv">${e.fProxVer||e.fProxCal||'—'}</div></div>
+          <div class="pf"><div class="pfl">Periodo Verif.</div><div class="pfv">${e.fPeriodoVer||'—'}</div></div>
+          <div class="pf"><div class="pfl">Ubicación</div><div class="pfv">${e.fUbicacion||'—'}</div></div>
         </div>
         ${diasBadge}
-        ${e.fNotas?`<p style="font-size:.78rem;color:var(--text2);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)">📝 ${e.fNotas}</p>`:''}
+        ${e.fNotas?`<p style="font-size:.78rem;color:var(--tx2);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--bd)">📝 ${e.fNotas}</p>`:''}
       </div>
     </div>`;
-  showSection('public');
-  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  showSec('public');
+  document.querySelectorAll('.nt').forEach(b=>b.classList.remove('active'));
+}
+
+// EXPORT EXCEL
+function exportExcel(){
+  if(!equipos.length){showToast('No hay equipos para exportar');return;}
+  const headers=['ID','Instrumento','Departamento','Responsable','Descripción','Unidad','Marca/Modelo','No. Serie','Rango','Resolución','Ult. Calibración','Próx. Calibración','Ult. Verificación','Próx. Verificación','Periodo Verif.','Periodo Calib.','Estado','Ubicación','Notas','Estatus Sistema'];
+  const rows=equipos.map(e=>[
+    e.fId,e.fInstrumento,e.fDept,e.fResponsable,e.fDesc,e.fUnidad,e.fMarca,e.fSerie,e.fRango,e.fResolucion,
+    e.fUltCal,e.fProxCal,e.fUltVer,e.fProxVer,e.fPeriodoVer,e.fPeriodoCal,e.fEstado,e.fUbicacion,e.fNotas,
+    statusLbl(statusOf(e))
+  ]);
+  const ws=XLSX.utils.aoa_to_sheet([headers,...rows]);
+  ws['!cols']=headers.map(()=>({wch:18}));
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Equipos de Medición');
+  XLSX.writeFile(wb,'Zubex_Equipos_Medicion_'+new Date().toISOString().slice(0,10)+'.xlsx');
+  showToast('📊 Excel exportado');
+}
+
+// CHANGE PASSWORD
+function cambiarPass(){
+  const act=document.getElementById('cpActual').value;
+  const nv=document.getElementById('cpNueva').value;
+  const cf=document.getElementById('cpConfirm').value;
+  if(act!==getPass()){showToast('⚠️ Contraseña actual incorrecta');return;}
+  if(nv.length<4){showToast('⚠️ La nueva contraseña debe tener al menos 4 caracteres');return;}
+  if(nv!==cf){showToast('⚠️ Las contraseñas no coinciden');return;}
+  localStorage.setItem('zxPass',nv);
+  document.getElementById('cpActual').value='';
+  document.getElementById('cpNueva').value='';
+  document.getElementById('cpConfirm').value='';
+  showToast('✅ Contraseña actualizada');
 }
 
 function checkQRParam(){
-  const params=new URLSearchParams(window.location.search);
-  const qrId=params.get('qr');
-  if(qrId){
-    const e=equipos.find(x=>x.fId===decodeURIComponent(qrId));
-    if(e) setTimeout(()=>verPublic(e.fId),200);
-  }
+  const p=new URLSearchParams(location.search);
+  const qId=p.get('qr');
+  if(qId){const e=equipos.find(x=>x.fId===decodeURIComponent(qId));if(e)setTimeout(()=>verPub(e.fId),200);}
 }
 
 function showToast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
+  t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-updateDash(); updateDeptFilter(); renderTable(); checkQRParam();
+fillInstruments();updateDash();updateDeptFilter();renderTable();checkQRParam();
 </script>
 </body>
 </html>
