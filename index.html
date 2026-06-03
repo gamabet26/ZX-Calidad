@@ -26,7 +26,7 @@ header{background:var(--wh);border-bottom:2px solid var(--zbl);padding:0 2rem;di
 .sync-dot{width:8px;height:8px;border-radius:50%;background:#ccc;display:inline-block;margin-right:6px;transition:.3s}
 .sync-dot.ok{background:var(--ok)}.sync-dot.err{background:var(--dg)}.sync-dot.loading{background:var(--wn);animation:pulse .8s infinite alternate}
 @keyframes pulse{0%{opacity:.4}100%{opacity:1}}
-nav{background:var(--wh);border-bottom:1px solid var(--bd);padding:0 2rem;display:flex;gap:0;position:sticky;top:64px;z-index:99}
+nav{background:var(--wh);border-bottom:1px solid var(--bd);padding:0 2rem;display:flex;position:sticky;top:64px;z-index:99}
 .nt{padding:14px 28px;font-size:.88rem;font-weight:600;border:none;background:none;cursor:pointer;color:var(--tx2);border-bottom:3px solid transparent;transition:.2s;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
 .nt.active{color:var(--zb);border-bottom-color:var(--zb)}
 .nt:hover:not(.active){color:var(--zb);background:var(--zbl)}
@@ -52,6 +52,7 @@ main{position:relative;z-index:1;padding:2rem;max-width:1200px;margin:0 auto}
 .btn-s{background:var(--wh);color:var(--zb);border:1px solid var(--zb)}.btn-s:hover{background:var(--zbl)}
 .btn-g{background:#1a7a38;color:#fff}.btn-g:hover{background:#155e2c}
 .btn-sm{padding:5px 10px;font-size:.77rem}
+.btn-del{background:#ffeaea;color:#aa1111;border:1px solid #ffcaca;border-radius:6px;cursor:pointer;font-size:.77rem;padding:5px 9px}
 .tw{background:var(--wh);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
 table{width:100%;border-collapse:collapse;font-size:.83rem}
 thead{background:var(--zb);color:#fff}
@@ -66,8 +67,7 @@ tbody td{padding:10px 14px}
 .md{background:var(--wh);border-radius:16px;width:92%;max-width:740px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
 .mh{padding:1.2rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
 .mh h2{font-size:1rem;font-weight:700;color:var(--zb)}
-.mb{padding:1.5rem}
-.mf{padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.75rem}
+.mb{padding:1.5rem}.mf{padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.75rem}
 .cb{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--tx2);line-height:1}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .fgr{display:flex;flex-direction:column;gap:5px}
@@ -84,14 +84,12 @@ textarea{resize:vertical;min-height:70px}
 .qbadge{font-size:.68rem;background:var(--zb);color:#fff;padding:2px 10px;border-radius:20px;margin-top:4px}
 .di{flex:1;min-width:260px}
 .ir{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:.85rem}
-.ir:last-child{border:none}
-.il{color:var(--tx2);font-weight:600;font-size:.77rem}
+.ir:last-child{border:none}.il{color:var(--tx2);font-weight:600;font-size:.77rem}
 .pc{background:var(--wh);border-radius:16px;max-width:400px;margin:2rem auto;border:2px solid var(--zb);overflow:hidden}
 .pch{background:var(--zb);color:#fff;padding:1rem 1.2rem;text-align:center}
 .pch .plogo{font-size:1.6rem;font-weight:900;letter-spacing:2px;font-style:italic}
 .pch .ptyp{background:rgba(255,255,255,.25);padding:2px 14px;border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:2px;display:inline-block;margin-top:6px}
-.pb{padding:1.2rem}
-.pid{font-size:.8rem;color:var(--tx2);margin-bottom:.3rem}
+.pb{padding:1.2rem}.pid{font-size:.8rem;color:var(--tx2);margin-bottom:.3rem}
 .pname{font-size:1.1rem;font-weight:700;margin-bottom:1rem}
 .psem{display:flex;align-items:center;gap:.75rem;padding:10px 14px;border-radius:10px;margin-bottom:1rem}
 .psem.green{background:#e6f9ed;color:#1a7a38}.psem.yellow{background:#fff4e0;color:#b36200}.psem.red{background:#ffeaea;color:#aa1111}.psem.purple{background:#f5e0ff;color:#6a0099}
@@ -110,7 +108,6 @@ textarea{resize:vertical;min-height:70px}
 .ztbtn:hover{background:var(--zbd);transform:translateY(-2px)}
 .uc{background:var(--zbl);color:var(--zb);padding:8px 20px;border-radius:20px;font-size:.78rem;font-weight:600;letter-spacing:1px;display:inline-block}
 .empty{text-align:center;padding:3rem;color:var(--tx2);font-size:.9rem}
-.loading-row td{text-align:center;padding:2rem;color:var(--tx2)}
 .pw-box{background:var(--bg);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
 .pw-box h3{font-size:.9rem;font-weight:700;color:var(--zb);margin-bottom:1rem}
 .toast{position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:12px 22px;border-radius:10px;font-size:.85rem;z-index:9999;transform:translateY(100px);opacity:0;transition:.3s}
@@ -184,7 +181,7 @@ textarea{resize:vertical;min-height:70px}
           <th>Estado</th><th>ID</th><th>Instrumento</th><th>Departamento</th>
           <th>Ult. Calibración</th><th>Próx. Verificación</th><th>Responsable</th><th>Acciones</th>
         </tr></thead>
-        <tbody id="equiposBody"><tr class="loading-row"><td colspan="8">⏳ Cargando equipos...</td></tr></tbody>
+        <tbody id="equiposBody"><tr><td colspan="8" class="empty">⏳ Cargando...</td></tr></tbody>
       </table>
     </div>
   </div>
@@ -211,15 +208,11 @@ textarea{resize:vertical;min-height:70px}
       </div>
       <div class="pw-box">
         <h3>☁️ Estado Supabase</h3>
-        <p style="font-size:.84rem;color:var(--tx2);line-height:1.8">
-          Proyecto: <strong>CalidadZX</strong><br>
-          Región: <strong>São Paulo (sa-east-1)</strong><br>
-          Estado: <span id="cfgStatus">verificando...</span>
-        </p>
+        <p style="font-size:.84rem;color:var(--tx2);line-height:1.8">Proyecto: <strong>CalidadZX</strong><br>Región: <strong>São Paulo (sa-east-1)</strong><br>Estado: <span id="cfgStatus">verificando...</span></p>
       </div>
       <div class="pw-box">
         <h3>ℹ️ Información</h3>
-        <p style="font-size:.84rem;color:var(--tx2);line-height:1.6">Usuario administrador: <strong>admin</strong><br>La contraseña protege registro, edición y eliminación.</p>
+        <p style="font-size:.84rem;color:var(--tx2);line-height:1.6">Usuario: <strong>admin</strong> — Contraseña inicial: <strong>admin123</strong></p>
       </div>
     </div>
   </div>
@@ -234,10 +227,7 @@ textarea{resize:vertical;min-height:70px}
   <div class="md" style="max-width:380px">
     <div class="mh"><h2 id="passModalTitle">🔐 Acceso Admin</h2><button class="cb" onclick="closePass()">×</button></div>
     <div class="mb">
-      <div class="fgr">
-        <label>Contraseña</label>
-        <input type="password" id="passInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')verifyPass()">
-      </div>
+      <div class="fgr"><label>Contraseña</label><input type="password" id="passInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')verifyPass()"></div>
       <p id="passError" style="color:var(--dg);font-size:.8rem;margin-top:.5rem;display:none">Contraseña incorrecta</p>
     </div>
     <div class="mf">
@@ -304,26 +294,24 @@ textarea{resize:vertical;min-height:70px}
 <div class="toast" id="toast"></div>
 
 <script>
-const SB_URL = 'https://snsdveykyqgmgoraqdiv.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuc2R2ZXlreXFnbWdvcmFxZGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MDkxMjMsImV4cCI6MjA5NjA4NTEyM30.lz4tD41nMpaWW5A_nmXciBX4iR3CBsgWWkQ2CZPnSFY';
-const TABLE = 'equipos_medicion';
+const SB_URL='https://snsdveykyqgmgoraqdiv.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuc2R2ZXlreXFnbWdvcmFxZGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MDkxMjMsImV4cCI6MjA5NjA4NTEyM30.lz4tD41nMpaWW5A_nmXciBX4iR3CBsgWWkQ2CZPnSFY';
+const TABLE='equipos_medicion';
+const {createClient}=supabase;
+const db=createClient(SB_URL,SB_KEY);
 
-const { createClient } = supabase;
-const db = createClient(SB_URL, SB_KEY);
+const INSTRUMENTS=['ADMET','Balanza analítica','Báscula','Calibrador de Termopares','Calibrador Digital','Cámara termográfica','Contador Digital','Copa Zahn','Cronómetro Digital','Cuenta Metros','Cuentametros','Dinamómetro','Infrarrojo','Lainas','Medidor de alturas','Medidor de ancho plano','Medidor de espesor','Medidor de espesor de ultrasonido','Medidor de espesores','Medidor de estática','Micrómetro','Pesa patrón','Placa patrón','Probador de dureza','Regla patrón','Rugosímetro','Termómetro','Termómetro Copa Zahn','Termómetro Digital','Termómetro Infrarrojo','Torquímetro','Transportador de Ángulos','Vernier'];
 
-const INSTRUMENTS = ['ADMET','Balanza analítica','Báscula','Calibrador de Termopares','Calibrador Digital','Cámara termográfica','Contador Digital','Copa Zahn','Cronómetro Digital','Cuenta Metros','Cuentametros','Dinamómetro','Infrarrojo','Lainas','Medidor de alturas','Medidor de ancho plano','Medidor de espesor','Medidor de espesor de ultrasonido','Medidor de espesores','Medidor de estática','Medidor de Estática','Micrómetro','Pesa patrón','Pesa Patrón','Placa patrón','Probador de dureza','Regla patrón','Rugosímetro','Termómetro','Termómetro Copa Zahn','Termómetro Digital','Termómetro Infrarrojo','Torquímetro','Transportador de Ángulos','Vernier'].filter((v,i,a)=>a.findIndex(x=>x.toLowerCase()===v.toLowerCase())===i).sort();
-
-let equipos = [];
-let editingId = null;
-let pendingAction = null;
-const DEFAULT_PASS = 'admin123';
-
+let equipos=[];
+let editingId=null;
+let pendingAction=null;
+const DEFAULT_PASS='admin123';
 function getPass(){return localStorage.getItem('zxPassCal')||DEFAULT_PASS}
 
 function setSyncStatus(st,txt){
   const dot=document.getElementById('syncDot'),t=document.getElementById('syncTxt');
-  dot.className='sync-dot '+st; t.textContent=txt;
-  document.getElementById('cfgStatus').textContent=txt;
+  dot.className='sync-dot '+st;t.textContent=txt;
+  const cfg=document.getElementById('cfgStatus');if(cfg)cfg.textContent=txt;
 }
 
 async function loadEquipos(){
@@ -332,11 +320,11 @@ async function loadEquipos(){
     const {data,error}=await db.from(TABLE).select('*').order('created_at',{ascending:false});
     if(error) throw error;
     equipos=data||[];
-    updateDash(); updateDeptFilter(); renderTable();
+    updateDash();updateDeptFilter();renderTable();
     setSyncStatus('ok','Conectado ✓ — '+equipos.length+' equipos');
   }catch(e){
     setSyncStatus('err','Error de conexión');
-    showToast('❌ Error al cargar: '+e.message);
+    showToast('❌ Error: '+e.message);
   }
 }
 
@@ -349,26 +337,26 @@ function showSec(sec,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nt').forEach(b=>b.classList.remove('active'));
   document.getElementById('section-'+sec).classList.add('active');
-  if(btn) btn.classList.add('active');
+  if(btn)btn.classList.add('active');
 }
 
 function goZtela(){showToast('Redirigiendo...');setTimeout(()=>window.open('https://zubex-ztela.com','_blank'),800)}
 
 function diasHasta(d){
-  if(!d) return null;
+  if(!d)return null;
   const dt=new Date(d),hoy=new Date();
   dt.setHours(0,0,0,0);hoy.setHours(0,0,0,0);
   return Math.ceil((dt-hoy)/864e5);
 }
 
 function statusOf(e){
-  if(e.f_estado==='baja') return 'baja';
-  if(e.f_estado==='dmg') return 'dmg';
-  if(e.f_estado==='fs') return 'venc';
+  if(e.f_estado==='baja')return 'baja';
+  if(e.f_estado==='dmg')return 'dmg';
+  if(e.f_estado==='fs')return 'venc';
   const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
-  if(dias===null) return 'na';
-  if(dias<0) return 'venc';
-  if(dias<=30) return 'warn';
+  if(dias===null)return 'na';
+  if(dias<0)return 'venc';
+  if(dias<=30)return 'warn';
   return 'ok';
 }
 
@@ -403,11 +391,11 @@ function renderTable(){
   });
   const tb=document.getElementById('equiposBody');
   if(!filtered.length){tb.innerHTML='<tr><td colspan="8" class="empty">Sin resultados</td></tr>';return;}
-  tb.innerHTML=filtered.map(e=>{
+  // Usar índice para evitar problemas con caracteres especiales en IDs
+  tb.innerHTML=filtered.map((e,idx)=>{
     const sc=statusOf(e);
     const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
     const dStr=dias!==null?(dias<0?`<span style="color:var(--dg);font-size:.75rem">${Math.abs(dias)}d vencido</span>`:`<span style="font-size:.75rem;color:var(--tx2)">${dias}d</span>`):'';
-    const safeId=encodeURIComponent(e.f_id);
     return `<tr>
       <td><span class="sb s-${sc}">${statusLbl(sc)}</span></td>
       <td><strong>${e.f_id}</strong></td>
@@ -417,16 +405,37 @@ function renderTable(){
       <td style="font-size:.8rem">${e.f_prox_ver||e.f_prox_cal||'—'} ${dStr}</td>
       <td style="font-size:.82rem">${e.f_responsable||'—'}</td>
       <td style="white-space:nowrap;display:flex;gap:4px;padding:8px 14px">
-        <button class="btn btn-sm btn-s" onclick="openDet('${safeId}')">👁</button>
-        <button class="btn btn-sm btn-s" onclick="reqPass('edit','${safeId}')">✏️</button>
-        <button class="btn btn-sm" style="background:#ffeaea;color:#aa1111;border:1px solid #ffcaca;border-radius:6px;cursor:pointer;font-size:.77rem;padding:5px 9px" onclick="reqPass('del','${safeId}')">🗑</button>
+        <button class="btn btn-sm btn-s" data-action="ver" data-idx="${idx}">👁</button>
+        <button class="btn btn-sm btn-s" data-action="edit" data-idx="${idx}">✏️</button>
+        <button class="btn btn-sm btn-del" data-action="del" data-idx="${idx}">🗑</button>
       </td>
     </tr>`;
   }).join('');
 }
 
-function reqPass(action,id=''){
-  pendingAction={action,id};
+// Delegación de eventos en tabla — sin onclick inline
+document.getElementById('equiposBody').addEventListener('click',function(ev){
+  const btn=ev.target.closest('[data-action]');if(!btn)return;
+  const action=btn.dataset.action;
+  const idx=parseInt(btn.dataset.idx);
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const dept=document.getElementById('filterDept').value;
+  const status=document.getElementById('filterStatus').value;
+  const filtered=equipos.filter(e=>{
+    const mq=!q||((e.f_id||'')+(e.f_instrumento||'')+(e.f_dept||'')+(e.f_responsable||'')).toLowerCase().includes(q);
+    const md=!dept||e.f_dept===dept;
+    const sc=statusOf(e);
+    const ms=!status||sc===status;
+    return mq&&md&&ms;
+  });
+  const e=filtered[idx];if(!e)return;
+  if(action==='ver') openDet(e.f_id);
+  else if(action==='edit') reqPass('edit',e.f_id);
+  else if(action==='del') reqPass('del',e.f_id);
+});
+
+function reqPass(action,id){
+  pendingAction={action,id:id||''};
   document.getElementById('passInput').value='';
   document.getElementById('passError').style.display='none';
   document.getElementById('passModalTitle').textContent=action==='del'?'🔐 Confirmar eliminación':'🔐 Acceso Admin';
@@ -437,15 +446,14 @@ function reqPass(action,id=''){
 function verifyPass(){
   if(document.getElementById('passInput').value!==getPass()){
     document.getElementById('passError').style.display='block';
-    document.getElementById('passInput').value='';
-    return;
+    document.getElementById('passInput').value='';return;
   }
   closePass();
-  if(!pendingAction) return;
-  const {action,id}=pendingAction; pendingAction=null;
+  if(!pendingAction)return;
+  const {action,id}=pendingAction;pendingAction=null;
   if(action==='new') openNewModal();
-  else if(action==='edit') openEdit(decodeURIComponent(id));
-  else if(action==='del') eliminar(decodeURIComponent(id));
+  else if(action==='edit') openEdit(id);
+  else if(action==='del') eliminar(id);
 }
 
 function closePass(){document.getElementById('modalPass').classList.remove('open')}
@@ -460,7 +468,7 @@ function openNewModal(){
 }
 
 function openEdit(fid){
-  const e=equipos.find(x=>x.f_id===fid);if(!e) return;
+  const e=equipos.find(x=>x.f_id===fid);if(!e)return;
   editingId=fid;
   document.getElementById('modalTitle').textContent='Editar: '+fid;
   document.getElementById('fId').value=e.f_id||'';
@@ -495,7 +503,7 @@ async function saveEquipo(){
   const btn=document.getElementById('btnSave');
   btn.innerHTML='<span class="spinner"></span> Guardando...';btn.disabled=true;
   const payload={
-    f_id:fid, f_instrumento:inst, f_dept:dept,
+    f_id:fid,f_instrumento:inst,f_dept:dept,
     f_responsable:document.getElementById('fResponsable').value.trim(),
     f_desc:document.getElementById('fDesc').value.trim(),
     f_unidad:document.getElementById('fUnidad').value.trim(),
@@ -516,43 +524,34 @@ async function saveEquipo(){
   };
   try{
     let error;
-    if(editingId){
-      ({error}=await db.from(TABLE).update(payload).eq('f_id',editingId));
-    } else {
-      ({error}=await db.from(TABLE).insert(payload));
-    }
-    if(error) throw error;
-    closeModal();
-    showToast('✅ Equipo guardado en Supabase');
+    if(editingId){({error}=await db.from(TABLE).update(payload).eq('f_id',editingId));}
+    else{({error}=await db.from(TABLE).insert(payload));}
+    if(error)throw error;
+    closeModal();showToast('✅ Equipo guardado');
     await loadEquipos();
-  }catch(e){
-    showToast('❌ Error: '+e.message);
-  }finally{
-    btn.innerHTML='💾 Guardar';btn.disabled=false;
-  }
+  }catch(e){showToast('❌ Error: '+e.message);}
+  finally{btn.innerHTML='💾 Guardar';btn.disabled=false;}
 }
 
 async function eliminar(fid){
-  if(!confirm(`¿Eliminar el equipo ${fid}? Esta acción no se puede deshacer.`)) return;
+  if(!confirm('¿Eliminar el equipo '+fid+'? Esta acción no se puede deshacer.'))return;
   try{
     const {error}=await db.from(TABLE).delete().eq('f_id',fid);
-    if(error) throw error;
-    showToast('🗑 Equipo eliminado');
-    await loadEquipos();
-  }catch(e){
-    showToast('❌ Error: '+e.message);
-  }
+    if(error)throw error;
+    showToast('🗑 Equipo eliminado');await loadEquipos();
+  }catch(e){showToast('❌ Error: '+e.message);}
 }
 
 function closeDet(){document.getElementById('modalDetalle').classList.remove('open')}
 
 function openDet(fid){
-  const e=equipos.find(x=>x.f_id===decodeURIComponent(fid));if(!e) return;
+  const e=equipos.find(x=>x.f_id===fid);if(!e)return;
   const sc=statusOf(e);
   const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
   const diasTxt=dias!==null?(dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días restantes`):'Sin fecha';
-  const cid='qr_'+e.f_id.replace(/[^a-z0-9]/gi,'_');
-  document.getElementById('detalleBody').innerHTML=`
+  const cid='qr_'+Math.random().toString(36).slice(2,8);
+  const body=document.getElementById('detalleBody');
+  body.innerHTML=`
     <div class="dh">
       <div class="dq">
         <div class="qcard">
@@ -561,8 +560,9 @@ function openDet(fid){
           <div class="qid">${e.f_id}</div>
           <div class="qbadge">${statusLbl(sc)}</div>
         </div>
-        <button class="btn btn-sm btn-s" style="margin-top:8px" onclick="dlQR('${cid}','${e.f_id}')">⬇ Descargar QR</button>
-        <button class="btn btn-sm btn-s" style="margin-top:4px" onclick="verPub('${e.f_id}')">📱 Vista QR</button>
+        <button class="btn btn-sm btn-s" style="margin-top:8px" id="btnDlQr">⬇ Descargar QR</button>
+        <button class="btn btn-sm btn-s" style="margin-top:4px" id="btnVistaQr">📱 Vista QR</button>
+        <button class="btn btn-sm btn-p" style="margin-top:4px" id="btnPrintLbl">🖨️ Etiqueta</button>
       </div>
       <div class="di">
         ${[['ID',`<strong>${e.f_id}</strong>`],['Instrumento',e.f_instrumento||'—'],['Descripción',e.f_desc||'—'],
@@ -576,20 +576,39 @@ function openDet(fid){
         ].map(([l,v])=>`<div class="ir"><span class="il">${l}</span><span>${v}</span></div>`).join('')}
       </div>
     </div>`;
+
   document.getElementById('modalDetalle').classList.add('open');
-  document.getElementById('btnEditDet').onclick=()=>{closeDet();reqPass('edit',encodeURIComponent(e.f_id))};
+  document.getElementById('btnEditDet').onclick=()=>{closeDet();reqPass('edit',fid)};
+  document.getElementById('btnDlQr').onclick=()=>dlQR(cid,e.f_id);
+  document.getElementById('btnVistaQr').onclick=()=>verPub(e.f_id);
+  document.getElementById('btnPrintLbl').onclick=()=>printLabel(e.f_id);
   setTimeout(()=>genQR(cid,e.f_id),150);
 }
 
 function genQR(cid,eqId){
-  const el=document.getElementById(cid);
-  if(!el||el.querySelector('canvas')) return;
+  const el=document.getElementById(cid);if(!el||el.querySelector('canvas'))return;
   const url=location.href.split('?')[0]+'?qr='+encodeURIComponent(eqId);
-  new QRCode(el,{text:url,width:140,height:140,colorDark:'#1a1aff',colorLight:'#fff'});
+  new QRCode(el,{text:url,width:160,height:160,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.H});
+  setTimeout(()=>overlayZX(el),350);
+}
+
+function overlayZX(el){
+  const orig=el.querySelector('canvas');if(!orig)return;
+  const size=orig.width,cx=size/2,cy=size/2,r=size*0.14;
+  const c=document.createElement('canvas');c.width=size;c.height=size;
+  const ctx=c.getContext('2d');
+  ctx.drawImage(orig,0,0);
+  ctx.beginPath();ctx.arc(cx,cy,r+4,0,2*Math.PI);ctx.fillStyle='#fff';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,r,0,2*Math.PI);ctx.fillStyle='#000';ctx.fill();
+  ctx.fillStyle='#1a1aff';
+  ctx.font=`bold ${Math.round(r*1.1)}px 'Segoe UI',Arial,sans-serif`;
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('ZX',cx,cy);
+  orig.replaceWith(c);
 }
 
 function dlQR(cid,eqId){
-  const el=document.getElementById(cid);if(!el) return;
+  const el=document.getElementById(cid);if(!el)return;
   const c=el.querySelector('canvas');if(!c){showToast('Generando QR...');return;}
   const a=document.createElement('a');a.download='QR_'+eqId+'.png';a.href=c.toDataURL();a.click();
   showToast('⬇ QR descargado');
@@ -597,7 +616,7 @@ function dlQR(cid,eqId){
 
 function verPub(fid){
   closeDet();
-  const e=equipos.find(x=>x.f_id===fid);if(!e) return;
+  const e=equipos.find(x=>x.f_id===fid);if(!e)return;
   const sc=statusOf(e);
   const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
   const semC=sc==='ok'?'green':sc==='warn'?'yellow':sc==='dmg'?'purple':'red';
@@ -628,6 +647,74 @@ function verPub(fid){
   document.querySelectorAll('.nt').forEach(b=>b.classList.remove('active'));
 }
 
+function printLabel(fid){
+  const e=equipos.find(x=>x.f_id===fid);if(!e)return;
+  const proxFecha=e.f_prox_ver||e.f_prox_cal||'';
+  let mesAnio='',dias=[];
+  if(proxFecha){
+    const d=new Date(proxFecha);
+    const meses=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+    mesAnio=meses[d.getMonth()]+'-'+d.getFullYear();
+    const totalDias=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+    const set=new Set();
+    for(let w=0;w<4;w++){const day=Math.ceil(totalDias/4)*w+1;if(day<=totalDias)set.add(day);}
+    while(set.size<4&&set.size<totalDias){set.add(set.size*7+1 <= totalDias ? set.size*7+1 : totalDias);}
+    dias=[...set].slice(0,4).sort((a,b)=>a-b);
+  }
+  const qrUrl=location.href.split('?')[0]+'?qr='+encodeURIComponent(fid);
+  const resp=e.f_responsable||'—';
+  const win=window.open('','_blank','width=420,height=640');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Etiqueta ${fid}</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+    .label{width:260px;border:2.5px solid #1a1aff;border-radius:8px;overflow:hidden}
+    .lh{background:#1a1aff;color:#fff;text-align:center;padding:8px 6px 6px}
+    .lh .logo{font-size:24px;font-weight:900;font-style:italic;letter-spacing:1px}
+    .ltype{background:#6600cc;color:#fff;text-align:center;padding:5px;font-size:10px;font-weight:700;letter-spacing:2px}
+    .lrow{display:flex;border-bottom:1px solid #dde;padding:5px 8px;font-size:11px;gap:4px;align-items:center}
+    .lk{color:#555;min-width:52px;font-size:10px}
+    .lv{font-weight:700;color:#1a1a2e}
+    .lnext{background:#1a1aff;color:#fff;text-align:center;padding:5px;font-size:10px;font-weight:700;letter-spacing:1px}
+    .lmes{text-align:center;padding:6px;font-size:13px;font-weight:700;color:#1a1a2e;border-bottom:1px solid #dde}
+    .ldias{display:grid;grid-template-columns:1fr 1fr}
+    .ld{text-align:center;padding:10px 4px;font-size:20px;font-weight:700;color:#1a1a2e;border:0.5px solid #dde}
+    .lqr{text-align:center;padding:10px 8px 8px;border-top:1px solid #dde}
+    .lqr p{font-size:9px;color:#888;margin-top:5px;letter-spacing:.5px}
+    @media print{body{padding:0;min-height:auto}@page{margin:8mm;size:85mm 115mm}}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>
+  </head><body>
+  <div class="label">
+    <div class="lh"><div class="logo">zubex</div></div>
+    <div class="ltype">VERIFICACIÓN</div>
+    <div class="lrow"><span class="lk">ID:</span><span class="lv">${fid}</span></div>
+    <div class="lrow"><span class="lk">Revisado:</span><span class="lv">${resp}</span></div>
+    <div class="lnext">Próxima Verificación</div>
+    <div class="lmes">${mesAnio||'SIN FECHA'}</div>
+    <div class="ldias">${dias.length>=4?dias.map(d=>`<div class="ld">${String(d).padStart(2,'0')}</div>`).join(''):'<div class="ld" style="grid-column:1/-1;font-size:11px;color:#aaa;padding:8px">Sin fechas programadas</div>'}</div>
+    <div class="lqr"><div id="qrPrint"></div><p>Escanea para info del equipo</p></div>
+  </div>
+  <script>
+    const qr=new QRCode(document.getElementById('qrPrint'),{text:'${qrUrl}',width:110,height:110,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.H});
+    setTimeout(function(){
+      const orig=document.getElementById('qrPrint').querySelector('canvas');
+      if(!orig)return;
+      const size=orig.width,cx=size/2,cy=size/2,r=size*0.14;
+      const c=document.createElement('canvas');c.width=size;c.height=size;
+      const ctx=c.getContext('2d');ctx.drawImage(orig,0,0);
+      ctx.beginPath();ctx.arc(cx,cy,r+4,0,2*Math.PI);ctx.fillStyle='#fff';ctx.fill();
+      ctx.beginPath();ctx.arc(cx,cy,r,0,2*Math.PI);ctx.fillStyle='#000';ctx.fill();
+      ctx.fillStyle='#1a1aff';ctx.font='bold '+Math.round(r*1.1)+'px Arial,sans-serif';
+      ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('ZX',cx,cy);
+      orig.replaceWith(c);
+      setTimeout(function(){window.print();},300);
+    },500);
+  <\/script>
+  </body></html>`);
+  win.document.close();
+}
+
 function exportExcel(){
   if(!equipos.length){showToast('No hay equipos para exportar');return;}
   const headers=['ID','Instrumento','Departamento','Responsable','Descripción','Unidad','Marca/Modelo','No. Serie','Rango','Resolución','Ult. Calibración','Próx. Calibración','Ult. Verificación','Próx. Verificación','Periodo Verif.','Periodo Calib.','Estado','Ubicación','Notas','Estatus'];
@@ -655,16 +742,8 @@ function cambiarPass(){
 async function checkQRParam(){
   const p=new URLSearchParams(location.search);
   const qId=p.get('qr');
-  if(qId){
-    await loadEquipos();
-    const e=equipos.find(x=>x.f_id===decodeURIComponent(qId));
-    if(e) verPub(e.f_id);
-  }
+  if(qId){await loadEquipos();const e=equipos.find(x=>x.f_id===decodeURIComponent(qId));if(e)verPub(e.f_id);}
 }
-
-// Anti-pause ping cada 5 días
-function pingDB(){db.from(TABLE).select('f_id').limit(1).then(()=>console.log('ping ok'))}
-setInterval(pingDB, 5*24*60*60*1000);
 
 function showToast(msg){
   const t=document.getElementById('toast');
@@ -672,9 +751,8 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-fillInstruments();
-loadEquipos();
-checkQRParam();
+setInterval(()=>db.from(TABLE).select('f_id').limit(1),5*24*60*60*1000);
+fillInstruments();loadEquipos();checkQRParam();
 </script>
 </body>
 </html>
