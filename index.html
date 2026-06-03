@@ -6,6 +6,7 @@
 <title>Zubex Calidad</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--zb:#1a1aff;--zbd:#0d0d99;--zbl:#e8e8ff;--bg:#f5f6fa;--wh:#fff;--tx:#1a1a2e;--tx2:#666;--bd:#e0e0ee;--ok:#1a9e3f;--wn:#e6820a;--dg:#cc2222;--dmg:#8b00b5}
@@ -22,6 +23,9 @@ header{background:var(--wh);border-bottom:2px solid var(--zbl);padding:0 2rem;di
 .bt h1{font-size:1.1rem;font-weight:700;color:var(--zb);letter-spacing:1px}
 .bt p{font-size:.7rem;color:var(--tx2);letter-spacing:2px;text-transform:uppercase}
 .dbadge{background:var(--zb);color:#fff;padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:1px}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:#ccc;display:inline-block;margin-right:6px;transition:.3s}
+.sync-dot.ok{background:var(--ok)}.sync-dot.err{background:var(--dg)}.sync-dot.loading{background:var(--wn);animation:pulse .8s infinite alternate}
+@keyframes pulse{0%{opacity:.4}100%{opacity:1}}
 nav{background:var(--wh);border-bottom:1px solid var(--bd);padding:0 2rem;display:flex;gap:0;position:sticky;top:64px;z-index:99}
 .nt{padding:14px 28px;font-size:.88rem;font-weight:600;border:none;background:none;cursor:pointer;color:var(--tx2);border-bottom:3px solid transparent;transition:.2s;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
 .nt.active{color:var(--zb);border-bottom-color:var(--zb)}
@@ -29,7 +33,7 @@ nav{background:var(--wh);border-bottom:1px solid var(--bd);padding:0 2rem;displa
 .ext-ic{font-size:.7rem;background:var(--zbl);color:var(--zb);padding:2px 6px;border-radius:4px}
 main{position:relative;z-index:1;padding:2rem;max-width:1200px;margin:0 auto}
 .section{display:none}.section.active{display:block}
-.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
+.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1rem;margin-bottom:2rem}
 .dc{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:1.1rem;display:flex;align-items:center;gap:12px}
 .dc .ic{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
 .dc .inf p{font-size:.73rem;color:var(--tx2);margin-bottom:2px}
@@ -56,7 +60,7 @@ tbody tr{border-bottom:1px solid var(--bd);transition:.15s}
 tbody tr:hover{background:#f0f0ff}
 tbody td{padding:10px 14px}
 .sb{padding:3px 10px;border-radius:20px;font-size:.71rem;font-weight:600;white-space:nowrap}
-.s-ok{background:#e6f9ed;color:#1a7a38}.s-warn{background:#fff4e0;color:#b36200}.s-venc{background:#ffeaea;color:#aa1111}.s-na{background:#f0f0f0;color:#888}.s-dmg{background:#f5e0ff;color:#6a0099}
+.s-ok{background:#e6f9ed;color:#1a7a38}.s-warn{background:#fff4e0;color:#b36200}.s-venc{background:#ffeaea;color:#aa1111}.s-na{background:#f0f0f0;color:#888}.s-dmg{background:#f5e0ff;color:#6a0099}.s-baja{background:#f0f0f0;color:#888}
 .mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
 .mo.open{display:flex}
 .md{background:var(--wh);border-radius:16px;width:92%;max-width:740px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
@@ -96,7 +100,7 @@ textarea{resize:vertical;min-height:70px}
 .pf{background:var(--bg);border-radius:8px;padding:.75rem}
 .pfl{font-size:.7rem;color:var(--tx2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
 .pfv{font-size:.9rem;font-weight:600}
-.db2{text-align:center;font-size:.8rem;padding:8px;border-radius:8px;font-weight:600}
+.db2{text-align:center;font-size:.8rem;padding:8px;border-radius:8px;font-weight:600;margin-top:.5rem}
 .db2.ok{background:#e6f9ed;color:#1a7a38}.db2.warn{background:#fff4e0;color:#b36200}.db2.venc{background:#ffeaea;color:#aa1111}
 .ztc{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:2rem;text-align:center}
 .ztcard{background:var(--wh);border:1px solid var(--bd);border-radius:20px;padding:3rem 4rem;max-width:500px}
@@ -106,11 +110,13 @@ textarea{resize:vertical;min-height:70px}
 .ztbtn:hover{background:var(--zbd);transform:translateY(-2px)}
 .uc{background:var(--zbl);color:var(--zb);padding:8px 20px;border-radius:20px;font-size:.78rem;font-weight:600;letter-spacing:1px;display:inline-block}
 .empty{text-align:center;padding:3rem;color:var(--tx2);font-size:.9rem}
-.toast{position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:12px 22px;border-radius:10px;font-size:.85rem;z-index:9999;transform:translateY(100px);opacity:0;transition:.3s}
-.toast.show{transform:translateY(0);opacity:1}
+.loading-row td{text-align:center;padding:2rem;color:var(--tx2)}
 .pw-box{background:var(--bg);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
 .pw-box h3{font-size:.9rem;font-weight:700;color:var(--zb);margin-bottom:1rem}
-.divider{border:none;border-top:1px solid var(--bd);margin:1.5rem 0}
+.toast{position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:12px 22px;border-radius:10px;font-size:.85rem;z-index:9999;transform:translateY(100px);opacity:0;transition:.3s}
+.toast.show{transform:translateY(0);opacity:1}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -128,7 +134,7 @@ textarea{resize:vertical;min-height:70px}
 <header>
   <div class="la">
     <div class="lzx">
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 40 40" fill="none">
         <polyline points="4,8 20,8 4,26 20,26" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
         <line x1="24" y1="8" x2="36" y2="26" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round"/>
         <line x1="36" y1="8" x2="24" y2="26" stroke="#1a1aff" stroke-width="3.5" stroke-linecap="round"/>
@@ -136,7 +142,10 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <div class="bt"><h1>zubex</h1><p>Departamento de Calidad</p></div>
   </div>
-  <span class="dbadge">CALIDAD ZX</span>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <span style="font-size:.75rem;color:var(--tx2)"><span class="sync-dot" id="syncDot"></span><span id="syncTxt">Conectando...</span></span>
+    <span class="dbadge">CALIDAD ZX</span>
+  </div>
 </header>
 
 <nav>
@@ -146,14 +155,13 @@ textarea{resize:vertical;min-height:70px}
 </nav>
 
 <main>
-  <!-- EQUIPOS -->
   <div id="section-equipos" class="section active">
-    <div class="dg" id="dashCards">
-      <div class="dc total"><div class="ic">📐</div><div class="inf"><p>Total equipos</p><h3 id="dTotal">0</h3></div></div>
-      <div class="dc ok"><div class="ic">✅</div><div class="inf"><p>Vigentes</p><h3 id="dOk">0</h3></div></div>
-      <div class="dc warn"><div class="ic">⚠️</div><div class="inf"><p>Por vencer (30 días)</p><h3 id="dWarn">0</h3></div></div>
-      <div class="dc alert"><div class="ic">🚨</div><div class="inf"><p>Vencidos</p><h3 id="dAlert">0</h3></div></div>
-      <div class="dc dmg"><div class="ic">🔧</div><div class="inf"><p>Dañados</p><h3 id="dDmg">0</h3></div></div>
+    <div class="dg">
+      <div class="dc total"><div class="ic">📐</div><div class="inf"><p>Total equipos</p><h3 id="dTotal">—</h3></div></div>
+      <div class="dc ok"><div class="ic">✅</div><div class="inf"><p>Vigentes</p><h3 id="dOk">—</h3></div></div>
+      <div class="dc warn"><div class="ic">⚠️</div><div class="inf"><p>Por vencer (30 días)</p><h3 id="dWarn">—</h3></div></div>
+      <div class="dc alert"><div class="ic">🚨</div><div class="inf"><p>Vencidos</p><h3 id="dAlert">—</h3></div></div>
+      <div class="dc dmg"><div class="ic">🔧</div><div class="inf"><p>Dañados</p><h3 id="dDmg">—</h3></div></div>
     </div>
     <div class="tb">
       <input type="text" id="searchInput" placeholder="🔍  Buscar ID, instrumento, depto..." oninput="renderTable()">
@@ -166,61 +174,56 @@ textarea{resize:vertical;min-height:70px}
         <option value="dmg">Dañado</option>
         <option value="baja">Dado de baja</option>
       </select>
-      <button class="btn btn-g" onclick="exportExcel()">📊 Exportar Excel</button>
-      <button class="btn btn-p" onclick="reqPass('new')">＋ Registrar equipo</button>
+      <button class="btn btn-g" onclick="exportExcel()">📊 Excel</button>
+      <button class="btn btn-s" onclick="loadEquipos()">🔄 Actualizar</button>
+      <button class="btn btn-p" onclick="reqPass('new')">＋ Registrar</button>
     </div>
     <div class="tw">
       <table>
-        <thead>
-          <tr>
-            <th>Estado</th><th>ID</th><th>Instrumento</th><th>Departamento</th>
-            <th>Ult. Calibración</th><th>Próx. Verificación</th><th>Responsable</th><th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="equiposBody"><tr><td colspan="8" class="empty">Sin equipos registrados.</td></tr></tbody>
+        <thead><tr>
+          <th>Estado</th><th>ID</th><th>Instrumento</th><th>Departamento</th>
+          <th>Ult. Calibración</th><th>Próx. Verificación</th><th>Responsable</th><th>Acciones</th>
+        </tr></thead>
+        <tbody id="equiposBody"><tr class="loading-row"><td colspan="8">⏳ Cargando equipos...</td></tr></tbody>
       </table>
     </div>
   </div>
 
-  <!-- ZTELA -->
   <div id="section-ztela" class="section">
     <div class="ztc">
       <div class="ztcard">
         <div class="ztlog">ZX - Ztela</div>
         <div class="ztsub">Plataforma de producción y extrusión de película plástica</div>
         <button class="ztbtn" onclick="goZtela()">Ir a Ztela <span>→</span></button>
-        <div style="margin-top:1.5rem"><span class="uc">🚧 &nbsp;En construcción</span></div>
+        <div style="margin-top:1.5rem"><span class="uc">🚧 En construcción</span></div>
       </div>
     </div>
   </div>
 
-  <!-- CONFIG -->
   <div id="section-config" class="section">
     <div style="max-width:480px;margin:0 auto;padding-top:1rem">
       <div class="pw-box">
         <h3>🔐 Cambiar contraseña de Admin</h3>
-        <div class="fgr" style="margin-bottom:1rem">
-          <label>Contraseña actual</label>
-          <input type="password" id="cpActual" placeholder="••••••••">
-        </div>
-        <div class="fgr" style="margin-bottom:1rem">
-          <label>Nueva contraseña</label>
-          <input type="password" id="cpNueva" placeholder="••••••••">
-        </div>
-        <div class="fgr" style="margin-bottom:1.2rem">
-          <label>Confirmar nueva contraseña</label>
-          <input type="password" id="cpConfirm" placeholder="••••••••">
-        </div>
+        <div class="fgr" style="margin-bottom:1rem"><label>Contraseña actual</label><input type="password" id="cpActual" placeholder="••••••••"></div>
+        <div class="fgr" style="margin-bottom:1rem"><label>Nueva contraseña</label><input type="password" id="cpNueva" placeholder="••••••••"></div>
+        <div class="fgr" style="margin-bottom:1.2rem"><label>Confirmar nueva contraseña</label><input type="password" id="cpConfirm" placeholder="••••••••"></div>
         <button class="btn btn-p" onclick="cambiarPass()">Actualizar contraseña</button>
       </div>
-      <div class="pw-box" style="margin-top:1rem">
+      <div class="pw-box">
+        <h3>☁️ Estado Supabase</h3>
+        <p style="font-size:.84rem;color:var(--tx2);line-height:1.8">
+          Proyecto: <strong>CalidadZX</strong><br>
+          Región: <strong>São Paulo (sa-east-1)</strong><br>
+          Estado: <span id="cfgStatus">verificando...</span>
+        </p>
+      </div>
+      <div class="pw-box">
         <h3>ℹ️ Información</h3>
-        <p style="font-size:.84rem;color:var(--tx2);line-height:1.6">Usuario administrador: <strong>admin</strong><br>La contraseña protege el registro, edición y eliminación de equipos.</p>
+        <p style="font-size:.84rem;color:var(--tx2);line-height:1.6">Usuario administrador: <strong>admin</strong><br>La contraseña protege registro, edición y eliminación.</p>
       </div>
     </div>
   </div>
 
-  <!-- VISTA PÚBLICA QR -->
   <div id="section-public" class="section">
     <div id="pubCardContent"></div>
   </div>
@@ -251,23 +254,21 @@ textarea{resize:vertical;min-height:70px}
     <div class="mb">
       <div class="fg">
         <div class="fgr"><label>ID del Equipo *</label><input type="text" id="fId" placeholder="EQM-XXX-000"></div>
-        <div class="fgr"><label>Instrumento *</label>
-          <select id="fInstrumento"><option value="">— Seleccionar —</option></select>
-        </div>
+        <div class="fgr"><label>Instrumento *</label><select id="fInstrumento"><option value="">— Seleccionar —</option></select></div>
         <div class="fgr"><label>Departamento *</label><input type="text" id="fDept" placeholder="Calidad, Producción..."></div>
-        <div class="fgr"><label>Responsable (Custodio)</label><input type="text" id="fResponsable" placeholder="Nombre"></div>
-        <div class="fgr"><label>Descripción</label><input type="text" id="fDesc" placeholder="Descripción breve"></div>
+        <div class="fgr"><label>Responsable</label><input type="text" id="fResponsable"></div>
+        <div class="fgr"><label>Descripción</label><input type="text" id="fDesc"></div>
         <div class="fgr"><label>Unidad de medida</label><input type="text" id="fUnidad" placeholder="mm, °C, kg..."></div>
-        <div class="fgr"><label>Marca / Modelo</label><input type="text" id="fMarca" placeholder="Mitutoyo..."></div>
+        <div class="fgr"><label>Marca / Modelo</label><input type="text" id="fMarca"></div>
         <div class="fgr"><label>Número de serie</label><input type="text" id="fSerie"></div>
-        <div class="fgr"><label>Rango de medición</label><input type="text" id="fRango" placeholder="0 - 150 mm"></div>
+        <div class="fgr"><label>Rango de medición</label><input type="text" id="fRango" placeholder="0-150 mm"></div>
         <div class="fgr"><label>Resolución / Exactitud</label><input type="text" id="fResolucion" placeholder="0.02 mm"></div>
         <div class="fgr"><label>Última calibración</label><input type="date" id="fUltCal"></div>
         <div class="fgr"><label>Próxima calibración</label><input type="date" id="fProxCal"></div>
-        <div class="fgr"><label>Última verificación interna</label><input type="date" id="fUltVer"></div>
-        <div class="fgr"><label>Próxima verificación interna</label><input type="date" id="fProxVer"></div>
-        <div class="fgr"><label>Periodo verif. interna</label><input type="text" id="fPeriodoVer" placeholder="Mensual, Bimestral..."></div>
-        <div class="fgr"><label>Periodo calib. externa</label><input type="text" id="fPeriodoCal" placeholder="Anual, Semestral..."></div>
+        <div class="fgr"><label>Última verificación</label><input type="date" id="fUltVer"></div>
+        <div class="fgr"><label>Próxima verificación</label><input type="date" id="fProxVer"></div>
+        <div class="fgr"><label>Periodo verif. interna</label><input type="text" id="fPeriodoVer" placeholder="Mensual..."></div>
+        <div class="fgr"><label>Periodo calib. externa</label><input type="text" id="fPeriodoCal" placeholder="Anual..."></div>
         <div class="fgr"><label>Estado</label>
           <select id="fEstado">
             <option value="op">Operativo</option>
@@ -283,7 +284,7 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <div class="mf">
       <button class="btn btn-s" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-p" onclick="saveEquipo()">💾 Guardar</button>
+      <button class="btn btn-p" id="btnSave" onclick="saveEquipo()">💾 Guardar</button>
     </div>
   </div>
 </div>
@@ -303,30 +304,45 @@ textarea{resize:vertical;min-height:70px}
 <div class="toast" id="toast"></div>
 
 <script>
-const INSTRUMENTS = [...new Set([
-  'Termómetro Infrarrojo','Medidor de espesor','Pesa Patrón','Regla patrón','Termómetro',
-  'Vernier','Balanza analítica','Báscula','ADMET','Dinamómetro','Lainas',
-  'Medidor de estática','Termómetro Copa Zahn','Cronómetro Digital','Termómetro Digital',
-  'Contador Digital','Copa Zahn','Cuentametros','Cuenta Metros','Infrarrojo',
-  'Medidor de ancho plano','Torquímetro','Cámara termográfica','Medidor de Estática',
-  'Probador de dureza','Micrómetro','Transportador de Ángulos','Placa patrón',
-  'Medidor de alturas','Rugosímetro','Medidor de espesor de ultrasonido',
-  'Calibrador Digital','Calibrador de Termopares','Medidor de espesores','Pesa patrón'
-])].sort();
+const SB_URL = 'https://snsdveykyqgmgoraqdiv.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuc2R2ZXlreXFnbWdvcmFxZGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MDkxMjMsImV4cCI6MjA5NjA4NTEyM30.lz4tD41nMpaWW5A_nmXciBX4iR3CBsgWWkQ2CZPnSFY';
+const TABLE = 'equipos_medicion';
 
-let equipos = JSON.parse(localStorage.getItem('zxEq2')||'[]');
+const { createClient } = supabase;
+const db = createClient(SB_URL, SB_KEY);
+
+const INSTRUMENTS = ['ADMET','Balanza analítica','Báscula','Calibrador de Termopares','Calibrador Digital','Cámara termográfica','Contador Digital','Copa Zahn','Cronómetro Digital','Cuenta Metros','Cuentametros','Dinamómetro','Infrarrojo','Lainas','Medidor de alturas','Medidor de ancho plano','Medidor de espesor','Medidor de espesor de ultrasonido','Medidor de espesores','Medidor de estática','Medidor de Estática','Micrómetro','Pesa patrón','Pesa Patrón','Placa patrón','Probador de dureza','Regla patrón','Rugosímetro','Termómetro','Termómetro Copa Zahn','Termómetro Digital','Termómetro Infrarrojo','Torquímetro','Transportador de Ángulos','Vernier'].filter((v,i,a)=>a.findIndex(x=>x.toLowerCase()===v.toLowerCase())===i).sort();
+
+let equipos = [];
 let editingId = null;
 let pendingAction = null;
-const ZTELA_URL = 'https://zubex-ztela.com';
 const DEFAULT_PASS = 'admin123';
 
-function getPass(){return localStorage.getItem('zxPass')||DEFAULT_PASS}
-function save(){localStorage.setItem('zxEq2',JSON.stringify(equipos))}
+function getPass(){return localStorage.getItem('zxPassCal')||DEFAULT_PASS}
 
-// Fill instrument dropdown
+function setSyncStatus(st,txt){
+  const dot=document.getElementById('syncDot'),t=document.getElementById('syncTxt');
+  dot.className='sync-dot '+st; t.textContent=txt;
+  document.getElementById('cfgStatus').textContent=txt;
+}
+
+async function loadEquipos(){
+  setSyncStatus('loading','Sincronizando...');
+  try{
+    const {data,error}=await db.from(TABLE).select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    equipos=data||[];
+    updateDash(); updateDeptFilter(); renderTable();
+    setSyncStatus('ok','Conectado ✓ — '+equipos.length+' equipos');
+  }catch(e){
+    setSyncStatus('err','Error de conexión');
+    showToast('❌ Error al cargar: '+e.message);
+  }
+}
+
 function fillInstruments(){
-  const sel = document.getElementById('fInstrumento');
-  sel.innerHTML = '<option value="">— Seleccionar —</option>' + INSTRUMENTS.map(i=>`<option value="${i}">${i}</option>`).join('');
+  const sel=document.getElementById('fInstrumento');
+  sel.innerHTML='<option value="">— Seleccionar —</option>'+INSTRUMENTS.map(i=>`<option value="${i}">${i}</option>`).join('');
 }
 
 function showSec(sec,btn){
@@ -336,20 +352,20 @@ function showSec(sec,btn){
   if(btn) btn.classList.add('active');
 }
 
-function goZtela(){showToast('Redirigiendo a ZX-Ztela...');setTimeout(()=>window.open(ZTELA_URL,'_blank'),800)}
+function goZtela(){showToast('Redirigiendo...');setTimeout(()=>window.open('https://zubex-ztela.com','_blank'),800)}
 
 function diasHasta(d){
   if(!d) return null;
   const dt=new Date(d),hoy=new Date();
   dt.setHours(0,0,0,0);hoy.setHours(0,0,0,0);
-  return Math.ceil((dt-hoy)/(864e5));
+  return Math.ceil((dt-hoy)/864e5);
 }
 
 function statusOf(e){
-  if(e.fEstado==='baja') return 'baja';
-  if(e.fEstado==='dmg') return 'dmg';
-  if(e.fEstado==='fs') return 'venc';
-  const dias=diasHasta(e.fProxVer||e.fProxCal);
+  if(e.f_estado==='baja') return 'baja';
+  if(e.f_estado==='dmg') return 'dmg';
+  if(e.f_estado==='fs') return 'venc';
+  const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
   if(dias===null) return 'na';
   if(dias<0) return 'venc';
   if(dias<=30) return 'warn';
@@ -360,13 +376,7 @@ function statusLbl(s){return{ok:'Vigente',warn:'Por vencer',venc:'Vencido',baja:
 
 function updateDash(){
   let tot=equipos.length,ok=0,warn=0,al=0,dmg=0;
-  equipos.forEach(e=>{
-    const s=statusOf(e);
-    if(s==='ok') ok++;
-    else if(s==='warn') warn++;
-    else if(s==='venc') al++;
-    else if(s==='dmg') dmg++;
-  });
+  equipos.forEach(e=>{const s=statusOf(e);if(s==='ok')ok++;else if(s==='warn')warn++;else if(s==='venc')al++;else if(s==='dmg')dmg++;});
   document.getElementById('dTotal').textContent=tot;
   document.getElementById('dOk').textContent=ok;
   document.getElementById('dWarn').textContent=warn;
@@ -376,7 +386,7 @@ function updateDash(){
 
 function updateDeptFilter(){
   const sel=document.getElementById('filterDept'),cur=sel.value;
-  const deps=[...new Set(equipos.map(e=>e.fDept).filter(Boolean))].sort();
+  const deps=[...new Set(equipos.map(e=>e.f_dept).filter(Boolean))].sort();
   sel.innerHTML='<option value="">Todos los departamentos</option>'+deps.map(d=>`<option value="${d}"${d===cur?' selected':''}>${d}</option>`).join('');
 }
 
@@ -385,59 +395,57 @@ function renderTable(){
   const dept=document.getElementById('filterDept').value;
   const status=document.getElementById('filterStatus').value;
   const filtered=equipos.filter(e=>{
-    const mq=!q||(e.fId+e.fInstrumento+e.fDept+e.fResponsable).toLowerCase().includes(q);
-    const md=!dept||e.fDept===dept;
+    const mq=!q||((e.f_id||'')+(e.f_instrumento||'')+(e.f_dept||'')+(e.f_responsable||'')).toLowerCase().includes(q);
+    const md=!dept||e.f_dept===dept;
     const sc=statusOf(e);
-    const ms=!status||sc===status||(status==='baja'&&e.fEstado==='baja')||(status==='dmg'&&sc==='dmg');
+    const ms=!status||sc===status;
     return mq&&md&&ms;
   });
   const tb=document.getElementById('equiposBody');
   if(!filtered.length){tb.innerHTML='<tr><td colspan="8" class="empty">Sin resultados</td></tr>';return;}
   tb.innerHTML=filtered.map(e=>{
     const sc=statusOf(e);
-    const dias=diasHasta(e.fProxVer||e.fProxCal);
+    const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
     const dStr=dias!==null?(dias<0?`<span style="color:var(--dg);font-size:.75rem">${Math.abs(dias)}d vencido</span>`:`<span style="font-size:.75rem;color:var(--tx2)">${dias}d</span>`):'';
+    const safeId=encodeURIComponent(e.f_id);
     return `<tr>
       <td><span class="sb s-${sc}">${statusLbl(sc)}</span></td>
-      <td><strong>${e.fId}</strong></td>
-      <td>${e.fInstrumento||'—'}</td>
-      <td>${e.fDept||'—'}</td>
-      <td style="font-size:.8rem">${e.fUltCal||'—'}</td>
-      <td style="font-size:.8rem">${e.fProxVer||e.fProxCal||'—'} ${dStr}</td>
-      <td style="font-size:.82rem">${e.fResponsable||'—'}</td>
+      <td><strong>${e.f_id}</strong></td>
+      <td>${e.f_instrumento||'—'}</td>
+      <td>${e.f_dept||'—'}</td>
+      <td style="font-size:.8rem">${e.f_ult_cal||'—'}</td>
+      <td style="font-size:.8rem">${e.f_prox_ver||e.f_prox_cal||'—'} ${dStr}</td>
+      <td style="font-size:.82rem">${e.f_responsable||'—'}</td>
       <td style="white-space:nowrap;display:flex;gap:4px;padding:8px 14px">
-        <button class="btn btn-sm btn-s" onclick="openDet('${e.fId}')">👁</button>
-        <button class="btn btn-sm btn-s" onclick="reqPass('edit','${e.fId}')">✏️</button>
-        <button class="btn btn-sm" style="background:#ffeaea;color:#aa1111;border:1px solid #ffcaca;border-radius:6px;cursor:pointer;font-size:.77rem;padding:5px 9px" onclick="reqPass('del','${e.fId}')">🗑</button>
+        <button class="btn btn-sm btn-s" onclick="openDet('${safeId}')">👁</button>
+        <button class="btn btn-sm btn-s" onclick="reqPass('edit','${safeId}')">✏️</button>
+        <button class="btn btn-sm" style="background:#ffeaea;color:#aa1111;border:1px solid #ffcaca;border-radius:6px;cursor:pointer;font-size:.77rem;padding:5px 9px" onclick="reqPass('del','${safeId}')">🗑</button>
       </td>
     </tr>`;
   }).join('');
 }
 
-// PASSWORD FLOW
-function reqPass(action, id=''){
+function reqPass(action,id=''){
   pendingAction={action,id};
   document.getElementById('passInput').value='';
   document.getElementById('passError').style.display='none';
-  document.getElementById('passModalTitle').textContent = action==='del'?'🔐 Confirmar eliminación':'🔐 Acceso Admin';
+  document.getElementById('passModalTitle').textContent=action==='del'?'🔐 Confirmar eliminación':'🔐 Acceso Admin';
   document.getElementById('modalPass').classList.add('open');
   setTimeout(()=>document.getElementById('passInput').focus(),100);
 }
 
 function verifyPass(){
-  const v=document.getElementById('passInput').value;
-  if(v!==getPass()){
+  if(document.getElementById('passInput').value!==getPass()){
     document.getElementById('passError').style.display='block';
     document.getElementById('passInput').value='';
     return;
   }
   closePass();
   if(!pendingAction) return;
-  const {action,id}=pendingAction;
-  pendingAction=null;
+  const {action,id}=pendingAction; pendingAction=null;
   if(action==='new') openNewModal();
-  else if(action==='edit') openEdit(id);
-  else if(action==='del') eliminar(id);
+  else if(action==='edit') openEdit(decodeURIComponent(id));
+  else if(action==='del') eliminar(decodeURIComponent(id));
 }
 
 function closePass(){document.getElementById('modalPass').classList.remove('open')}
@@ -445,82 +453,132 @@ function closePass(){document.getElementById('modalPass').classList.remove('open
 function openNewModal(){
   editingId=null;
   document.getElementById('modalTitle').textContent='Registrar Equipo de Medición';
-  const fields=['fId','fDesc','fDept','fResponsable','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas'];
-  fields.forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  ['fId','fDesc','fDept','fResponsable','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   document.getElementById('fInstrumento').value='';
   document.getElementById('fEstado').value='op';
   document.getElementById('modalRegistro').classList.add('open');
 }
 
-function openEdit(id){
-  const e=equipos.find(x=>x.fId===id);if(!e) return;
-  editingId=id;
-  document.getElementById('modalTitle').textContent='Editar: '+id;
-  const fields=['fId','fInstrumento','fDept','fResponsable','fDesc','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas','fEstado'];
-  fields.forEach(k=>{const el=document.getElementById(k);if(el&&e[k]!==undefined)el.value=e[k]});
+function openEdit(fid){
+  const e=equipos.find(x=>x.f_id===fid);if(!e) return;
+  editingId=fid;
+  document.getElementById('modalTitle').textContent='Editar: '+fid;
+  document.getElementById('fId').value=e.f_id||'';
+  document.getElementById('fInstrumento').value=e.f_instrumento||'';
+  document.getElementById('fDept').value=e.f_dept||'';
+  document.getElementById('fResponsable').value=e.f_responsable||'';
+  document.getElementById('fDesc').value=e.f_desc||'';
+  document.getElementById('fUnidad').value=e.f_unidad||'';
+  document.getElementById('fMarca').value=e.f_marca||'';
+  document.getElementById('fSerie').value=e.f_serie||'';
+  document.getElementById('fRango').value=e.f_rango||'';
+  document.getElementById('fResolucion').value=e.f_resolucion||'';
+  document.getElementById('fUltCal').value=e.f_ult_cal||'';
+  document.getElementById('fProxCal').value=e.f_prox_cal||'';
+  document.getElementById('fUltVer').value=e.f_ult_ver||'';
+  document.getElementById('fProxVer').value=e.f_prox_ver||'';
+  document.getElementById('fPeriodoVer').value=e.f_periodo_ver||'';
+  document.getElementById('fPeriodoCal').value=e.f_periodo_cal||'';
+  document.getElementById('fEstado').value=e.f_estado||'op';
+  document.getElementById('fUbicacion').value=e.f_ubicacion||'';
+  document.getElementById('fNotas').value=e.f_notas||'';
   document.getElementById('modalRegistro').classList.add('open');
 }
 
 function closeModal(){document.getElementById('modalRegistro').classList.remove('open')}
 
-function saveEquipo(){
-  const id=document.getElementById('fId').value.trim();
+async function saveEquipo(){
+  const fid=document.getElementById('fId').value.trim();
   const inst=document.getElementById('fInstrumento').value;
   const dept=document.getElementById('fDept').value.trim();
-  if(!id||!inst||!dept){showToast('⚠️ ID, Instrumento y Departamento son requeridos');return;}
-  if(!editingId&&equipos.find(e=>e.fId===id)){showToast('⚠️ Ya existe un equipo con ese ID');return;}
-  const campos=['fId','fInstrumento','fDept','fResponsable','fDesc','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas','fEstado'];
-  const obj={};
-  campos.forEach(k=>{const el=document.getElementById(k);if(el)obj[k]=el.value.trim()});
-  if(editingId){const i=equipos.findIndex(e=>e.fId===editingId);if(i>-1)equipos[i]=obj;}
-  else equipos.push(obj);
-  save();updateDash();updateDeptFilter();renderTable();
-  closeModal();showToast('✅ Equipo guardado');
+  if(!fid||!inst||!dept){showToast('⚠️ ID, Instrumento y Departamento son requeridos');return;}
+  const btn=document.getElementById('btnSave');
+  btn.innerHTML='<span class="spinner"></span> Guardando...';btn.disabled=true;
+  const payload={
+    f_id:fid, f_instrumento:inst, f_dept:dept,
+    f_responsable:document.getElementById('fResponsable').value.trim(),
+    f_desc:document.getElementById('fDesc').value.trim(),
+    f_unidad:document.getElementById('fUnidad').value.trim(),
+    f_marca:document.getElementById('fMarca').value.trim(),
+    f_serie:document.getElementById('fSerie').value.trim(),
+    f_rango:document.getElementById('fRango').value.trim(),
+    f_resolucion:document.getElementById('fResolucion').value.trim(),
+    f_ult_cal:document.getElementById('fUltCal').value||null,
+    f_prox_cal:document.getElementById('fProxCal').value||null,
+    f_ult_ver:document.getElementById('fUltVer').value||null,
+    f_prox_ver:document.getElementById('fProxVer').value||null,
+    f_periodo_ver:document.getElementById('fPeriodoVer').value.trim(),
+    f_periodo_cal:document.getElementById('fPeriodoCal').value.trim(),
+    f_estado:document.getElementById('fEstado').value,
+    f_ubicacion:document.getElementById('fUbicacion').value.trim(),
+    f_notas:document.getElementById('fNotas').value.trim(),
+    updated_at:new Date().toISOString()
+  };
+  try{
+    let error;
+    if(editingId){
+      ({error}=await db.from(TABLE).update(payload).eq('f_id',editingId));
+    } else {
+      ({error}=await db.from(TABLE).insert(payload));
+    }
+    if(error) throw error;
+    closeModal();
+    showToast('✅ Equipo guardado en Supabase');
+    await loadEquipos();
+  }catch(e){
+    showToast('❌ Error: '+e.message);
+  }finally{
+    btn.innerHTML='💾 Guardar';btn.disabled=false;
+  }
 }
 
-function eliminar(id){
-  if(!confirm(`¿Eliminar el equipo ${id}?`)) return;
-  equipos=equipos.filter(e=>e.fId!==id);
-  save();updateDash();updateDeptFilter();renderTable();
-  showToast('🗑 Equipo eliminado');
+async function eliminar(fid){
+  if(!confirm(`¿Eliminar el equipo ${fid}? Esta acción no se puede deshacer.`)) return;
+  try{
+    const {error}=await db.from(TABLE).delete().eq('f_id',fid);
+    if(error) throw error;
+    showToast('🗑 Equipo eliminado');
+    await loadEquipos();
+  }catch(e){
+    showToast('❌ Error: '+e.message);
+  }
 }
 
 function closeDet(){document.getElementById('modalDetalle').classList.remove('open')}
 
-function openDet(id){
-  const e=equipos.find(x=>x.fId===id);if(!e) return;
+function openDet(fid){
+  const e=equipos.find(x=>x.f_id===decodeURIComponent(fid));if(!e) return;
   const sc=statusOf(e);
-  const dias=diasHasta(e.fProxVer||e.fProxCal);
+  const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
   const diasTxt=dias!==null?(dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días restantes`):'Sin fecha';
-  const cid='qr_'+e.fId.replace(/[^a-z0-9]/gi,'_');
+  const cid='qr_'+e.f_id.replace(/[^a-z0-9]/gi,'_');
   document.getElementById('detalleBody').innerHTML=`
     <div class="dh">
       <div class="dq">
         <div class="qcard">
           <h4>VERIFICACIÓN</h4>
           <div id="${cid}"></div>
-          <div class="qid">${e.fId}</div>
+          <div class="qid">${e.f_id}</div>
           <div class="qbadge">${statusLbl(sc)}</div>
         </div>
-        <button class="btn btn-sm btn-s" style="margin-top:8px" onclick="dlQR('${cid}','${e.fId}')">⬇ Descargar QR</button>
-        <button class="btn btn-sm btn-s" style="margin-top:4px" onclick="verPub('${e.fId}')">📱 Vista QR</button>
+        <button class="btn btn-sm btn-s" style="margin-top:8px" onclick="dlQR('${cid}','${e.f_id}')">⬇ Descargar QR</button>
+        <button class="btn btn-sm btn-s" style="margin-top:4px" onclick="verPub('${e.f_id}')">📱 Vista QR</button>
       </div>
       <div class="di">
-        ${[
-          ['ID',`<strong>${e.fId}</strong>`],['Instrumento',e.fInstrumento||'—'],['Descripción',e.fDesc||'—'],
-          ['Departamento',e.fDept||'—'],['Responsable',e.fResponsable||'—'],['Ubicación',e.fUbicacion||'—'],
-          ['Marca / Modelo',e.fMarca||'—'],['No. Serie',e.fSerie||'—'],['Rango',e.fRango||'—'],
-          ['Resolución',e.fResolucion||'—'],['Ult. Calibración',e.fUltCal||'—'],['Próx. Calibración',e.fProxCal||'—'],
-          ['Ult. Verificación',e.fUltVer||'—'],['Próx. Verificación',e.fProxVer||'—'],
-          ['Periodo Verif.',e.fPeriodoVer||'—'],['Periodo Calib.',e.fPeriodoCal||'—'],
+        ${[['ID',`<strong>${e.f_id}</strong>`],['Instrumento',e.f_instrumento||'—'],['Descripción',e.f_desc||'—'],
+          ['Departamento',e.f_dept||'—'],['Responsable',e.f_responsable||'—'],['Ubicación',e.f_ubicacion||'—'],
+          ['Marca / Modelo',e.f_marca||'—'],['No. Serie',e.f_serie||'—'],['Rango',e.f_rango||'—'],
+          ['Resolución',e.f_resolucion||'—'],['Ult. Calibración',e.f_ult_cal||'—'],['Próx. Calibración',e.f_prox_cal||'—'],
+          ['Ult. Verificación',e.f_ult_ver||'—'],['Próx. Verificación',e.f_prox_ver||'—'],
+          ['Periodo Verif.',e.f_periodo_ver||'—'],['Periodo Calib.',e.f_periodo_cal||'—'],
           ['Estado',`<span class="sb s-${sc}">${statusLbl(sc)}</span> — ${diasTxt}`],
-          ...(e.fNotas?[['Notas',`<span style="font-size:.8rem;color:var(--tx2)">${e.fNotas}</span>`]]:[])
+          ...(e.f_notas?[['Notas',`<span style="font-size:.8rem;color:var(--tx2)">${e.f_notas}</span>`]]:[])
         ].map(([l,v])=>`<div class="ir"><span class="il">${l}</span><span>${v}</span></div>`).join('')}
       </div>
     </div>`;
   document.getElementById('modalDetalle').classList.add('open');
-  document.getElementById('btnEditDet').onclick=()=>{closeDet();reqPass('edit',e.fId)};
-  setTimeout(()=>genQR(cid,e.fId),150);
+  document.getElementById('btnEditDet').onclick=()=>{closeDet();reqPass('edit',encodeURIComponent(e.f_id))};
+  setTimeout(()=>genQR(cid,e.f_id),150);
 }
 
 function genQR(cid,eqId){
@@ -537,84 +595,86 @@ function dlQR(cid,eqId){
   showToast('⬇ QR descargado');
 }
 
-function verPub(id){
+function verPub(fid){
   closeDet();
-  const e=equipos.find(x=>x.fId===id);if(!e) return;
+  const e=equipos.find(x=>x.f_id===fid);if(!e) return;
   const sc=statusOf(e);
-  const dias=diasHasta(e.fProxVer||e.fProxCal);
-  const semC=sc==='ok'?'green':sc==='warn'?'yellow':(sc==='dmg'?'purple':'red');
+  const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
+  const semC=sc==='ok'?'green':sc==='warn'?'yellow':sc==='dmg'?'purple':'red';
   const semTxt=sc==='ok'?'Equipo vigente':sc==='warn'?'Por vencer pronto':sc==='dmg'?'DAÑADO — En reparación':'VENCIDO / Fuera de servicio';
-  const dotC=sc==='ok'?'#1a9e3f':sc==='warn'?'#e6820a':(sc==='dmg'?'#8b00b5':'#cc2222');
+  const dotC=sc==='ok'?'#1a9e3f':sc==='warn'?'#e6820a':sc==='dmg'?'#8b00b5':'#cc2222';
   const diasBadge=dias!==null?`<div class="db2 ${dias<0?'venc':sc==='warn'?'warn':'ok'}">${dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días para próxima verificación`}</div>`:'';
   document.getElementById('pubCardContent').innerHTML=`
     <button class="btn btn-s" style="margin-bottom:1rem" onclick="showSec('equipos')">← Volver</button>
     <div class="pc">
       <div class="pch"><div class="plogo">zubex</div><div class="ptyp">VERIFICACIÓN</div></div>
       <div class="pb">
-        <div class="pid">ID: ${e.fId}</div>
-        <div class="pname">${e.fInstrumento||'—'}</div>
+        <div class="pid">ID: ${e.f_id}</div>
+        <div class="pname">${e.f_instrumento||'—'}</div>
         <div class="psem ${semC}"><div class="sdot" style="background:${dotC}"></div><span style="font-weight:600;font-size:.9rem">${semTxt}</span></div>
         <div class="pgrid">
-          <div class="pf"><div class="pfl">Departamento</div><div class="pfv">${e.fDept||'—'}</div></div>
-          <div class="pf"><div class="pfl">Responsable</div><div class="pfv">${e.fResponsable||'—'}</div></div>
-          <div class="pf"><div class="pfl">Ult. Verificación</div><div class="pfv">${e.fUltVer||e.fUltCal||'—'}</div></div>
-          <div class="pf"><div class="pfl">Próx. Verificación</div><div class="pfv">${e.fProxVer||e.fProxCal||'—'}</div></div>
-          <div class="pf"><div class="pfl">Periodo Verif.</div><div class="pfv">${e.fPeriodoVer||'—'}</div></div>
-          <div class="pf"><div class="pfl">Ubicación</div><div class="pfv">${e.fUbicacion||'—'}</div></div>
+          <div class="pf"><div class="pfl">Departamento</div><div class="pfv">${e.f_dept||'—'}</div></div>
+          <div class="pf"><div class="pfl">Responsable</div><div class="pfv">${e.f_responsable||'—'}</div></div>
+          <div class="pf"><div class="pfl">Ult. Verificación</div><div class="pfv">${e.f_ult_ver||e.f_ult_cal||'—'}</div></div>
+          <div class="pf"><div class="pfl">Próx. Verificación</div><div class="pfv">${e.f_prox_ver||e.f_prox_cal||'—'}</div></div>
+          <div class="pf"><div class="pfl">Periodo Verif.</div><div class="pfv">${e.f_periodo_ver||'—'}</div></div>
+          <div class="pf"><div class="pfl">Ubicación</div><div class="pfv">${e.f_ubicacion||'—'}</div></div>
         </div>
         ${diasBadge}
-        ${e.fNotas?`<p style="font-size:.78rem;color:var(--tx2);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--bd)">📝 ${e.fNotas}</p>`:''}
+        ${e.f_notas?`<p style="font-size:.78rem;color:var(--tx2);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--bd)">📝 ${e.f_notas}</p>`:''}
       </div>
     </div>`;
   showSec('public');
   document.querySelectorAll('.nt').forEach(b=>b.classList.remove('active'));
 }
 
-// EXPORT EXCEL
 function exportExcel(){
   if(!equipos.length){showToast('No hay equipos para exportar');return;}
-  const headers=['ID','Instrumento','Departamento','Responsable','Descripción','Unidad','Marca/Modelo','No. Serie','Rango','Resolución','Ult. Calibración','Próx. Calibración','Ult. Verificación','Próx. Verificación','Periodo Verif.','Periodo Calib.','Estado','Ubicación','Notas','Estatus Sistema'];
-  const rows=equipos.map(e=>[
-    e.fId,e.fInstrumento,e.fDept,e.fResponsable,e.fDesc,e.fUnidad,e.fMarca,e.fSerie,e.fRango,e.fResolucion,
-    e.fUltCal,e.fProxCal,e.fUltVer,e.fProxVer,e.fPeriodoVer,e.fPeriodoCal,e.fEstado,e.fUbicacion,e.fNotas,
-    statusLbl(statusOf(e))
-  ]);
+  const headers=['ID','Instrumento','Departamento','Responsable','Descripción','Unidad','Marca/Modelo','No. Serie','Rango','Resolución','Ult. Calibración','Próx. Calibración','Ult. Verificación','Próx. Verificación','Periodo Verif.','Periodo Calib.','Estado','Ubicación','Notas','Estatus'];
+  const rows=equipos.map(e=>[e.f_id,e.f_instrumento,e.f_dept,e.f_responsable,e.f_desc,e.f_unidad,e.f_marca,e.f_serie,e.f_rango,e.f_resolucion,e.f_ult_cal,e.f_prox_cal,e.f_ult_ver,e.f_prox_ver,e.f_periodo_ver,e.f_periodo_cal,e.f_estado,e.f_ubicacion,e.f_notas,statusLbl(statusOf(e))]);
   const ws=XLSX.utils.aoa_to_sheet([headers,...rows]);
   ws['!cols']=headers.map(()=>({wch:18}));
   const wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,ws,'Equipos de Medición');
-  XLSX.writeFile(wb,'Zubex_Equipos_Medicion_'+new Date().toISOString().slice(0,10)+'.xlsx');
+  XLSX.utils.book_append_sheet(wb,ws,'Equipos');
+  XLSX.writeFile(wb,'Zubex_Calidad_'+new Date().toISOString().slice(0,10)+'.xlsx');
   showToast('📊 Excel exportado');
 }
 
-// CHANGE PASSWORD
 function cambiarPass(){
   const act=document.getElementById('cpActual').value;
   const nv=document.getElementById('cpNueva').value;
   const cf=document.getElementById('cpConfirm').value;
   if(act!==getPass()){showToast('⚠️ Contraseña actual incorrecta');return;}
-  if(nv.length<4){showToast('⚠️ La nueva contraseña debe tener al menos 4 caracteres');return;}
+  if(nv.length<4){showToast('⚠️ Mínimo 4 caracteres');return;}
   if(nv!==cf){showToast('⚠️ Las contraseñas no coinciden');return;}
-  localStorage.setItem('zxPass',nv);
-  document.getElementById('cpActual').value='';
-  document.getElementById('cpNueva').value='';
-  document.getElementById('cpConfirm').value='';
+  localStorage.setItem('zxPassCal',nv);
+  ['cpActual','cpNueva','cpConfirm'].forEach(id=>document.getElementById(id).value='');
   showToast('✅ Contraseña actualizada');
 }
 
-function checkQRParam(){
+async function checkQRParam(){
   const p=new URLSearchParams(location.search);
   const qId=p.get('qr');
-  if(qId){const e=equipos.find(x=>x.fId===decodeURIComponent(qId));if(e)setTimeout(()=>verPub(e.fId),200);}
+  if(qId){
+    await loadEquipos();
+    const e=equipos.find(x=>x.f_id===decodeURIComponent(qId));
+    if(e) verPub(e.f_id);
+  }
 }
+
+// Anti-pause ping cada 5 días
+function pingDB(){db.from(TABLE).select('f_id').limit(1).then(()=>console.log('ping ok'))}
+setInterval(pingDB, 5*24*60*60*1000);
 
 function showToast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
+  setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-fillInstruments();updateDash();updateDeptFilter();renderTable();checkQRParam();
+fillInstruments();
+loadEquipos();
+checkQRParam();
 </script>
 </body>
 </html>
