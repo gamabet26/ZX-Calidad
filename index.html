@@ -711,9 +711,33 @@ async function showPublicQR(fid){
     </div>
     <div id="pubView"></div>`;
 
-  const consultarView=()=>{
-    const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
-    const diasBadge=dias!==null?`<div class="db2 ${dias<0?'venc':sc==='warn'?'warn':'ok'}">${dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días para próxima verificación`}</div>`:'';
+  const consultarView=async()=>{
+    // Obtener última validación OK del historial
+    const {data:ultVals}=await db.from(VAL_TABLE).select('*').eq('equipo_id',e.f_id).eq('resultado','ok').order('created_at',{ascending:false}).limit(1);
+    const ultVal=ultVals&&ultVals.length?ultVals[0]:null;
+    const ultVerFecha=ultVal?new Date(ultVal.created_at).toLocaleDateString('es-MX',{year:'numeric',month:'2-digit',day:'2-digit'}):(e.f_ult_ver||'—');
+    // Calcular próxima verificación desde última validación + periodo
+    let proxVerFecha=e.f_prox_ver||'—';
+    if(ultVal&&e.f_periodo_ver){
+      const base=new Date(ultVal.created_at);
+      const periodo=e.f_periodo_ver.toLowerCase();
+      let dias=0;
+      if(periodo.includes('diario')) dias=1;
+      else if(periodo.includes('semanal')) dias=7;
+      else if(periodo.includes('quincenal')) dias=15;
+      else if(periodo.includes('mensual')) dias=30;
+      else if(periodo.includes('bimestral')) dias=60;
+      else if(periodo.includes('trimestral')) dias=90;
+      else if(periodo.includes('semestral')) dias=180;
+      else if(periodo.includes('anual')) dias=365;
+      if(dias>0){
+        base.setDate(base.getDate()+dias);
+        proxVerFecha=base.toISOString().split('T')[0];
+      }
+    }
+    const diasR=diasHasta(proxVerFecha!=='—'?proxVerFecha:null);
+    const scProx=diasR===null?'na':diasR<0?'venc':diasR<=30?'warn':'ok';
+    const diasBadge=diasR!==null?`<div class="db2 ${diasR<0?'venc':scProx==='warn'?'warn':'ok'}">${diasR<0?`Vencido hace ${Math.abs(diasR)} días`:`${diasR} días para próxima verificación`}</div>`:'';
     const certBtn=e.certificado_url?`<div class="cert-badge" onclick="window.open('${e.certificado_url}','_blank')" style="margin-top:.75rem">📄 Ver Certificado de Calibración <span style="margin-left:auto">↗</span></div>`:'';
     document.getElementById('pubView').innerHTML=`
       <div class="pc">
@@ -725,8 +749,8 @@ async function showPublicQR(fid){
           <div class="pgrid">
             <div class="pf"><div class="pfl">Departamento</div><div class="pfv">${e.f_dept||'—'}</div></div>
             <div class="pf"><div class="pfl">Responsable</div><div class="pfv">${e.f_responsable||'—'}</div></div>
-            <div class="pf"><div class="pfl">Ult. Verificación</div><div class="pfv">${e.f_ult_ver||e.f_ult_cal||'—'}</div></div>
-            <div class="pf"><div class="pfl">Próx. Verificación</div><div class="pfv">${e.f_prox_ver||e.f_prox_cal||'—'}</div></div>
+            <div class="pf"><div class="pfl">Ult. Verificación</div><div class="pfv" style="color:var(--zb);font-weight:700">${ultVerFecha}</div></div>
+            <div class="pf"><div class="pfl">Próx. Verificación</div><div class="pfv" style="color:${diasR!==null&&diasR<0?'var(--dg)':diasR!==null&&diasR<=30?'var(--wn)':'var(--ok)'}">${proxVerFecha}</div></div>
             <div class="pf"><div class="pfl">Periodo Verif.</div><div class="pfv">${e.f_periodo_ver||'—'}</div></div>
             <div class="pf"><div class="pfl">Ubicación</div><div class="pfv">${e.f_ubicacion||'—'}</div></div>
           </div>
