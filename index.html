@@ -281,13 +281,8 @@ textarea{resize:vertical;min-height:70px}
         <div class="fgr"><label>ID del Equipo *</label><input type="text" id="fId" placeholder="EQM-XXX-000"></div>
         <div class="fgr"><label>Instrumento *</label><select id="fInstrumento"><option value="">— Seleccionar —</option></select></div>
         <div class="fgr"><label>Departamento *</label><input type="text" id="fDept" placeholder="Calidad, Producción..."></div>
-        <div class="fgr"><label>Responsable</label><input type="text" id="fResponsable"></div>
         <div class="fgr"><label>Descripción</label><input type="text" id="fDesc"></div>
         <div class="fgr"><label>Unidad de medida</label><input type="text" id="fUnidad" placeholder="mm, °C, kg..."></div>
-        <div class="fgr"><label>Marca / Modelo</label><input type="text" id="fMarca"></div>
-        <div class="fgr"><label>Número de serie</label><input type="text" id="fSerie"></div>
-        <div class="fgr"><label>Rango de medición</label><input type="text" id="fRango" placeholder="0-150 mm"></div>
-        <div class="fgr"><label>Resolución / Exactitud</label><input type="text" id="fResolucion" placeholder="0.02 mm"></div>
         <div class="fgr"><label>Última calibración</label><input type="date" id="fUltCal"></div>
         <div class="fgr"><label>Próxima calibración</label><input type="date" id="fProxCal"></div>
         <div class="fgr"><label>Última verificación</label><input type="date" id="fUltVer"></div>
@@ -511,13 +506,8 @@ function openEdit(fid){
   document.getElementById('fId').value=e.f_id||'';
   document.getElementById('fInstrumento').value=e.f_instrumento||'';
   document.getElementById('fDept').value=e.f_dept||'';
-  document.getElementById('fResponsable').value=e.f_responsable||'';
   document.getElementById('fDesc').value=e.f_desc||'';
   document.getElementById('fUnidad').value=e.f_unidad||'';
-  document.getElementById('fMarca').value=e.f_marca||'';
-  document.getElementById('fSerie').value=e.f_serie||'';
-  document.getElementById('fRango').value=e.f_rango||'';
-  document.getElementById('fResolucion').value=e.f_resolucion||'';
   document.getElementById('fUltCal').value=e.f_ult_cal||'';
   document.getElementById('fProxCal').value=e.f_prox_cal||'';
   document.getElementById('fUltVer').value=e.f_ult_ver||'';
@@ -625,9 +615,8 @@ async function openDet(fid){
       </div>
       <div class="di">
         ${[['ID',`<strong>${e.f_id}</strong>`],['Instrumento',e.f_instrumento||'—'],['Descripción',e.f_desc||'—'],
-          ['Departamento',e.f_dept||'—'],['Responsable',e.f_responsable||'—'],['Ubicación',e.f_ubicacion||'—'],
-          ['Marca/Modelo',e.f_marca||'—'],['No. Serie',e.f_serie||'—'],['Rango',e.f_rango||'—'],
-          ['Resolución',e.f_resolucion||'—'],['Ult. Calibración',e.f_ult_cal||'—'],['Próx. Calibración',e.f_prox_cal||'—'],
+          ['Departamento',e.f_dept||'—'],['Ubicación',e.f_ubicacion||'—'],
+          ['Ult. Calibración',e.f_ult_cal||'—'],['Próx. Calibración',e.f_prox_cal||'—'],
           ['Ult. Verificación',e.f_ult_ver||'—'],['Próx. Verificación',e.f_prox_ver||'—'],
           ['Periodo Verif.',e.f_periodo_ver||'—'],['Periodo Calib.',e.f_periodo_cal||'—'],
           ['Estado',`<span class="sb s-${sc}">${statusLbl(sc)}</span> — ${diasTxt}`],
