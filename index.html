@@ -221,7 +221,7 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <div class="tw">
       <table>
-        <thead><tr><th>Estado</th><th>ID</th><th>Instrumento</th><th>Departamento</th><th>Ult. Calibración</th><th>Próx. Verificación</th><th>Responsable</th><th>Acciones</th></tr></thead>
+        <thead><tr><th>Estado</th><th>ID</th><th>Instrumento</th><th>Departamento</th><th>Ult. Calibración</th><th>Próx. Calibración</th><th>Ult. Verificación</th><th>Próx. Verificación</th><th>Acciones</th></tr></thead>
         <tbody id="equiposBody"><tr><td colspan="8" class="empty">⏳ Cargando...</td></tr></tbody>
       </table>
     </div>
@@ -415,14 +415,14 @@ function renderTable(){
     const sc=statusOf(e);
     const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
     const dStr=dias!==null?(dias<0?`<span style="color:var(--dg);font-size:.75rem">${Math.abs(dias)}d vencido</span>`:`<span style="font-size:.75rem;color:var(--tx2)">${dias}d</span>`):'';
-    const certIcon=e.certificado_url?'📎 ':' ';
     return `<tr>
       <td><span class="sb s-${sc}">${statusLbl(sc)}</span></td>
-      <td><strong>${e.f_id}</strong> ${certIcon}</td>
+      <td><strong>${e.f_id}</strong>${e.certificado_url?' 📎':''}</td>
       <td>${e.f_instrumento||'—'}</td><td>${e.f_dept||'—'}</td>
       <td style="font-size:.8rem">${e.f_ult_cal||'—'}</td>
-      <td style="font-size:.8rem">${e.f_prox_ver||e.f_prox_cal||'—'} ${dStr}</td>
-      <td style="font-size:.82rem">${e.f_responsable||'—'}</td>
+      <td style="font-size:.8rem">${e.f_prox_cal||'—'}</td>
+      <td style="font-size:.8rem;color:var(--zb);font-weight:600" id="ultver_${idx}">⏳</td>
+      <td style="font-size:.8rem">${e.f_prox_ver||'—'} ${dStr}</td>
       <td style="white-space:nowrap;display:flex;gap:4px;padding:8px 14px">
         <button class="btn btn-sm btn-s" data-action="ver" data-idx="${idx}">👁</button>
         <button class="btn btn-sm btn-s" data-action="edit" data-idx="${idx}">✏️</button>
