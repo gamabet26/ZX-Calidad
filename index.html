@@ -405,12 +405,29 @@ function renderTable(){
   if(!filtered.length){tb.innerHTML='<tr><td colspan="9" class="empty">Sin resultados</td></tr>';return;}
   tb.innerHTML=filtered.map((e,idx)=>{
     const sc=statusOf(e);
-    const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
-    const dStr=dias!==null?(dias<0?`<span style="color:var(--dg);font-size:.75rem">${Math.abs(dias)}d vencido</span>`:`<span style="font-size:.75rem;color:var(--tx2)">${dias}d</span>`):'';
     const uv=ultVerMap[e.f_id];
     const uvHtml=uv
       ?`<span style="color:var(--ok);font-weight:600;font-size:.8rem">${new Date(uv).toLocaleDateString('es-MX',{year:'numeric',month:'2-digit',day:'2-digit'})}</span>`
       :`<span style="color:#bbb;font-size:.8rem">—</span>`;
+    // Calcular próxima verificación desde última validación + periodo
+    let proxVerCalc=e.f_prox_ver||'—';
+    if(uv&&e.f_periodo_ver){
+      const base=new Date(uv);
+      const p=e.f_periodo_ver.toLowerCase();
+      let d=0;
+      if(p.includes('diario'))d=1;
+      else if(p.includes('semanal'))d=7;
+      else if(p.includes('quincenal'))d=15;
+      else if(p.includes('mensual'))d=30;
+      else if(p.includes('bimestral'))d=60;
+      else if(p.includes('trimestral'))d=90;
+      else if(p.includes('semestral'))d=180;
+      else if(p.includes('anual'))d=365;
+      if(d>0){base.setDate(base.getDate()+d);proxVerCalc=base.toISOString().split('T')[0];}
+    }
+    const diasProx=diasHasta(proxVerCalc!=='—'?proxVerCalc:null);
+    const dStr=diasProx!==null?(diasProx<0?`<span style="color:var(--dg);font-size:.75rem">${Math.abs(diasProx)}d vencido</span>`:`<span style="font-size:.75rem;color:var(--tx2)">${diasProx}d</span>`):'';
+    const proxVerColor=diasProx!==null?(diasProx<0?'var(--dg)':diasProx<=30?'var(--wn)':'var(--tx)'):'var(--tx)';
     return `<tr>
       <td><span class="sb s-${sc}">${statusLbl(sc)}</span></td>
       <td><strong>${e.f_id}</strong>${e.certificado_url?' 📎':''}</td>
@@ -419,7 +436,7 @@ function renderTable(){
       <td style="font-size:.8rem">${e.f_ult_cal||'—'}</td>
       <td style="font-size:.8rem">${e.f_prox_cal||'—'}</td>
       <td>${uvHtml}</td>
-      <td style="font-size:.8rem">${e.f_prox_ver||'—'} ${dStr}</td>
+      <td style="font-size:.8rem;color:${proxVerColor};font-weight:600">${proxVerCalc} ${dStr}</td>
       <td style="white-space:nowrap;display:flex;gap:4px;padding:8px 14px">
         <button class="btn btn-sm btn-s" data-action="ver" data-idx="${idx}">👁</button>
         <button class="btn btn-sm btn-s" data-action="edit" data-idx="${idx}">✏️</button>
