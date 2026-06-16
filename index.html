@@ -51,7 +51,6 @@ main{position:relative;z-index:1;padding:2rem;max-width:1200px;margin:0 auto}
 .btn-p{background:var(--zb);color:#fff}.btn-p:hover{background:var(--zbd)}
 .btn-s{background:var(--wh);color:var(--zb);border:1px solid var(--zb)}.btn-s:hover{background:var(--zbl)}
 .btn-g{background:#1a7a38;color:#fff}.btn-g:hover{background:#155e2c}
-.btn-dmg{background:#f5e0ff;color:#6a0099;border:1px solid #d8a0f0}.btn-dmg:hover{background:#ead0ff}
 .btn-sm{padding:5px 10px;font-size:.77rem}
 .btn-del{background:#ffeaea;color:#aa1111;border:1px solid #ffcaca;border-radius:6px;cursor:pointer;font-size:.77rem;padding:5px 9px}
 .tw{background:var(--wh);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
@@ -91,12 +90,10 @@ textarea{resize:vertical;min-height:70px}
 .di{flex:1;min-width:260px}
 .ir{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:.85rem}
 .ir:last-child{border:none}.il{color:var(--tx2);font-weight:600;font-size:.77rem}
-/* HISTORIAL VALIDACIONES */
 .val-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;margin-bottom:6px;font-size:.83rem}
 .val-item.ok{background:#e6f9ed}.val-item.dañado{background:#ffeaea}
 .val-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .val-item.ok .val-dot{background:var(--ok)}.val-item.dañado .val-dot{background:var(--dg)}
-/* VISTA PÚBLICA */
 .pub-wrap{max-width:420px;margin:0 auto;padding:1rem}
 .pub-select{display:flex;gap:1rem;margin:1.5rem 0}
 .pub-opt{flex:1;border:2px solid var(--bd);border-radius:14px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:.2s;background:var(--wh)}
@@ -104,8 +101,6 @@ textarea{resize:vertical;min-height:70px}
 .pub-opt .po-icon{font-size:2rem;margin-bottom:.5rem}
 .pub-opt .po-title{font-size:.95rem;font-weight:700;color:var(--tx)}
 .pub-opt .po-sub{font-size:.75rem;color:var(--tx2);margin-top:3px}
-.pub-opt.consultar:hover{border-color:var(--zb)}
-.pub-opt.validar:hover{border-color:var(--ok)}
 .pc{background:var(--wh);border-radius:16px;border:2px solid var(--zb);overflow:hidden;margin-top:1rem}
 .pch{background:var(--zb);color:#fff;padding:1rem 1.2rem;text-align:center}
 .pch .plogo{font-size:1.6rem;font-weight:900;letter-spacing:2px;font-style:italic}
@@ -121,12 +116,10 @@ textarea{resize:vertical;min-height:70px}
 .pfv{font-size:.9rem;font-weight:600}
 .db2{text-align:center;font-size:.8rem;padding:8px;border-radius:8px;font-weight:600;margin-top:.5rem}
 .db2.ok{background:#e6f9ed;color:#1a7a38}.db2.warn{background:#fff4e0;color:#b36200}.db2.venc{background:#ffeaea;color:#aa1111}
-/* VALIDAR VIEW */
 .val-card{background:var(--wh);border-radius:16px;border:2px solid var(--bd);overflow:hidden;margin-top:1rem}
 .val-header{background:var(--zb);color:#fff;padding:1rem;text-align:center}
 .val-header .vh-logo{font-size:1.4rem;font-weight:900;font-style:italic;letter-spacing:2px}
 .val-header .vh-sub{font-size:.78rem;opacity:.8;margin-top:4px}
-.val-body{padding:1.5rem}
 .val-eq-info{background:var(--bg);border-radius:10px;padding:1rem;margin-bottom:1.5rem}
 .val-eq-info .vei-id{font-size:.75rem;color:var(--tx2);font-weight:600}
 .val-eq-info .vei-name{font-size:1rem;font-weight:700;margin-top:2px}
@@ -137,12 +130,6 @@ textarea{resize:vertical;min-height:70px}
 .vbtn.ok-btn{background:#e6f9ed;color:#1a7a38;border:2px solid #1a9e3f}.vbtn.ok-btn:hover{background:#c8f0d5}
 .vbtn.dmg-btn{background:#ffeaea;color:#aa1111;border:2px solid #cc2222}.vbtn.dmg-btn:hover{background:#ffd0d0}
 .vbtn:disabled{opacity:.5;cursor:not-allowed}
-.val-name-field{margin-bottom:1rem}
-.val-success{text-align:center;padding:2rem 1rem;display:none}
-.val-success .vs-icon{font-size:3rem;margin-bottom:.5rem}
-.val-success .vs-title{font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
-.val-success .vs-sub{font-size:.82rem;color:var(--tx2)}
-/* CERT BADGE */
 .cert-badge{display:flex;align-items:center;gap:8px;background:#e8e8ff;border-radius:8px;padding:8px 12px;margin-top:.5rem;font-size:.82rem;color:var(--zb);font-weight:600;cursor:pointer;transition:.15s}
 .cert-badge:hover{background:var(--zbl)}
 .ztc{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:2rem;text-align:center}
@@ -155,11 +142,11 @@ textarea{resize:vertical;min-height:70px}
 .empty{text-align:center;padding:3rem;color:var(--tx2);font-size:.9rem}
 .pw-box{background:var(--bg);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
 .pw-box h3{font-size:.9rem;font-weight:700;color:var(--zb);margin-bottom:1rem}
+.section-title{font-size:.8rem;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin:1.2rem 0 .6rem}
 .toast{position:fixed;bottom:2rem;right:2rem;background:#1a1a2e;color:#fff;padding:12px 22px;border-radius:10px;font-size:.85rem;z-index:9999;transform:translateY(100px);opacity:0;transition:.3s}
 .toast.show{transform:translateY(0);opacity:1}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
-.section-title{font-size:.8rem;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin:1.2rem 0 .6rem}
 </style>
 </head>
 <body>
@@ -198,7 +185,6 @@ textarea{resize:vertical;min-height:70px}
 </nav>
 
 <main>
-  <!-- EQUIPOS -->
   <div id="section-equipos" class="section active">
     <div class="dg">
       <div class="dc total"><div class="ic">📐</div><div class="inf"><p>Total equipos</p><h3 id="dTotal">—</h3></div></div>
@@ -222,12 +208,11 @@ textarea{resize:vertical;min-height:70px}
     <div class="tw">
       <table>
         <thead><tr><th>Estado</th><th>ID</th><th>Instrumento</th><th>Departamento</th><th>Ult. Calibración</th><th>Próx. Calibración</th><th>Ult. Verificación</th><th>Próx. Verificación</th><th>Acciones</th></tr></thead>
-        <tbody id="equiposBody"><tr><td colspan="8" class="empty">⏳ Cargando...</td></tr></tbody>
+        <tbody id="equiposBody"><tr><td colspan="9" class="empty">⏳ Cargando...</td></tr></tbody>
       </table>
     </div>
   </div>
 
-  <!-- ZTELA -->
   <div id="section-ztela" class="section">
     <div class="ztc"><div class="ztcard">
       <div class="ztlog">ZX - Ztela</div>
@@ -237,7 +222,6 @@ textarea{resize:vertical;min-height:70px}
     </div></div>
   </div>
 
-  <!-- CONFIG -->
   <div id="section-config" class="section">
     <div style="max-width:480px;margin:0 auto;padding-top:1rem">
       <div class="pw-box">
@@ -251,10 +235,13 @@ textarea{resize:vertical;min-height:70px}
         <h3>☁️ Estado Supabase</h3>
         <p style="font-size:.84rem;color:var(--tx2);line-height:1.8">Proyecto: <strong>CalidadZX</strong><br>Región: <strong>São Paulo</strong><br>Estado: <span id="cfgStatus">verificando...</span></p>
       </div>
+      <div class="pw-box">
+        <h3>ℹ️ Información</h3>
+        <p style="font-size:.84rem;color:var(--tx2);line-height:1.6">Usuario: <strong>admin</strong> — Contraseña inicial: <strong>admin123</strong></p>
+      </div>
     </div>
   </div>
 
-  <!-- VISTA PÚBLICA QR -->
   <div id="section-public" class="section">
     <div class="pub-wrap" id="pubContent"></div>
   </div>
@@ -325,21 +312,18 @@ const SB_URL='https://snsdveykyqgmgoraqdiv.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuc2R2ZXlreXFnbWdvcmFxZGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MDkxMjMsImV4cCI6MjA5NjA4NTEyM30.lz4tD41nMpaWW5A_nmXciBX4iR3CBsgWWkQ2CZPnSFY';
 const TABLE='equipos_medicion', VAL_TABLE='validaciones', BUCKET='certificados';
 const {createClient}=supabase;
-const db=createClient(SB_URL,SB_KEY,{
-  auth:{persistSession:false},
-  global:{fetch:(...args)=>fetch(...args)}
-});
+const db=createClient(SB_URL,SB_KEY,{auth:{persistSession:false},global:{fetch:(...a)=>fetch(...a)}});
 
 const INSTRUMENTS=['ADMET','Balanza analítica','Báscula','Calibrador de Termopares','Calibrador Digital','Cámara termográfica','Contador Digital','Copa Zahn','Cronómetro Digital','Cuenta Metros','Cuentametros','Dinamómetro','Infrarrojo','Lainas','Medidor de alturas','Medidor de ancho plano','Medidor de espesor','Medidor de espesor de ultrasonido','Medidor de espesores','Medidor de estática','Micrómetro','Pesa patrón','Placa patrón','Probador de dureza','Regla patrón','Rugosímetro','Termómetro','Termómetro Copa Zahn','Termómetro Digital','Termómetro Infrarrojo','Torquímetro','Transportador de Ángulos','Vernier'];
 
-let equipos=[],editingId=null,pendingAction=null,selectedFile=null;
+let equipos=[], ultVerMap={}, editingId=null, pendingAction=null, selectedFile=null;
 const DEFAULT_PASS='admin123';
 function getPass(){return localStorage.getItem('zxPassCal')||DEFAULT_PASS}
 
 function setSyncStatus(st,txt){
   const dot=document.getElementById('syncDot'),t=document.getElementById('syncTxt');
-  dot.className='sync-dot '+st;t.textContent=txt;
-  const cfg=document.getElementById('cfgStatus');if(cfg)cfg.textContent=txt;
+  dot.className='sync-dot '+st; t.textContent=txt;
+  const cfg=document.getElementById('cfgStatus'); if(cfg) cfg.textContent=txt;
 }
 
 async function loadEquipos(){
@@ -347,16 +331,15 @@ async function loadEquipos(){
   try{
     const [{data:eqData,error:eqErr},{data:valData}]=await Promise.all([
       db.from(TABLE).select('*').order('created_at',{ascending:false}),
-      db.from(VAL_TABLE).select('equipo_id, created_at').eq('resultado','ok').order('created_at',{ascending:false})
+      db.from(VAL_TABLE).select('equipo_id,created_at').eq('resultado','ok').order('created_at',{ascending:false})
     ]);
     if(eqErr) throw eqErr;
     equipos=eqData||[];
-    // Construir mapa de últimas verificaciones
-    window.ultVerMap={};
-    (valData||[]).forEach(v=>{if(!window.ultVerMap[v.equipo_id]) window.ultVerMap[v.equipo_id]=v.created_at;});
-    updateDash();updateDeptFilter();renderTable();
+    ultVerMap={};
+    (valData||[]).forEach(v=>{if(!ultVerMap[v.equipo_id]) ultVerMap[v.equipo_id]=v.created_at;});
+    updateDash(); updateDeptFilter(); renderTable();
     setSyncStatus('ok','Conectado ✓ — '+equipos.length+' equipos');
-  }catch(e){setSyncStatus('err','Error de conexión');showToast('❌ '+e.message);}
+  }catch(e){setSyncStatus('err','Error de conexión'); showToast('❌ '+e.message);}
 }
 
 function fillInstruments(){
@@ -368,26 +351,26 @@ function showSec(sec,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nt').forEach(b=>b.classList.remove('active'));
   document.getElementById('section-'+sec).classList.add('active');
-  if(btn)btn.classList.add('active');
+  if(btn) btn.classList.add('active');
 }
 
-function goZtela(){showToast('Redirigiendo a ZX-Ztela...');setTimeout(()=>window.open('https://gamabet26.github.io/Ztela2ZX/','_blank'),800)}
+function goZtela(){showToast('Redirigiendo...'); setTimeout(()=>window.open('https://gamabet26.github.io/Ztela2ZX/','_blank'),800)}
 
 function diasHasta(d){
-  if(!d)return null;
+  if(!d) return null;
   const dt=new Date(d),hoy=new Date();
-  dt.setHours(0,0,0,0);hoy.setHours(0,0,0,0);
+  dt.setHours(0,0,0,0); hoy.setHours(0,0,0,0);
   return Math.ceil((dt-hoy)/864e5);
 }
 
 function statusOf(e){
-  if(e.f_estado==='baja')return 'baja';
-  if(e.f_estado==='dmg')return 'dmg';
-  if(e.f_estado==='fs')return 'venc';
+  if(e.f_estado==='baja') return 'baja';
+  if(e.f_estado==='dmg') return 'dmg';
+  if(e.f_estado==='fs') return 'venc';
   const d=diasHasta(e.f_prox_ver||e.f_prox_cal);
-  if(d===null)return 'na';
-  if(d<0)return 'venc';
-  if(d<=30)return 'warn';
+  if(d===null) return 'na';
+  if(d<0) return 'venc';
+  if(d<=30) return 'warn';
   return 'ok';
 }
 function statusLbl(s){return{ok:'Vigente',warn:'Por vencer',venc:'Vencido',baja:'Dado de baja',dmg:'Dañado',na:'Sin fecha'}[s]||'—'}
@@ -413,7 +396,7 @@ function renderTable(){
   const dept=document.getElementById('filterDept').value;
   const status=document.getElementById('filterStatus').value;
   const filtered=equipos.filter(e=>{
-    const mq=!q||((e.f_id||'')+(e.f_instrumento||'')+(e.f_dept||'')+(e.f_responsable||'')).toLowerCase().includes(q);
+    const mq=!q||((e.f_id||'')+(e.f_instrumento||'')+(e.f_dept||'')).toLowerCase().includes(q);
     const md=!dept||e.f_dept===dept;
     const ms=!status||statusOf(e)===status;
     return mq&&md&&ms;
@@ -424,13 +407,18 @@ function renderTable(){
     const sc=statusOf(e);
     const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
     const dStr=dias!==null?(dias<0?`<span style="color:var(--dg);font-size:.75rem">${Math.abs(dias)}d vencido</span>`:`<span style="font-size:.75rem;color:var(--tx2)">${dias}d</span>`):'';
+    const uv=ultVerMap[e.f_id];
+    const uvHtml=uv
+      ?`<span style="color:var(--ok);font-weight:600;font-size:.8rem">${new Date(uv).toLocaleDateString('es-MX',{year:'numeric',month:'2-digit',day:'2-digit'})}</span>`
+      :`<span style="color:#bbb;font-size:.8rem">—</span>`;
     return `<tr>
       <td><span class="sb s-${sc}">${statusLbl(sc)}</span></td>
       <td><strong>${e.f_id}</strong>${e.certificado_url?' 📎':''}</td>
-      <td>${e.f_instrumento||'—'}</td><td>${e.f_dept||'—'}</td>
+      <td>${e.f_instrumento||'—'}</td>
+      <td>${e.f_dept||'—'}</td>
       <td style="font-size:.8rem">${e.f_ult_cal||'—'}</td>
       <td style="font-size:.8rem">${e.f_prox_cal||'—'}</td>
-      <td style="font-size:.8rem;color:var(--zb);font-weight:600" id="ultver_${idx}">⏳</td>
+      <td>${uvHtml}</td>
       <td style="font-size:.8rem">${e.f_prox_ver||'—'} ${dStr}</td>
       <td style="white-space:nowrap;display:flex;gap:4px;padding:8px 14px">
         <button class="btn btn-sm btn-s" data-action="ver" data-idx="${idx}">👁</button>
@@ -441,35 +429,28 @@ function renderTable(){
 }
 
 document.getElementById('equiposBody').addEventListener('click',function(ev){
-  const btn=ev.target.closest('[data-action]');if(!btn)return;
-  const action=btn.dataset.action,idx=parseInt(btn.dataset.idx);
+  const btn=ev.target.closest('[data-action]'); if(!btn) return;
+  const action=btn.dataset.action, idx=parseInt(btn.dataset.idx);
   const q=document.getElementById('searchInput').value.toLowerCase();
   const dept=document.getElementById('filterDept').value;
   const status=document.getElementById('filterStatus').value;
   const filtered=equipos.filter(e=>{
-    const mq=!q||((e.f_id||'')+(e.f_instrumento||'')+(e.f_dept||'')+(e.f_responsable||'')).toLowerCase().includes(q);
+    const mq=!q||((e.f_id||'')+(e.f_instrumento||'')+(e.f_dept||'')).toLowerCase().includes(q);
     const md=!dept||e.f_dept===dept;
     const ms=!status||statusOf(e)===status;
     return mq&&md&&ms;
   });
-  const e=filtered[idx];if(!e)return;
-  if(action==='ver')openDet(e.f_id);
-  else if(action==='edit')reqPass('edit',e.f_id);
-  else if(action==='del')reqPass('del',e.f_id);
+  const e=filtered[idx]; if(!e) return;
+  if(action==='ver') openDet(e.f_id);
+  else if(action==='edit') reqPass('edit',e.f_id);
+  else if(action==='del') reqPass('del',e.f_id);
 });
 
-// FILE SELECT
 function onFileSelect(input){
   selectedFile=input.files[0]||null;
-  const zone=document.getElementById('fileZone');
-  const txt=document.getElementById('fileZoneText');
-  if(selectedFile){
-    zone.classList.add('has-file');
-    txt.textContent='✅ '+selectedFile.name+' ('+Math.round(selectedFile.size/1024)+' KB)';
-  } else {
-    zone.classList.remove('has-file');
-    txt.textContent='Haz clic para seleccionar PDF';
-  }
+  const zone=document.getElementById('fileZone'), txt=document.getElementById('fileZoneText');
+  if(selectedFile){zone.classList.add('has-file');txt.textContent='✅ '+selectedFile.name+' ('+Math.round(selectedFile.size/1024)+' KB)';}
+  else{zone.classList.remove('has-file');txt.textContent='Haz clic para seleccionar PDF';}
 }
 
 function reqPass(action,id){
@@ -484,21 +465,21 @@ function reqPass(action,id){
 function verifyPass(){
   if(document.getElementById('passInput').value!==getPass()){
     document.getElementById('passError').style.display='block';
-    document.getElementById('passInput').value='';return;
+    document.getElementById('passInput').value=''; return;
   }
   closePass();
-  if(!pendingAction)return;
-  const {action,id}=pendingAction;pendingAction=null;
-  if(action==='new')openNewModal();
-  else if(action==='edit')openEdit(id);
-  else if(action==='del')eliminar(id);
+  if(!pendingAction) return;
+  const {action,id}=pendingAction; pendingAction=null;
+  if(action==='new') openNewModal();
+  else if(action==='edit') openEdit(id);
+  else if(action==='del') eliminar(id);
 }
 function closePass(){document.getElementById('modalPass').classList.remove('open')}
 
 function openNewModal(){
-  editingId=null;selectedFile=null;
+  editingId=null; selectedFile=null;
   document.getElementById('modalTitle').textContent='Registrar Equipo de Medición';
-  ['fId','fDesc','fDept','fResponsable','fUnidad','fMarca','fSerie','fRango','fResolucion','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  ['fId','fDesc','fDept','fUnidad','fUltCal','fProxCal','fUltVer','fProxVer','fPeriodoVer','fPeriodoCal','fUbicacion','fNotas'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   document.getElementById('fInstrumento').value='';
   document.getElementById('fEstado').value='op';
   document.getElementById('fCertFile').value='';
@@ -509,8 +490,8 @@ function openNewModal(){
 }
 
 function openEdit(fid){
-  const e=equipos.find(x=>x.f_id===fid);if(!e)return;
-  editingId=fid;selectedFile=null;
+  const e=equipos.find(x=>x.f_id===fid); if(!e) return;
+  editingId=fid; selectedFile=null;
   document.getElementById('modalTitle').textContent='Editar: '+fid;
   document.getElementById('fId').value=e.f_id||'';
   document.getElementById('fInstrumento').value=e.f_instrumento||'';
@@ -542,22 +523,19 @@ async function saveEquipo(){
   const dept=document.getElementById('fDept').value.trim();
   if(!fid||!inst||!dept){showToast('⚠️ ID, Instrumento y Departamento son requeridos');return;}
   const btn=document.getElementById('btnSave');
-  btn.innerHTML='<span class="spinner"></span> Guardando...';btn.disabled=true;
-  let certUrl=null,certNombre=null;
-  // Upload PDF if selected
+  btn.innerHTML='<span class="spinner"></span> Guardando...'; btn.disabled=true;
+  let certUrl=null, certNombre=null;
   if(selectedFile){
     try{
-      const ext=selectedFile.name.split('.').pop();
-      const path=fid+'/certificado_'+Date.now()+'.'+ext;
-      const {data:upData,error:upErr}=await db.storage.from(BUCKET).upload(path,selectedFile,{upsert:true,contentType:'application/pdf'});
-      if(upErr)throw upErr;
+      const path=fid+'/cert_'+Date.now()+'.pdf';
+      const {error:upErr}=await db.storage.from(BUCKET).upload(path,selectedFile,{upsert:true,contentType:'application/pdf'});
+      if(upErr) throw upErr;
       const {data:urlData}=db.storage.from(BUCKET).getPublicUrl(path);
-      certUrl=urlData.publicUrl;
-      certNombre=selectedFile.name;
-    }catch(e){showToast('⚠️ Error al subir PDF: '+e.message);btn.innerHTML='💾 Guardar';btn.disabled=false;return;}
+      certUrl=urlData.publicUrl; certNombre=selectedFile.name;
+    }catch(e){showToast('⚠️ Error PDF: '+e.message);btn.innerHTML='💾 Guardar';btn.disabled=false;return;}
   }
   const payload={
-    f_id:fid,f_instrumento:inst,f_dept:dept,
+    f_id:fid, f_instrumento:inst, f_dept:dept,
     f_desc:document.getElementById('fDesc').value.trim(),
     f_unidad:document.getElementById('fUnidad').value.trim(),
     f_ult_cal:document.getElementById('fUltCal').value||null,
@@ -571,57 +549,55 @@ async function saveEquipo(){
     f_notas:document.getElementById('fNotas').value.trim(),
     updated_at:new Date().toISOString()
   };
-  if(certUrl){payload.certificado_url=certUrl;payload.certificado_nombre=certNombre;}
+  if(certUrl){payload.certificado_url=certUrl; payload.certificado_nombre=certNombre;}
   try{
     let error;
     if(editingId){({error}=await db.from(TABLE).update(payload).eq('f_id',editingId));}
     else{({error}=await db.from(TABLE).insert(payload));}
-    if(error)throw error;
-    closeModal();showToast('✅ Equipo guardado');await loadEquipos();
+    if(error) throw error;
+    closeModal(); showToast('✅ Equipo guardado');
+    await loadEquipos();
   }catch(e){showToast('❌ Error: '+e.message);}
-  finally{btn.innerHTML='💾 Guardar';btn.disabled=false;}
+  finally{btn.innerHTML='💾 Guardar'; btn.disabled=false;}
 }
 
 async function eliminar(fid){
-  if(!confirm('¿Eliminar el equipo '+fid+'?'))return;
+  if(!confirm('¿Eliminar el equipo '+fid+'?')) return;
   try{
     const {error}=await db.from(TABLE).delete().eq('f_id',fid);
-    if(error)throw error;
-    showToast('🗑 Equipo eliminado');await loadEquipos();
+    if(error) throw error;
+    showToast('🗑 Equipo eliminado'); await loadEquipos();
   }catch(e){showToast('❌ '+e.message);}
 }
 
 function closeDet(){document.getElementById('modalDetalle').classList.remove('open')}
 
 async function openDet(fid){
-  const e=equipos.find(x=>x.f_id===fid);if(!e)return;
+  const e=equipos.find(x=>x.f_id===fid); if(!e) return;
   const sc=statusOf(e);
   const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
   const diasTxt=dias!==null?(dias<0?`Vencido hace ${Math.abs(dias)} días`:`${dias} días restantes`):'Sin fecha';
   const cid='qr_'+Math.random().toString(36).slice(2,8);
-  // Load validaciones
   const {data:vals}=await db.from(VAL_TABLE).select('*').eq('equipo_id',fid).order('created_at',{ascending:false}).limit(10);
   const valsHtml=(vals&&vals.length)?vals.map(v=>{
-    const d=new Date(v.created_at);
     const label=v.resultado==='ok'?'✅ OK':'🔧 Dañado';
-    const fecha=d.toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    const fecha=new Date(v.created_at).toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
     return `<div class="val-item ${v.resultado}"><div class="val-dot"></div><div style="flex:1"><strong>${label}</strong><span style="font-size:.75rem;color:var(--tx2);margin-left:8px">${fecha}</span>${v.validado_por?`<span style="font-size:.75rem;color:var(--tx2);margin-left:6px">— ${v.validado_por}</span>`:''}</div></div>`;
   }).join(''):'<p style="font-size:.82rem;color:var(--tx2)">Sin validaciones registradas</p>';
-
   const certBadge=e.certificado_url?`<div class="cert-badge" onclick="window.open('${e.certificado_url}','_blank')">📄 ${e.certificado_nombre||'Ver Certificado'} <span style="margin-left:auto;font-size:.75rem">↗ Abrir</span></div>`:'<p style="font-size:.8rem;color:var(--tx2)">Sin certificado adjunto</p>';
-
   document.getElementById('detalleBody').innerHTML=`
     <div class="dh">
       <div class="dq">
         <div class="qcard"><h4>VERIFICACIÓN</h4><div id="${cid}"></div><div class="qid">${e.f_id}</div><div class="qbadge">${statusLbl(sc)}</div></div>
         <button class="btn btn-sm btn-s" style="margin-top:8px" id="btnDlQr">⬇ QR</button>
-        <button class="btn btn-sm btn-s" style="margin-top:4px" id="btnPrintLbl">🖨️ Etiqueta</button>
+        <button class="btn btn-sm btn-p" style="margin-top:4px" id="btnPrintLbl">🖨️ Etiqueta</button>
       </div>
       <div class="di">
         ${[['ID',`<strong>${e.f_id}</strong>`],['Instrumento',e.f_instrumento||'—'],['Descripción',e.f_desc||'—'],
           ['Departamento',e.f_dept||'—'],['Ubicación',e.f_ubicacion||'—'],
           ['Ult. Calibración',e.f_ult_cal||'—'],['Próx. Calibración',e.f_prox_cal||'—'],
-          ['Ult. Verificación',e.f_ult_ver||'—'],['Próx. Verificación',e.f_prox_ver||'—'],
+          ['Ult. Verificación',ultVerMap[fid]?new Date(ultVerMap[fid]).toLocaleDateString('es-MX',{year:'numeric',month:'2-digit',day:'2-digit'}):'—'],
+          ['Próx. Verificación',e.f_prox_ver||'—'],
           ['Periodo Verif.',e.f_periodo_ver||'—'],['Periodo Calib.',e.f_periodo_cal||'—'],
           ['Estado',`<span class="sb s-${sc}">${statusLbl(sc)}</span> — ${diasTxt}`],
           ...(e.f_notas?[['Notas',`<span style="font-size:.8rem;color:var(--tx2)">${e.f_notas}</span>`]]:[])
@@ -632,7 +608,6 @@ async function openDet(fid){
     ${certBadge}
     <div class="section-title" style="margin-top:1.2rem">🗂 Historial de Validaciones</div>
     ${valsHtml}`;
-
   document.getElementById('modalDetalle').classList.add('open');
   document.getElementById('btnEditDet').onclick=()=>{closeDet();reqPass('edit',fid)};
   document.getElementById('btnDlQr').onclick=()=>dlQR(cid,e.f_id);
@@ -641,16 +616,16 @@ async function openDet(fid){
 }
 
 function genQR(cid,eqId){
-  const el=document.getElementById(cid);if(!el||el.querySelector('canvas'))return;
+  const el=document.getElementById(cid); if(!el||el.querySelector('canvas')) return;
   const url=location.href.split('?')[0]+'?qr='+encodeURIComponent(eqId);
   new QRCode(el,{text:url,width:160,height:160,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.H});
   setTimeout(()=>overlayZX(el),350);
 }
 
 function overlayZX(el){
-  const orig=el.querySelector('canvas');if(!orig)return;
+  const orig=el.querySelector('canvas'); if(!orig) return;
   const size=orig.width,cx=size/2,cy=size/2,r=size*0.14;
-  const c=document.createElement('canvas');c.width=size;c.height=size;
+  const c=document.createElement('canvas'); c.width=size; c.height=size;
   const ctx=c.getContext('2d');
   ctx.drawImage(orig,0,0);
   ctx.beginPath();ctx.arc(cx,cy,r+4,0,2*Math.PI);ctx.fillStyle='#fff';ctx.fill();
@@ -663,19 +638,17 @@ function overlayZX(el){
 }
 
 function dlQR(cid,eqId){
-  const el=document.getElementById(cid);if(!el)return;
-  const c=el.querySelector('canvas');if(!c){showToast('Generando QR...');return;}
-  const a=document.createElement('a');a.download='QR_'+eqId+'.png';a.href=c.toDataURL();a.click();
+  const el=document.getElementById(cid); if(!el) return;
+  const c=el.querySelector('canvas'); if(!c){showToast('Generando QR...');return;}
+  const a=document.createElement('a'); a.download='QR_'+eqId+'.png'; a.href=c.toDataURL(); a.click();
   showToast('⬇ QR descargado');
 }
 
-// ===== VISTA PÚBLICA QR =====
 async function showPublicQR(fid){
   document.querySelectorAll('.nt').forEach(b=>b.classList.remove('active'));
   showSec('public');
   const pub=document.getElementById('pubContent');
   pub.innerHTML='<p style="text-align:center;padding:3rem;color:var(--tx2)">⏳ Cargando...</p>';
-  // Load from Supabase directly (for QR scan scenario)
   let e=equipos.find(x=>x.f_id===fid);
   if(!e){
     const {data}=await db.from(TABLE).select('*').eq('f_id',fid).single();
@@ -686,51 +659,38 @@ async function showPublicQR(fid){
   const semC=sc==='ok'?'green':sc==='warn'?'yellow':sc==='dmg'?'purple':'red';
   const semTxt=sc==='ok'?'Equipo vigente':sc==='warn'?'Por vencer pronto':sc==='dmg'?'DAÑADO — En reparación':'VENCIDO / Fuera de servicio';
   const dotC=sc==='ok'?'#1a9e3f':sc==='warn'?'#e6820a':sc==='dmg'?'#8b00b5':'#cc2222';
+
   pub.innerHTML=`
     <div style="text-align:center;margin-bottom:1rem">
       <div style="background:var(--zb);color:#fff;border-radius:12px;padding:.5rem 1rem;display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:1px">CALIDAD ZX</div>
     </div>
     <div class="pub-select">
-      <div class="pub-opt consultar" id="optConsultar">
-        <div class="po-icon">🔍</div>
-        <div class="po-title">Consultar</div>
-        <div class="po-sub">Ver información del equipo</div>
-      </div>
-      <div class="pub-opt validar" id="optValidar">
-        <div class="po-icon">✅</div>
-        <div class="po-title">Validar</div>
-        <div class="po-sub">Registrar revisión</div>
-      </div>
+      <div class="pub-opt" id="optConsultar"><div class="po-icon">🔍</div><div class="po-title">Consultar</div><div class="po-sub">Ver información del equipo</div></div>
+      <div class="pub-opt" id="optValidar"><div class="po-icon">✅</div><div class="po-title">Validar</div><div class="po-sub">Registrar revisión</div></div>
     </div>
     <div id="pubView"></div>`;
 
   const consultarView=async()=>{
-    // Obtener última validación OK del historial
     const {data:ultVals}=await db.from(VAL_TABLE).select('*').eq('equipo_id',e.f_id).eq('resultado','ok').order('created_at',{ascending:false}).limit(1);
     const ultVal=ultVals&&ultVals.length?ultVals[0]:null;
     const ultVerFecha=ultVal?new Date(ultVal.created_at).toLocaleDateString('es-MX',{year:'numeric',month:'2-digit',day:'2-digit'}):(e.f_ult_ver||'—');
-    // Calcular próxima verificación desde última validación + periodo
     let proxVerFecha=e.f_prox_ver||'—';
     if(ultVal&&e.f_periodo_ver){
       const base=new Date(ultVal.created_at);
-      const periodo=e.f_periodo_ver.toLowerCase();
-      let dias=0;
-      if(periodo.includes('diario')) dias=1;
-      else if(periodo.includes('semanal')) dias=7;
-      else if(periodo.includes('quincenal')) dias=15;
-      else if(periodo.includes('mensual')) dias=30;
-      else if(periodo.includes('bimestral')) dias=60;
-      else if(periodo.includes('trimestral')) dias=90;
-      else if(periodo.includes('semestral')) dias=180;
-      else if(periodo.includes('anual')) dias=365;
-      if(dias>0){
-        base.setDate(base.getDate()+dias);
-        proxVerFecha=base.toISOString().split('T')[0];
-      }
+      const p=e.f_periodo_ver.toLowerCase();
+      let d=0;
+      if(p.includes('diario'))d=1;
+      else if(p.includes('semanal'))d=7;
+      else if(p.includes('quincenal'))d=15;
+      else if(p.includes('mensual'))d=30;
+      else if(p.includes('bimestral'))d=60;
+      else if(p.includes('trimestral'))d=90;
+      else if(p.includes('semestral'))d=180;
+      else if(p.includes('anual'))d=365;
+      if(d>0){base.setDate(base.getDate()+d);proxVerFecha=base.toISOString().split('T')[0];}
     }
     const diasR=diasHasta(proxVerFecha!=='—'?proxVerFecha:null);
-    const scProx=diasR===null?'na':diasR<0?'venc':diasR<=30?'warn':'ok';
-    const diasBadge=diasR!==null?`<div class="db2 ${diasR<0?'venc':scProx==='warn'?'warn':'ok'}">${diasR<0?`Vencido hace ${Math.abs(diasR)} días`:`${diasR} días para próxima verificación`}</div>`:'';
+    const diasBadge=diasR!==null?`<div class="db2 ${diasR<0?'venc':diasR<=30?'warn':'ok'}">${diasR<0?`Vencido hace ${Math.abs(diasR)} días`:`${diasR} días para próxima verificación`}</div>`:'';
     const certBtn=e.certificado_url?`<div class="cert-badge" onclick="window.open('${e.certificado_url}','_blank')" style="margin-top:.75rem">📄 Ver Certificado de Calibración <span style="margin-left:auto">↗</span></div>`:'';
     document.getElementById('pubView').innerHTML=`
       <div class="pc">
@@ -741,11 +701,11 @@ async function showPublicQR(fid){
           <div class="psem ${semC}"><div class="sdot" style="background:${dotC}"></div><span style="font-weight:600;font-size:.9rem">${semTxt}</span></div>
           <div class="pgrid">
             <div class="pf"><div class="pfl">Departamento</div><div class="pfv">${e.f_dept||'—'}</div></div>
-            <div class="pf"><div class="pfl">Responsable</div><div class="pfv">${e.f_responsable||'—'}</div></div>
-            <div class="pf"><div class="pfl">Ult. Verificación</div><div class="pfv" style="color:var(--zb);font-weight:700">${ultVerFecha}</div></div>
-            <div class="pf"><div class="pfl">Próx. Verificación</div><div class="pfv" style="color:${diasR!==null&&diasR<0?'var(--dg)':diasR!==null&&diasR<=30?'var(--wn)':'var(--ok)'}">${proxVerFecha}</div></div>
-            <div class="pf"><div class="pfl">Periodo Verif.</div><div class="pfv">${e.f_periodo_ver||'—'}</div></div>
             <div class="pf"><div class="pfl">Ubicación</div><div class="pfv">${e.f_ubicacion||'—'}</div></div>
+            <div class="pf"><div class="pfl">Ult. Verificación</div><div class="pfv" style="color:var(--zb);font-weight:700">${ultVerFecha}</div></div>
+            <div class="pf"><div class="pfl">Próx. Verificación</div><div class="pfv">${proxVerFecha}</div></div>
+            <div class="pf"><div class="pfl">Periodo Verif.</div><div class="pfv">${e.f_periodo_ver||'—'}</div></div>
+            <div class="pf"><div class="pfl">Periodo Calib.</div><div class="pfv">${e.f_periodo_cal||'—'}</div></div>
           </div>
           ${diasBadge}${certBtn}
           ${e.f_notas?`<p style="font-size:.78rem;color:var(--tx2);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--bd)">📝 ${e.f_notas}</p>`:''}
@@ -757,86 +717,75 @@ async function showPublicQR(fid){
     document.getElementById('pubView').innerHTML=`
       <div class="val-card">
         <div class="val-header"><div class="vh-logo">zubex</div><div class="vh-sub">Registro de Validación</div></div>
-        <div class="val-body">
+        <div id="valInner" style="padding:1.5rem">
           <div class="val-eq-info">
             <div class="vei-id">ID: ${e.f_id}</div>
             <div class="vei-name">${e.f_instrumento||'—'}</div>
-            <div class="vei-dept">${e.f_dept||'—'} ${e.f_ubicacion?'· '+e.f_ubicacion:''}</div>
+            <div class="vei-dept">${e.f_dept||'—'}${e.f_ubicacion?' · '+e.f_ubicacion:''}</div>
           </div>
           <p style="font-size:.8rem;color:var(--tx2);margin-bottom:.75rem;text-align:center">¿Cuál es el resultado de la revisión?</p>
           <div class="val-btns">
             <button class="vbtn ok-btn" id="vbOk"><span class="vbicon">✅</span>OK</button>
             <button class="vbtn dmg-btn" id="vbDmg"><span class="vbicon">🔧</span>Dañado</button>
           </div>
-          <div class="val-name-field fgr">
+          <div class="fgr" style="margin-top:1rem">
             <label>Validado por (opcional)</label>
             <input type="text" id="valNombre" placeholder="Tu nombre...">
-          </div>
-          <div class="val-success" id="valSuccess">
-            <div class="vs-icon" id="vsIcon">✅</div>
-            <div class="vs-title" id="vsTitle">Validación registrada</div>
-            <div class="vs-sub" id="vsSub"></div>
           </div>
         </div>
       </div>`;
 
-  const doValidar=async(resultado)=>{
-    const btnOk=document.getElementById('vbOk');
-    const btnDmg=document.getElementById('vbDmg');
-    const nombre=document.getElementById('valNombre')?document.getElementById('valNombre').value.trim():'';
-    if(btnOk) btnOk.disabled=true;
-    if(btnDmg) btnDmg.disabled=true;
-    try{
-      const ins={equipo_id:e.f_id, resultado};
-      if(nombre) ins.validado_por=nombre;
-      const {error}=await db.from(VAL_TABLE).insert(ins);
-      if(error) throw error;
-      // Si dañado, actualizar estado
-      if(resultado==='dañado'){
-        await db.from(TABLE).update({f_estado:'dmg',updated_at:new Date().toISOString()}).eq('f_id',e.f_id);
+    const doValidar=async(resultado)=>{
+      const inner=document.getElementById('valInner');
+      const nombre=(document.getElementById('valNombre')?.value||'').trim();
+      ['vbOk','vbDmg'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=true;});
+      try{
+        const {error}=await db.from(VAL_TABLE).insert({equipo_id:e.f_id,resultado,validado_por:nombre||null});
+        if(error) throw error;
+        if(resultado==='dañado'){
+          await db.from(TABLE).update({f_estado:'dmg',updated_at:new Date().toISOString()}).eq('f_id',e.f_id);
+        }
+        if(inner){
+          inner.innerHTML=`
+            <div style="text-align:center;padding:1.5rem .5rem">
+              <div style="font-size:3.5rem">${resultado==='ok'?'✅':'🔧'}</div>
+              <div style="font-size:1.1rem;font-weight:700;margin:.75rem 0 .3rem">${resultado==='ok'?'Equipo validado como OK':'Equipo marcado como Dañado'}</div>
+              <div style="font-size:.82rem;color:var(--tx2);line-height:1.5">
+                ${new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+                ${nombre?'<br>por <strong>'+nombre+'</strong>':''}
+              </div>
+              <button class="btn btn-p" style="margin-top:1.5rem;width:100%;justify-content:center" onclick="history.back()">← Volver</button>
+            </div>`;
+        }
+        loadEquipos();
+      }catch(err){
+        showToast('❌ Error: '+err.message);
+        ['vbOk','vbDmg'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=false;});
       }
-      // Mostrar éxito
-      const valBody=document.querySelector('.val-body');
-      if(valBody){
-        valBody.innerHTML=`
-          <div style="text-align:center;padding:2rem 1rem">
-            <div style="font-size:3rem;margin-bottom:.5rem">${resultado==='ok'?'✅':'🔧'}</div>
-            <div style="font-size:1.1rem;font-weight:700;margin-bottom:.3rem">${resultado==='ok'?'Equipo validado como OK':'Equipo marcado como Dañado'}</div>
-            <div style="font-size:.82rem;color:var(--tx2)">Registrado el ${new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})}${nombre?' por '+nombre:''}</div>
-            <button class="btn btn-s" style="margin-top:1.5rem" onclick="showSec('equipos')">← Volver</button>
-          </div>`;
-      }
-      // Refrescar datos en background
-      loadEquipos();
-    }catch(err){
-      showToast('❌ Error: '+err.message);
-      if(btnOk) btnOk.disabled=false;
-      if(btnDmg) btnDmg.disabled=false;
-    }
-  };
+    };
 
-    document.getElementById('vbOk').onclick=()=>doValidar('ok');
-    document.getElementById('vbDmg').onclick=()=>doValidar('dañado');
+    setTimeout(()=>{
+      const btnOk=document.getElementById('vbOk');
+      const btnDmg=document.getElementById('vbDmg');
+      if(btnOk) btnOk.addEventListener('click',()=>doValidar('ok'));
+      if(btnDmg) btnDmg.addEventListener('click',()=>doValidar('dañado'));
+    },50);
   };
 
   document.getElementById('optConsultar').onclick=()=>{
-    document.getElementById('optConsultar').style.borderColor='var(--zb)';
-    document.getElementById('optConsultar').style.background='var(--zbl)';
-    document.getElementById('optValidar').style.borderColor='var(--bd)';
-    document.getElementById('optValidar').style.background='var(--wh)';
+    document.getElementById('optConsultar').style.cssText='border-color:var(--zb);background:var(--zbl)';
+    document.getElementById('optValidar').style.cssText='border-color:var(--bd);background:var(--wh)';
     consultarView();
   };
   document.getElementById('optValidar').onclick=()=>{
-    document.getElementById('optValidar').style.borderColor='var(--ok)';
-    document.getElementById('optValidar').style.background='#e6f9ed';
-    document.getElementById('optConsultar').style.borderColor='var(--bd)';
-    document.getElementById('optConsultar').style.background='var(--wh)';
+    document.getElementById('optValidar').style.cssText='border-color:var(--ok);background:#e6f9ed';
+    document.getElementById('optConsultar').style.cssText='border-color:var(--bd);background:var(--wh)';
     validarView();
   };
 }
 
 function printLabel(fid){
-  const e=equipos.find(x=>x.f_id===fid);if(!e)return;
+  const e=equipos.find(x=>x.f_id===fid); if(!e) return;
   const proxFecha=e.f_prox_ver||e.f_prox_cal||'';
   let mesAnio='',dias=[];
   if(proxFecha){
@@ -850,13 +799,13 @@ function printLabel(fid){
   const qrUrl=location.href.split('?')[0]+'?qr='+encodeURIComponent(fid);
   const win=window.open('','_blank','width=420,height=640');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Etiqueta ${fid}</title>
-  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}.label{width:260px;border:2.5px solid #1a1aff;border-radius:8px;overflow:hidden}.lh{background:#1a1aff;color:#fff;text-align:center;padding:8px 6px 6px}.lh .logo{font-size:24px;font-weight:900;font-style:italic;letter-spacing:1px}.ltype{background:#6600cc;color:#fff;text-align:center;padding:5px;font-size:10px;font-weight:700;letter-spacing:2px}.lrow{display:flex;border-bottom:1px solid #dde;padding:5px 8px;font-size:11px;gap:4px;align-items:center}.lk{color:#555;min-width:52px;font-size:10px}.lv{font-weight:700;color:#1a1a2e}.lnext{background:#1a1aff;color:#fff;text-align:center;padding:5px;font-size:10px;font-weight:700;letter-spacing:1px}.lmes{text-align:center;padding:6px;font-size:13px;font-weight:700;color:#1a1a2e;border-bottom:1px solid #dde}.ldias{display:grid;grid-template-columns:1fr 1fr}.ld{text-align:center;padding:10px 4px;font-size:20px;font-weight:700;color:#1a1a2e;border:0.5px solid #dde}.lqr{text-align:center;padding:10px 8px 8px;border-top:1px solid #dde}.lqr p{font-size:9px;color:#888;margin-top:5px;letter-spacing:.5px}@media print{body{padding:0;min-height:auto}@page{margin:8mm;size:85mm 115mm}}</style>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}.label{width:260px;border:2.5px solid #1a1aff;border-radius:8px;overflow:hidden}.lh{background:#1a1aff;color:#fff;text-align:center;padding:8px 6px 6px}.lh .logo{font-size:24px;font-weight:900;font-style:italic;letter-spacing:1px}.ltype{background:#6600cc;color:#fff;text-align:center;padding:5px;font-size:10px;font-weight:700;letter-spacing:2px}.lrow{display:flex;border-bottom:1px solid #dde;padding:5px 8px;font-size:11px;gap:4px;align-items:center}.lk{color:#555;min-width:52px;font-size:10px}.lv{font-weight:700;color:#1a1a2e}.lnext{background:#1a1aff;color:#fff;text-align:center;padding:5px;font-size:10px;font-weight:700;letter-spacing:1px}.lmes{text-align:center;padding:6px;font-size:13px;font-weight:700;color:#1a1a2e;border-bottom:1px solid #dde}.ldias{display:grid;grid-template-columns:1fr 1fr}.ld{text-align:center;padding:10px 4px;font-size:20px;font-weight:700;color:#1a1a2e;border:0.5px solid #dde}.lqr{text-align:center;padding:10px 8px 8px;border-top:1px solid #dde}.lqr p{font-size:9px;color:#888;margin-top:5px}@media print{body{padding:0;min-height:auto}@page{margin:8mm;size:85mm 115mm}}</style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>
   </head><body><div class="label">
     <div class="lh"><div class="logo">zubex</div></div>
     <div class="ltype">VERIFICACIÓN</div>
     <div class="lrow"><span class="lk">ID:</span><span class="lv">${fid}</span></div>
-    <div class="lrow"><span class="lk">Revisado:</span><span class="lv">${e.f_responsable||'—'}</span></div>
+    <div class="lrow"><span class="lk">Depto:</span><span class="lv">${e.f_dept||'—'}</span></div>
     <div class="lnext">Próxima Verificación</div>
     <div class="lmes">${mesAnio||'SIN FECHA'}</div>
     <div class="ldias">${dias.map(d=>`<div class="ld">${String(d).padStart(2,'0')}</div>`).join('')}</div>
@@ -870,11 +819,11 @@ function printLabel(fid){
 
 function exportExcel(){
   if(!equipos.length){showToast('No hay equipos para exportar');return;}
-  const headers=['ID','Instrumento','Departamento','Responsable','Descripción','Unidad','Marca/Modelo','No. Serie','Rango','Resolución','Ult. Calibración','Próx. Calibración','Ult. Verificación','Próx. Verificación','Periodo Verif.','Periodo Calib.','Estado','Ubicación','Notas','Certificado','Estatus'];
-  const rows=equipos.map(e=>[e.f_id,e.f_instrumento,e.f_dept,e.f_responsable,e.f_desc,e.f_unidad,e.f_marca,e.f_serie,e.f_rango,e.f_resolucion,e.f_ult_cal,e.f_prox_cal,e.f_ult_ver,e.f_prox_ver,e.f_periodo_ver,e.f_periodo_cal,e.f_estado,e.f_ubicacion,e.f_notas,e.certificado_nombre||'',statusLbl(statusOf(e))]);
+  const headers=['ID','Instrumento','Departamento','Descripción','Unidad','Ult. Calibración','Próx. Calibración','Ult. Verificación','Próx. Verificación','Periodo Verif.','Periodo Calib.','Estado','Ubicación','Notas','Certificado','Estatus'];
+  const rows=equipos.map(e=>[e.f_id,e.f_instrumento,e.f_dept,e.f_desc,e.f_unidad,e.f_ult_cal,e.f_prox_cal,ultVerMap[e.f_id]?new Date(ultVerMap[e.f_id]).toISOString().split('T')[0]:'',e.f_prox_ver,e.f_periodo_ver,e.f_periodo_cal,e.f_estado,e.f_ubicacion,e.f_notas,e.certificado_nombre||'',statusLbl(statusOf(e))]);
   const ws=XLSX.utils.aoa_to_sheet([headers,...rows]);
   ws['!cols']=headers.map(()=>({wch:18}));
-  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Equipos');
+  const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Equipos');
   XLSX.writeFile(wb,'Zubex_Calidad_'+new Date().toISOString().slice(0,10)+'.xlsx');
   showToast('📊 Excel exportado');
 }
@@ -894,17 +843,17 @@ function cambiarPass(){
 async function checkQRParam(){
   const p=new URLSearchParams(location.search);
   const qId=p.get('qr');
-  if(qId){await loadEquipos();showPublicQR(decodeURIComponent(qId));}
+  if(qId){await loadEquipos(); showPublicQR(decodeURIComponent(qId));}
 }
 
 function showToast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
+  t.textContent=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2800);
 }
 
 setInterval(()=>db.from(TABLE).select('f_id').limit(1),5*24*60*60*1000);
-fillInstruments();loadEquipos();checkQRParam();
+fillInstruments(); loadEquipos(); checkQRParam();
 </script>
 </body>
 </html>
