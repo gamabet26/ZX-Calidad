@@ -410,7 +410,7 @@ function renderTable(){
     return mq&&md&&ms;
   });
   const tb=document.getElementById('equiposBody');
-  if(!filtered.length){tb.innerHTML='<tr><td colspan="8" class="empty">Sin resultados</td></tr>';return;}
+  if(!filtered.length){tb.innerHTML='<tr><td colspan="9" class="empty">Sin resultados</td></tr>';return;}
   tb.innerHTML=filtered.map((e,idx)=>{
     const sc=statusOf(e);
     const dias=diasHasta(e.f_prox_ver||e.f_prox_cal);
