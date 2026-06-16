@@ -345,9 +345,15 @@ function setSyncStatus(st,txt){
 async function loadEquipos(){
   setSyncStatus('loading','Sincronizando...');
   try{
-    const {data,error}=await db.from(TABLE).select('*').order('created_at',{ascending:false});
-    if(error)throw error;
-    equipos=data||[];
+    const [{data:eqData,error:eqErr},{data:valData}]=await Promise.all([
+      db.from(TABLE).select('*').order('created_at',{ascending:false}),
+      db.from(VAL_TABLE).select('equipo_id, created_at').eq('resultado','ok').order('created_at',{ascending:false})
+    ]);
+    if(eqErr) throw eqErr;
+    equipos=eqData||[];
+    // Construir mapa de últimas verificaciones
+    window.ultVerMap={};
+    (valData||[]).forEach(v=>{if(!window.ultVerMap[v.equipo_id]) window.ultVerMap[v.equipo_id]=v.created_at;});
     updateDash();updateDeptFilter();renderTable();
     setSyncStatus('ok','Conectado ✓ — '+equipos.length+' equipos');
   }catch(e){setSyncStatus('err','Error de conexión');showToast('❌ '+e.message);}
