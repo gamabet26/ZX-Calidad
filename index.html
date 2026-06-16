@@ -774,25 +774,40 @@ async function showPublicQR(fid){
         </div>
       </div>`;
 
-    const doValidar=async(resultado)=>{
-      const nombre=document.getElementById('valNombre').value.trim();
-      document.getElementById('vbOk').disabled=true;
-      document.getElementById('vbDmg').disabled=true;
-      try{
-        const {error}=await db.from(VAL_TABLE).insert({equipo_id:e.f_id,resultado,validado_por:nombre||null});
-        if(error)throw error;
-        // Si dañado, actualizar estado del equipo
-        if(resultado==='dañado'){
-          await db.from(TABLE).update({f_estado:'dmg',updated_at:new Date().toISOString()}).eq('f_id',e.f_id);
-        }
-        const vs=document.getElementById('valSuccess');
-        document.getElementById('vsIcon').textContent=resultado==='ok'?'✅':'🔧';
-        document.getElementById('vsTitle').textContent=resultado==='ok'?'Equipo validado como OK':'Equipo marcado como Dañado';
-        document.getElementById('vsSub').textContent='Registrado el '+new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})+(nombre?' por '+nombre:'');
-        vs.style.display='block';
-        document.getElementById('valNombre').parentElement.style.display='none';
-      }catch(err){showToast('❌ Error: '+err.message);document.getElementById('vbOk').disabled=false;document.getElementById('vbDmg').disabled=false;}
-    };
+  const doValidar=async(resultado)=>{
+    const btnOk=document.getElementById('vbOk');
+    const btnDmg=document.getElementById('vbDmg');
+    const nombre=document.getElementById('valNombre')?document.getElementById('valNombre').value.trim():'';
+    if(btnOk) btnOk.disabled=true;
+    if(btnDmg) btnDmg.disabled=true;
+    try{
+      const ins={equipo_id:e.f_id, resultado};
+      if(nombre) ins.validado_por=nombre;
+      const {error}=await db.from(VAL_TABLE).insert(ins);
+      if(error) throw error;
+      // Si dañado, actualizar estado
+      if(resultado==='dañado'){
+        await db.from(TABLE).update({f_estado:'dmg',updated_at:new Date().toISOString()}).eq('f_id',e.f_id);
+      }
+      // Mostrar éxito
+      const valBody=document.querySelector('.val-body');
+      if(valBody){
+        valBody.innerHTML=`
+          <div style="text-align:center;padding:2rem 1rem">
+            <div style="font-size:3rem;margin-bottom:.5rem">${resultado==='ok'?'✅':'🔧'}</div>
+            <div style="font-size:1.1rem;font-weight:700;margin-bottom:.3rem">${resultado==='ok'?'Equipo validado como OK':'Equipo marcado como Dañado'}</div>
+            <div style="font-size:.82rem;color:var(--tx2)">Registrado el ${new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})}${nombre?' por '+nombre:''}</div>
+            <button class="btn btn-s" style="margin-top:1.5rem" onclick="showSec('equipos')">← Volver</button>
+          </div>`;
+      }
+      // Refrescar datos en background
+      loadEquipos();
+    }catch(err){
+      showToast('❌ Error: '+err.message);
+      if(btnOk) btnOk.disabled=false;
+      if(btnDmg) btnDmg.disabled=false;
+    }
+  };
 
     document.getElementById('vbOk').onclick=()=>doValidar('ok');
     document.getElementById('vbDmg').onclick=()=>doValidar('dañado');
