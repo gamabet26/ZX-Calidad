@@ -325,7 +325,10 @@ const SB_URL='https://snsdveykyqgmgoraqdiv.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuc2R2ZXlreXFnbWdvcmFxZGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MDkxMjMsImV4cCI6MjA5NjA4NTEyM30.lz4tD41nMpaWW5A_nmXciBX4iR3CBsgWWkQ2CZPnSFY';
 const TABLE='equipos_medicion', VAL_TABLE='validaciones', BUCKET='certificados';
 const {createClient}=supabase;
-const db=createClient(SB_URL,SB_KEY);
+const db=createClient(SB_URL,SB_KEY,{
+  auth:{persistSession:false},
+  global:{fetch:(...args)=>fetch(...args)}
+});
 
 const INSTRUMENTS=['ADMET','Balanza analítica','Báscula','Calibrador de Termopares','Calibrador Digital','Cámara termográfica','Contador Digital','Copa Zahn','Cronómetro Digital','Cuenta Metros','Cuentametros','Dinamómetro','Infrarrojo','Lainas','Medidor de alturas','Medidor de ancho plano','Medidor de espesor','Medidor de espesor de ultrasonido','Medidor de espesores','Medidor de estática','Micrómetro','Pesa patrón','Placa patrón','Probador de dureza','Regla patrón','Rugosímetro','Termómetro','Termómetro Copa Zahn','Termómetro Digital','Termómetro Infrarrojo','Torquímetro','Transportador de Ángulos','Vernier'];
 
