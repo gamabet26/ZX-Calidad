@@ -189,7 +189,7 @@ textarea{resize:vertical;min-height:70px}
     <div class="dg">
       <div class="dc total"><div class="ic">📐</div><div class="inf"><p>Total equipos</p><h3 id="dTotal">—</h3></div></div>
       <div class="dc ok"><div class="ic">✅</div><div class="inf"><p>Vigentes</p><h3 id="dOk">—</h3></div></div>
-      <div class="dc warn"><div class="ic">⚠️</div><div class="inf"><p>Por vencer (30 días)</p><h3 id="dWarn">—</h3></div></div>
+      <div class="dc warn"><div class="ic">⚠️</div><div class="inf"><p>Por vencer (7 días)</p><h3 id="dWarn">—</h3></div></div>
       <div class="dc alert"><div class="ic">🚨</div><div class="inf"><p>Vencidos</p><h3 id="dAlert">—</h3></div></div>
       <div class="dc dmg"><div class="ic">🔧</div><div class="inf"><p>Dañados</p><h3 id="dDmg">—</h3></div></div>
     </div>
@@ -370,7 +370,7 @@ function statusOf(e){
   const d=diasHasta(e.f_prox_ver||e.f_prox_cal);
   if(d===null) return 'na';
   if(d<0) return 'venc';
-  if(d<=30) return 'warn';
+  if(d<=7) return 'warn';
   return 'ok';
 }
 function statusLbl(s){return{ok:'Vigente',warn:'Por vencer',venc:'Vencido',baja:'Dado de baja',dmg:'Dañado',na:'Sin fecha'}[s]||'—'}
