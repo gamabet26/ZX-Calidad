@@ -192,6 +192,7 @@ textarea{resize:vertical;min-height:70px}
       <div class="dc warn"><div class="ic">⚠️</div><div class="inf"><p>Por vencer (7 días)</p><h3 id="dWarn">—</h3></div></div>
       <div class="dc alert"><div class="ic">🚨</div><div class="inf"><p>Vencidos</p><h3 id="dAlert">—</h3></div></div>
       <div class="dc dmg"><div class="ic">🔧</div><div class="inf"><p>Dañados</p><h3 id="dDmg">—</h3></div></div>
+      <div class="dc" style="border-color:#aaa"><div class="ic" style="background:#f0f0f0">🚫</div><div class="inf"><p style="color:var(--tx2)">Dados de baja</p><h3 id="dBaja" style="color:#888">—</h3></div></div>
     </div>
     <div class="tb">
       <input type="text" id="searchInput" placeholder="🔍  Buscar ID, instrumento, depto..." oninput="renderTable()">
@@ -376,13 +377,14 @@ function statusOf(e){
 function statusLbl(s){return{ok:'Vigente',warn:'Por vencer',venc:'Vencido',baja:'Dado de baja',dmg:'Dañado',na:'Sin fecha'}[s]||'—'}
 
 function updateDash(){
-  let tot=equipos.length,ok=0,warn=0,al=0,dmg=0;
-  equipos.forEach(e=>{const s=statusOf(e);if(s==='ok')ok++;else if(s==='warn')warn++;else if(s==='venc')al++;else if(s==='dmg')dmg++;});
+  let tot=equipos.length,ok=0,warn=0,al=0,dmg=0,baja=0;
+  equipos.forEach(e=>{const s=statusOf(e);if(s==='ok')ok++;else if(s==='warn')warn++;else if(s==='venc')al++;else if(s==='dmg')dmg++;else if(s==='baja')baja++;});
   document.getElementById('dTotal').textContent=tot;
   document.getElementById('dOk').textContent=ok;
   document.getElementById('dWarn').textContent=warn;
   document.getElementById('dAlert').textContent=al;
   document.getElementById('dDmg').textContent=dmg;
+  document.getElementById('dBaja').textContent=baja;
 }
 
 function updateDeptFilter(){
