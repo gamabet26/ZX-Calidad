@@ -618,7 +618,7 @@ async function openDet(fid){
           ['Ult. Verificación',ultVerMap[fid]?new Date(ultVerMap[fid]).toLocaleDateString('es-MX',{year:'numeric',month:'2-digit',day:'2-digit'}):'—'],
           ['Próx. Verificación',e.f_prox_ver||'—'],
           ['Periodo Verif.',e.f_periodo_ver||'—'],['Periodo Calib.',e.f_periodo_cal||'—'],
-          ['Estado',`<span class="sb s-${sc}">${statusLbl(sc)}</span> — ${diasTxt}`],
+          ['Estado',`<span class="sb s-${sc}">${statusLbl(sc)}</span> &nbsp;|&nbsp; <span style="font-size:.8rem;color:var(--tx2)">Estado manual: <strong>${{op:'Operativo',rev:'En revisión',dmg:'Dañado',fs:'Fuera de servicio',baja:'Dado de baja'}[e.f_estado]||e.f_estado}</strong></span> — ${diasTxt}`],
           ...(e.f_notas?[['Notas',`<span style="font-size:.8rem;color:var(--tx2)">${e.f_notas}</span>`]]:[])
         ].map(([l,v])=>`<div class="ir"><span class="il">${l}</span><span>${v}</span></div>`).join('')}
       </div>
